@@ -4,8 +4,9 @@ import physics.*;
 import world.World;
 
 public class Entity {
-	/** The position of this entity */
+	/** The position of this Entity instance */
 	private Position pos;
+	
 	/** The dimensions of this entity */
 	private Dimension dim;
 	
@@ -20,6 +21,9 @@ public class Entity {
 		//TODO
 	}
 	
+	/**
+	 * Parameterized constructor, initializes entity position and dimensions to given parameters
+	 */
 	public Entity(World world) {
 		this.world = world;
 		this.setPos(new Position());

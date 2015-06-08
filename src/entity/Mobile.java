@@ -3,14 +3,35 @@ package entity;
 import java.util.Collection;
 
 import physics.Vector;
+import world.World;
 
 public class Mobile extends Entity {
+	
+	/** The movement vector of this mobile entity */
 	Vector vel;
-
-	public void update() {
-		//TODO
+	
+	/**
+	 * Constructor, initializes world
+	 * @param world
+	 */
+	public Mobile(World world) {
+		super(world);
+		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Update the position of this mobile entity based on its current velocity
+	 */
+	public void update() {
+		this.getPos().translate(vel);
+		collide(this.getWorld().getEntities());
+	}
+
+	/**
+	 * Detect and deal with collisions with other entities in the world
+	 * @param entities
+	 * @return whether or not a collision is detected
+	 */
 	public boolean collide(Collection<Entity> entities) {
 		//TODO
 		return false;
