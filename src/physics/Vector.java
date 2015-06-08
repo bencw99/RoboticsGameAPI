@@ -1,0 +1,77 @@
+package physics;
+
+/** A class representing a vector
+ * 
+ * @author Benjamin Cohen-Wang
+ */
+public class Vector {
+	/** The x displacement of this vector */
+	private double dx;
+	
+	/** The y displacement of this vector */
+	private double dy;
+	
+	/** Default constructor, initializes vector to magnitude zero
+	 * 
+	 */
+	public Vector() {
+		this(0, 0);
+	}
+	
+	/** Parameterized constructor, initializes vector fields to given values
+	 * 
+	 * @param dx	the value the x displacement is set to
+	 * @param dy	the value the y displacement is set to
+	 */
+	public Vector(double dx, double dy) {
+		this.dx = dx;
+		this.dy = dy;
+	}
+	
+	/** Adds the given vector to this instance
+	 * 
+	 * @param other	the vector to be added to this
+	 */
+	public void add(Vector other) {
+		this.dx += other.dx;
+		this.dy += other.dy;
+	}
+	
+	
+	/** Scales this vector by the given scalar
+	 * 
+	 * @param scalar	the scalar the vector is scaled by
+	 */
+	public void scale(double scalar) {
+		dx *= scalar;
+		dy *= scalar;
+	}
+	
+	/**
+	 * @return x of instance
+	 */
+	public double getX() {
+		return dx;
+	}
+
+	/**
+	 * @return y of instance
+	 */
+	public double getY() {
+		return dy;
+	}
+
+	/**
+	 * @param x the value the x is set to
+	 */
+	public void setX(double dx) {
+		this.dx = dx;
+	}
+
+	/**
+	 * @param y the value the y is set to
+	 */
+	public void setY(double dy) {
+		this.dy = dy;
+	}
+}
