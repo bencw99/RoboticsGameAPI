@@ -3,5 +3,9 @@ package entity;
 import physics.*;
 
 public class Entity {
-	Position pos;
+	private Position pos;
+	
+	public Entity() {
+		pos = new Position();
+	}
 }

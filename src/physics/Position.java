@@ -45,8 +45,7 @@ public class Position {
 	 * @param vec the translation vector
 	 */
 	public void translate(Vector vec) {
-		translateX(vec.getX());
-		translateY(vec.getY());
+		translate(vec.getX(), vec.getY());
 	}
 	
 	/**
