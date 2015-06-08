@@ -3,13 +3,17 @@ package entity;
 import physics.*;
 
 public class Entity {
-	Position pos;
+	private Position pos;
 
 	public void init() {
-
+		//TODO
 	}
 
 	public void disable() {
-
+		//TODO
+	}
+	
+	public Entity() {
+		pos = new Position();
 	}
 }
