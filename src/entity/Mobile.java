@@ -3,6 +3,7 @@ package entity;
 import java.awt.Graphics;
 import java.util.Collection;
 
+import constants.Constants;
 import physics.Vector;
 import world.World;
 
@@ -23,7 +24,7 @@ public class Mobile extends Entity {
 	 * Update the position of this mobile entity based on its current velocity
 	 */
 	public void update() {
-		this.getPos().translate(vel);
+		this.getPos().translate(new Vector(vel.getX()/Constants.UPDATES_PER_SEC, vel.getY()/Constants.UPDATES_PER_SEC));
 		collide(this.getWorld().getEntities());
 	}
 
