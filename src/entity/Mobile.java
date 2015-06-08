@@ -16,7 +16,6 @@ public class Mobile extends Entity {
 	 */
 	public Mobile(World world) {
 		super(world);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
