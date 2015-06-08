@@ -1,12 +1,16 @@
 package entity;
 
 import physics.*;
+import world.World;
 
 public class Entity {
 	/** The position of this entity */
 	private Position pos;
 	/** The dimensions of this entity */
 	private Dimension dim;
+	
+	/** Reference to the world this entity is in */
+	private World world;
 
 	public void init() {
 		//TODO
@@ -16,7 +20,8 @@ public class Entity {
 		//TODO
 	}
 	
-	public Entity() {
+	public Entity(World world) {
+		this.world = world;
 		this.setPos(new Position());
 	}
 
@@ -46,5 +51,12 @@ public class Entity {
 	 */
 	public void setDim(Dimension dim) {
 		this.dim = dim;
+	}
+
+	/**
+	 * @return the world
+	 */
+	public World getWorld() {
+		return world;
 	}
 }
