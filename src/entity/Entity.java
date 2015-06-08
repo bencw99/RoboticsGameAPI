@@ -1,66 +1,21 @@
 package entity;
 
-import physics.*;
+import physics.Dimension;
+import physics.Position;
 import world.World;
 
-public class Entity {
-	/** The position of this Entity instance */
-	private Position pos;
-	
-	/** The dimensions of this entity */
-	private Dimension dim;
-	
-	/** Reference to the world this entity is in */
-	private World world;
-
-	public void init() {
-		//TODO
-	}
-
-	public void disable() {
-		//TODO
+public abstract class Entity extends Element{	
+	/**
+	 * Parameterized constructor, initializes entity world to given parameters
+	 */
+	public Entity(World world) {
+		super(world);
 	}
 	
 	/**
 	 * Parameterized constructor, initializes entity position and dimensions to given parameters
 	 */
-	public Entity(World world) {
-		this.world = world;
-		this.setPos(new Position());
-	}
-
-	/**
-	 * @return the position
-	 */
-	public Position getPos() {
-		return pos;
-	}
-
-	/**
-	 * @param pos the position to set
-	 */
-	public void setPos(Position pos) {
-		this.pos = pos;
-	}
-
-	/**
-	 * @return the dim
-	 */
-	public Dimension getDim() {
-		return dim;
-	}
-
-	/**
-	 * @param dim the dimension to set
-	 */
-	public void setDim(Dimension dim) {
-		this.dim = dim;
-	}
-
-	/**
-	 * @return the world
-	 */
-	public World getWorld() {
-		return world;
+	public Entity(World world, Position pos, Dimension dim) {
+		super(world, pos, dim);
 	}
 }

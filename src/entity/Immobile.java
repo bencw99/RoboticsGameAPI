@@ -1,5 +1,7 @@
 package entity;
 
+import java.awt.Graphics;
+
 import world.World;
 
 public class Immobile extends Entity {
@@ -13,4 +15,10 @@ public class Immobile extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void draw(Graphics g)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

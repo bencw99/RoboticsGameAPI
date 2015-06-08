@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Graphics;
 import java.util.Collection;
 
 import physics.Vector;
@@ -35,5 +36,12 @@ public class Mobile extends Entity {
 	public boolean collide(Collection<Entity> entities) {
 		//TODO
 		return false;
+	}
+
+	@Override
+	public void draw(Graphics g)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }
