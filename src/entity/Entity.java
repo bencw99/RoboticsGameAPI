@@ -14,6 +14,20 @@ public class Entity {
 	}
 	
 	public Entity() {
-		pos = new Position();
+		this.setPos(new Position());
+	}
+
+	/**
+	 * @return the position
+	 */
+	public Position getPos() {
+		return pos;
+	}
+
+	/**
+	 * @param pos the position to set
+	 */
+	public void setPos(Position pos) {
+		this.pos = pos;
 	}
 }
