@@ -37,6 +37,43 @@ public class Vector {
 		this.dy += other.dy;
 	}
 	
+	/**
+	 * Translates this vector by the given x and y differentials
+	 * 
+	 * @param dx the x differential
+	 * @param dy the y differential
+	 */
+	public void translate(double dx, double dy) {
+		translateX(dx);
+		translateY(dy);
+	}
+	
+	/**
+	 * Translates this vector by the given vector differentials
+	 * 
+	 * @param vec the translation vector
+	 */
+	public void translate(Vector vec) {
+		translate(vec.getX(), vec.getY());
+	}
+	
+	/**
+	 * Translates this vector by the given x differential
+	 * 
+	 * @param dx the x differential
+	 */
+	public void translateX(double dx) {
+		this.dx += dx;
+	}
+	
+	/**
+	 * Translates this vector by the given y differential
+	 * 
+	 * @param dy the y differential
+	 */
+	public void translateY(double dy) {
+		this.dy += dy;
+	}
 	
 	/** Scales this vector by the given scalar
 	 * 

@@ -40,6 +40,16 @@ public class Position {
 	}
 	
 	/**
+	 * Translates this position by the given vector differentials
+	 * 
+	 * @param vec the translation vector
+	 */
+	public void translate(Vector vec) {
+		translateX(vec.getX());
+		translateY(vec.getY());
+	}
+	
+	/**
 	 * Translates this position by the given x differential
 	 * 
 	 * @param dx the x differential
