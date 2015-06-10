@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics;
+import physics.*;
 import java.awt.Polygon;
 
 import physics.Dimension;
@@ -19,8 +20,8 @@ public class Immobile extends Entity implements Interactable {
 	/**
 	 * Parameterized constructor, initializes entity position and dimensions to given parameters
 	 */
-	public Immobile(World world, Position pos, Dimension dim) {
-		super(world, pos, dim);
+	public Immobile(World world, Position pos, Dimension dim, Vector vel) {
+		super(world, pos, dim, vel);
 	}
 
 	@Override
