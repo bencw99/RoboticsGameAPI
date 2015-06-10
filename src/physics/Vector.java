@@ -28,15 +28,6 @@ public class Vector {
 		this.dy = dy;
 	}
 	
-	/** Adds the given vector to this instance
-	 * 
-	 * @param other	the vector to be added to this
-	 */
-	public void add(Vector other) {
-		this.dx += other.dx;
-		this.dy += other.dy;
-	}
-	
 	/**
 	 * Translates this vector by the given x and y differentials
 	 * 

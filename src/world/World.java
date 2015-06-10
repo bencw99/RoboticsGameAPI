@@ -26,6 +26,7 @@ public class World implements Drawable {
 	 */
 	public void addEntity(Element ent) {
 		entities.add(ent);
+		ent.setWorld(this);
 	}
 
 	/**

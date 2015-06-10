@@ -11,7 +11,7 @@ public class Dimension {
 	 * 
 	 */
 	public Dimension() {
-		this(0, 0);
+		this(64, 64);
 	}
 	
 	/** Parameterized constructor, initializes dimension width and height to given parameters

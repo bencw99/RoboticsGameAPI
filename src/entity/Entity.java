@@ -6,7 +6,7 @@ import physics.Dimension;
 import physics.Position;
 import world.World;
 
-public abstract class Entity implements Drawable{	
+public abstract class Entity implements Drawable {	
 	/** The position of this Entity instance */
 	private Position pos;
 	
@@ -16,16 +16,13 @@ public abstract class Entity implements Drawable{
 	/** Reference to the world this entity is in */
 	private World world;
 	
-	/** The default dimensions of an entity*/
-	public static final Dimension DEFAULT_DIMENSION = new Dimension(64, 64);
-	
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
 	 */
 	public Entity(World world) {
 		this.world = world;
 		this.setPos(new Position());
-		this.setDim(DEFAULT_DIMENSION);
+		this.setDim(new Dimension());
 	}
 	
 	/**
@@ -70,6 +67,13 @@ public abstract class Entity implements Drawable{
 	 */
 	public World getWorld() {
 		return world;
+	}
+	
+	/**
+	 * @param world the world to set
+	 */
+	public void setWorld(World world) {
+		this.world = world;
 	}
 	
 	@Override
