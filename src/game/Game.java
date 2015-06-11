@@ -54,6 +54,7 @@ public class Game {
 			}
 		case RUNNING:
 			if(InputListener.isKeyPressed('p')) {
+				
 				state = State.PAUSED;
 			}
 			world.update();
