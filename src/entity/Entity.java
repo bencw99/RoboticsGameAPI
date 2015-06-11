@@ -1,8 +1,8 @@
 package entity;
 
 import java.awt.Graphics;
-import physics.*;
 
+import physics.*;
 import world.World;
 
 public abstract class Entity {
@@ -84,6 +84,43 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Translates this position by the given x and y differentials
+	 * 
+	 * @param dx the x differential
+	 * @param dy the y differential
+	 */
+	public void translate(double dx, double dy) {
+		pos.translate(dx, dy);
+	}
+	
+	/**
+	 * Translates this position by the given vector differentials
+	 * 
+	 * @param vec the translation vector
+	 */
+	public void translate(Vector vec) {
+		pos.translate(vec);
+	}
+	
+	/**
+	 * Translates the position by the given x differential
+	 * 
+	 * @param dx the x differential
+	 */
+	public void translateX(double dx) {
+		pos.translateX(dx);
+	}
+	
+	/**
+	 * Translates the position by the given y differential
+	 * 
+	 * @param dy the y differential
+	 */
+	public void translateY(double dy) {
+		pos.translateY(dy);
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
@@ -95,6 +132,15 @@ public abstract class Entity {
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+	
+	/**
+	 * Translates this angle by the given angle difference
+	 * 
+	 * @param dAngle the angle to be translated by
+	 */
+	public void translateAngle(double dAngle) {
+		this.angle += dAngle;
 	}
 
 	/**
