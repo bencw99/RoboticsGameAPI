@@ -1,8 +1,10 @@
 package entity;
 
 import java.awt.Graphics;
-import physics.*;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 
+import physics.*;
 import world.World;
 
 public abstract class Entity {
@@ -124,4 +126,5 @@ public abstract class Entity {
 	public void setWorld(World world) {
 		this.world = world;
 	}
+
 }
