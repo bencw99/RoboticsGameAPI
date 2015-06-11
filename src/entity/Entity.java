@@ -132,6 +132,11 @@ public abstract class Entity {
 		Rectangle aRectangle = a.getBounds();
 		Rectangle bRectangle = b.getBounds();
 		return(aRectangle.intersects(bRectangle));
+	} 
+
+	
+	public boolean collide(Dimension dim) {
+		
 	}
 
 }
