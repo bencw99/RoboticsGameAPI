@@ -7,13 +7,14 @@ import entity.*;
 
 /**
  * A class representing the world of a game
+ * Contains all entities
  */
 public class World {
 	/** List of entities in this world */
 	private ArrayList<Entity> entities;
 	
-	/** Default constructor, initializes elements
-	 * 
+	/** 
+	 * Default constructor, initializes elements
 	 */
 	public World() {
 		entities = new ArrayList<Entity>();

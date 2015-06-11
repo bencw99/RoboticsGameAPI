@@ -4,12 +4,12 @@ import input.*;
 import world.*;
 
 /**
- * The class describing a game
+ * The class that starts up the game
  */
 public class Game {
 	/** The state enum of the game class **/
 	public static enum State {
-		WAITING,
+		LOADING,
 		RUNNING,
 		PAUSED,
 		FINISHED
@@ -26,39 +26,43 @@ public class Game {
 	 */
 	public Game() {
 		this.world = new World();
-		this.state = State.WAITING;
+		this.state = State.LOADING;
+	}
+	
+	public static void main(String[] args) {
+		Game game = new Game();
+		while(game.state != State.FINISHED) {
+			game.update();	
+		}
 	}
 	
 	/** 
 	 * Updates this game
 	 */
 	public void update() {
+		//Different keys pressed to start stuff
 		switch(state) {
-		case WAITING: {
+		case LOADING:
 			if(InputListener.isKeyPressed(' ')) {
 				state = State.RUNNING;
 			}
-		}
-		case RUNNING: {
+		case RUNNING:
 			if(InputListener.isKeyPressed('p')) {
 				state = State.PAUSED;
 			}
 			world.update();
-		}
-		case PAUSED: {
+		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {
 				state = State.RUNNING;
 			}
-		}
-		case FINISHED: {
-
-		}
-		
+		case FINISHED: 
+			world.disable();
+			//TODO Graphically close the game
 		}
 	}
 
 	/**
-	 * @return the world
+	 * @return the world object
 	 */
 	public World getWorld()
 	{
@@ -66,7 +70,7 @@ public class Game {
 	}
 
 	/**
-	 * @return the state
+	 * @return the state of the game
 	 */
 	public State getState()
 	{
