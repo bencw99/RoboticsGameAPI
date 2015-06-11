@@ -1,5 +1,6 @@
 package game;
 
+import constants.Constants;
 import input.*;
 import world.*;
 
@@ -33,6 +34,11 @@ public class Game {
 		Game game = new Game();
 		while(game.state != State.FINISHED) {
 			game.update();	
+			try {
+				Thread.sleep(1000/Constants.UPDATES_PER_SEC);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
