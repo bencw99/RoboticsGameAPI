@@ -63,6 +63,8 @@ public class World {
 	 * @param ent	the entity to add
 	 */
 	public void add(Entity ent) {
+		ent.init();
+		ent.setWorld(this);
 		entities.add(ent);
 	}
 	
@@ -72,6 +74,8 @@ public class World {
 	 * @param ent	the entity to remove
 	 */
 	public void remove(Entity ent) {
+		ent.disable();
+		ent.setWorld(null);
 		entities.remove(ent);
 	}
 
