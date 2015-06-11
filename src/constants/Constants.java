@@ -1,5 +1,9 @@
 package constants;
 
+/** 
+ * A class holding constants
+ */
 public class Constants {
-	public final static int UPDATES_PER_SEC = 200;
+	/** The constant describing the updates per second of a game **/
+	public final static int UPDATES_PER_SEC = 100;
 }
