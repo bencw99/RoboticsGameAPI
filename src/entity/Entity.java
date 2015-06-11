@@ -126,5 +126,12 @@ public abstract class Entity {
 	public void setWorld(World world) {
 		this.world = world;
 	}
+	
+	
+	public boolean collide(Polygon a, Polygon b) {
+		Rectangle aRectangle = a.getBounds();
+		Rectangle bRectangle = b.getBounds();
+		return(aRectangle.intersects(bRectangle));
+	}
 
 }
