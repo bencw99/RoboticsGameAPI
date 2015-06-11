@@ -36,7 +36,7 @@ public class Game {
 			game.update();	
 			try {
 				Thread.sleep(1000/Constants.UPDATES_PER_SEC);
-			} catch (InterruptedException e) {
+			} catch (InterruptedException e) { 
 				e.printStackTrace();
 			}
 		}
