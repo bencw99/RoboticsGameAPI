@@ -1,17 +1,22 @@
 package physics;
 
+import constants.Constants;
+
+/** 
+ * A class describing the dimensions of an entity
+ */
 public class Dimension {
-	/** The width of this dimension */
+	/** The width of this dimension **/
 	private double width;
 	
-	/** The height of this dimension */
+	/** The height of this dimension **/
 	private double height;
 	
 	/** Default constructor, initializes dimension to width 0 and height 0
 	 * 
 	 */
 	public Dimension() {
-		this(64, 64);
+		this(Constants.DEFAULT_DIMENSION, Constants.DEFAULT_DIMENSION);
 	}
 	
 	/** Parameterized constructor, initializes dimension width and height to given parameters
