@@ -1,14 +1,13 @@
 package physics;
 
-/** A class representing a vector
- * 
- * @author Benjamin Cohen-Wang
+/** 
+ * A class representing a vector
  */
 public class Vector {
-	/** The x displacement of this vector */
+	/** The x displacement of this vector **/
 	private double dx;
 	
-	/** The y displacement of this vector */
+	/** The y displacement of this vector **/
 	private double dy;
 	
 	/** Default constructor, initializes vector to magnitude zero

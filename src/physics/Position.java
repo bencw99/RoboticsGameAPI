@@ -1,14 +1,12 @@
 package physics;
 
-/** A class representing positions in 3D space
- * 
- * @author Benjamin Cohen-Wang
+/** A class representing the position
  */
 public class Position {
-	/** The x-coordinate of this position */
+	/** The x-coordinate of this position **/
 	private double xPos;
 	
-	/** The y-coordinate of this position */
+	/** The y-coordinate of this position **/
 	private double yPos;
 	
 	/** Default constructor, initializes position to coordinates (0, 0)
