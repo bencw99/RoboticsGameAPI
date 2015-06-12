@@ -14,8 +14,9 @@ public class Gui extends JFrame {
 	public Gui() {
 		
 	}
-	
-	public void buttonClicked(Button button) {
-		
-	}
+	/**
+	 * compares button to the list of buttons, to find index
+	 * @param button
+	 * -the button that was pressed
+	 */
 }

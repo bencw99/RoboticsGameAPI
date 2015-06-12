@@ -6,13 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class Button extends JButton implements ActionListener {
-	private Gui thisGui;
-	Button(Gui gui){
+	//private Gui thisGui;
+	private Listener<Button> listener;
+	Button(/*Gui gui,*/ Listener<Button> listen){
 		addActionListener(this);
-		thisGui = gui;
+		listener = listen;
+		//thisGui = gui;
 	}
 	public void actionPerformed(ActionEvent e) {
-		thisGui.buttonClicked(this);
+		listener.callMethod(this);
 	}
 
 }
