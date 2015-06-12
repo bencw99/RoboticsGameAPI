@@ -1,5 +1,7 @@
 package game;
 
+import javax.swing.JPanel;
+
 import constants.Constants;
 import input.*;
 import world.*;
@@ -7,7 +9,7 @@ import world.*;
 /**
  * The class that starts up the game
  */
-public class Game {
+public class Game extends JPanel {
 	/** The state enum of the game class **/
 	public static enum State {
 		LOADING,
@@ -70,16 +72,14 @@ public class Game {
 	/**
 	 * @return the world object
 	 */
-	public World getWorld()
-	{
+	public World getWorld() {
 		return world;
 	}
 
 	/**
 	 * @return the state of the game
 	 */
-	public State getState()
-	{
+	public State getState() {
 		return state;
 	}
 }

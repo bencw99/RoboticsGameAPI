@@ -12,7 +12,7 @@ public class Gui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public Gui() {
-		
+		super("Game");
 	}
 	
 	public void buttonClicked(Button button) {
