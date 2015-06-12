@@ -130,16 +130,6 @@ public abstract class Entity {
 	public Position getUpperLeftPos() {
 		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
 	}
-
-    /**
-     * Returns the upper left position given a position and a dimension
-     * @param pos
-     * @param dim
-     * @return the upper left position
-     */
-    public Position getUpperLeftPos(Position pos, Dimension dim) {
-        return new Position(pos.getX() - dim.getWidth()/2, pos.getY() - dim.getHeight()/2);
-    }
 	
 	/**
 	 * @return the angle
@@ -204,15 +194,14 @@ public abstract class Entity {
 	} 
 
 	/**
-	 * Tests if this entity collides with the given dimensions
+	 * Tests if this entity collides with the given entity
 	 * 
-	 * @param dim the dimensions of the other colliding object
-	 * @param pos the position of the other colliding object
+	 * @param ent the entity that we are testing to see if it collides with this one
 	 * @return the result of the collision test
 	 */
-	public boolean collide(Position pos, Dimension dim) {
+	public boolean collide(Entity ent) {
         Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
-        Rectangle b = new Rectangle((int) getUpperLeftPos(pos, dim).getX(), (int) getUpperLeftPos(pos, dim).getY(), (int) dim.getWidth(), (int) dim.getHeight());
+        Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
         return(a.intersects(b));
 	}
 
