@@ -4,6 +4,8 @@ import physics.Dimension;
 import physics.Position;
 import physics.Vector;
 import world.World;
+import graphics.Sprite;
+import graphics.SpriteManager;
 
 import java.awt.*;
 
@@ -19,6 +21,9 @@ public abstract class Entity {
 	
 	/** Reference to the world this entity is in */
 	private World world;
+	
+	/** Draws and manages the graphics for this entity */
+	private SpriteManager spriteManager;
 
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
@@ -30,6 +35,9 @@ public abstract class Entity {
 		this.setPos(new Position());
 		this.setDim(new Dimension());
 		this.setAngle(0);
+		
+		// FOR TESTING 
+		spriteManager = new SpriteManager(new Sprite("happy", "happy.jpg"));
 	}
 	
 	/**
@@ -68,7 +76,7 @@ public abstract class Entity {
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
-		g.fillRect((int) getUpperLeftPos().getX(),(int) getUpperLeftPos().getY(), (int)dim.getWidth(), (int)dim.getHeight());
+		spriteManager.update(g);
 	}
 	
 	/**

@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class SpriteManager {
@@ -21,8 +22,10 @@ public class SpriteManager {
 		this.sprites = sprites;
 	}
 	
-	public void update() {
-
+	public void update(Graphics g) {
+		//update dimensions
+		//update mode
+		sprites.get(currentSprite).draw(g);
 	}
 	
 	//gets and sets
