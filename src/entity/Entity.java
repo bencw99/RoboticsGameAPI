@@ -40,7 +40,7 @@ public abstract class Entity {
 	 * @param pos the position of this entity
 	 * @param dim the dimension of this entity
 	 */
-	public Entity(World world, Position pos, double angle, Dimension dim) {
+	public Entity(World world, Position pos, double angle, Vector vector, Dimension dim) {
 		this.world = world;
 		this.pos = pos;
 		this.angle = angle;
@@ -132,6 +132,33 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Returns the upper right position of this entity
+	 * 
+	 * @return the upper right position
+	 */
+	public Position getUpperRightPos() {
+		return new Position(this.pos.getX() + this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
+	}
+	
+	/**
+	 * Returns the lower left position of this entity
+	 * 
+	 * @return the lower left position
+	 */
+	public Position getLowerLeftPos() {
+		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() + this.dim.getHeight()/2);
+	}
+	
+	/**
+	 * Returns the lower right position of this entity
+	 * 
+	 * @return the lower right position
+	 */
+	public Position getLowerRightPos() {
+		return new Position(this.pos.getX() + this.dim.getWidth()/2, this.pos.getY() + this.dim.getHeight()/2);
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
@@ -203,6 +230,14 @@ public abstract class Entity {
         Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
         Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
         return(a.intersects(b));
+	}
+	
+	public Vector directionalCollide(Entity ent) {
+		Rectangle c = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
+        Rectangle d = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
+		if(d.contains(this.getUpperLeftPos().getX(), this.getUpperLeftPos().getY())) {
+			return 
+		}
 	}
 
 }
