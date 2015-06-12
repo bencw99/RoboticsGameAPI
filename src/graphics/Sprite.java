@@ -10,16 +10,14 @@ public class Sprite {
 	private String imageLocation, name;
 	private File imageFile;
 	private BufferedImage image;
-	
-	public Sprite(String name) {
-		this.name = name;
-	}
+	private int displayHeight, displayWidth;
 	
 	public Sprite(String name, String imageLocation) {
-		this(name);
+		this.name = name;
 		loadSprite(imageLocation);
 	}
 	
+	// takes a sprite location and sets the IV for this class
 	private void loadSprite(String imageLocation) {
 		this.imageLocation = imageLocation;
 		imageFile = new File(imageLocation);
@@ -29,5 +27,25 @@ public class Sprite {
 			System.out.println("Illegal path for " + name + " : " + imageLocation);
 			e.printStackTrace();
 		}
+		displayHeight = image.getHeight();
+		displayWidth = image.getWidth();
 	}
+
+	public void setDisplayHeight(int height) {
+		displayHeight = height;
+	}
+	
+	public void setDisplayWidth(int width) {
+		displayWidth = width;
+	}
+	
+	public void scale(double scaleFactor) {
+		displayHeight *= scaleFactor;
+		displayWidth *= scaleFactor;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
 }
