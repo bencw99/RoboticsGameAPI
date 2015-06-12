@@ -1,10 +1,11 @@
 package entity;
 
-import physics.Dimension;
-import physics.Position;
-import world.World;
+import java.awt.Graphics;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 
-import java.awt.*;
+import physics.*;
+import world.World;
 
 public abstract class Entity {
 	/** The position of this Entity instance */
@@ -85,6 +86,52 @@ public abstract class Entity {
 	}
 
 	/**
+	 * Translates this position by the given x and y differentials
+	 * 
+	 * @param dx the x differential
+	 * @param dy the y differential
+	 */
+	public void translate(double dx, double dy) {
+		pos.translate(dx, dy);
+	}
+	
+	/**
+	 * Translates this position by the given vector differentials
+	 * 
+	 * @param vec the translation vector
+	 */
+	public void translate(Vector vec) {
+		pos.translate(vec);
+	}
+	
+	/**
+	 * Translates the position by the given x differential
+	 * 
+	 * @param dx the x differential
+	 */
+	public void translateX(double dx) {
+		pos.translateX(dx);
+	}
+	
+	/**
+	 * Translates the position by the given y differential
+	 * 
+	 * @param dy the y differential
+	 */
+	public void translateY(double dy) {
+		pos.translateY(dy);
+	}
+	
+	/**
+	 * Returns the upper left position of this entity
+	 * 
+	 * @return the upper left position
+	 */
+	public Position getUpperLeftPos() {
+		return new Position(pos.getX() - dim.getWidth()/2, pos.getY() - dim.getHeight()/2);
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
@@ -96,6 +143,15 @@ public abstract class Entity {
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+	
+	/**
+	 * Translates this angle by the given angle difference
+	 * 
+	 * @param dAngle the angle to be translated by
+	 */
+	public void translateAngle(double dAngle) {
+		this.angle += dAngle;
 	}
 
 	/**
@@ -126,17 +182,28 @@ public abstract class Entity {
 		this.world = world;
 	}
 	
-	
-	public boolean collide(Polygon a, Polygon b) {
+	/**
+	 * Tests if the two given polygons collide
+	 * 
+	 * @param a the first polygon to be tested
+	 * @param b the second polygon to be tested
+	 * @return the result of the collision test
+	 */
+	public static boolean collide(Polygon a, Polygon b) {
 		return(a.getBounds().intersects(b.getBounds()));
 	} 
 
-	
+	/**
+	 * Tests if this entity collides with the given dimensions
+	 * 
+	 * @param dim the dimensions of the other colliding object
+	 * @param pos the position of the other colliding object
+	 * @return the result of the collision test
+	 */
 	public boolean collide(Dimension dim, Position pos) {
         Rectangle a = new Rectangle((int) this.pos.getX(), (int) this.pos.getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
         Rectangle b = new Rectangle((int) pos.getX(), (int) pos.getY(), (int) dim.getWidth(), (int) dim.getHeight());
         return(a.intersects(b));
-
 	}
 
 }

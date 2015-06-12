@@ -65,13 +65,13 @@ public class Vector {
 		this.dy += dy;
 	}
 	
-	/** Scales this vector by the given scalar
+	/** Scales this vector by the given scalar and returns the result, INSTANCE NOT CHANGED
 	 * 
 	 * @param scalar	the scalar the vector is scaled by
+	 * @return the scaled vector
 	 */
-	public void scale(double scalar) {
-		dx *= scalar;
-		dy *= scalar;
+	public Vector scale(double scalar) {
+		return new Vector(dx * scalar, dy * scalar);
 	}
 	
 	/**
