@@ -23,7 +23,7 @@ public abstract class Entity {
 	private World world;
 	
 	/** Draws and manages the graphics for this entity */
-	private SpriteManager spriteManager;
+	protected SpriteManager spriteManager;
 
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
@@ -35,9 +35,6 @@ public abstract class Entity {
 		this.setPos(new Position());
 		this.setDim(new Dimension());
 		this.setAngle(0);
-		
-		// FOR TESTING 
-		spriteManager = new SpriteManager(new Sprite("happy", "happy.jpg"));
 	}
 	
 	/**

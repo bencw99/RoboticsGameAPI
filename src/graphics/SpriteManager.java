@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class SpriteManager {
 	private ArrayList<Sprite> sprites;
 	
-	private int currentSprite = 1;
+	private int currentSprite = 0;
 	
 	boolean cycleMode = false;
 	private int ticksPerCycle = 1;

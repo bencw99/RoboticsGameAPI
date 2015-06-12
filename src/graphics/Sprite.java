@@ -34,7 +34,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g) {
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(image, 50, 50, null);
 	}
 
 	public void setDisplayHeight(int height) {
