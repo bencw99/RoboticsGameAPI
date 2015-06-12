@@ -1,9 +1,11 @@
 package entity;
 
-import java.awt.Graphics;
-
-import physics.*;
+import physics.Dimension;
+import physics.Position;
+import physics.Vector;
 import world.World;
+
+import java.awt.*;
 
 public abstract class Entity {
 	/** The position of this Entity instance */
@@ -82,7 +84,7 @@ public abstract class Entity {
 	public void setPos(Position pos) {
 		this.pos = pos;
 	}
-	
+
 	/**
 	 * Translates this position by the given x and y differentials
 	 * 
@@ -121,6 +123,15 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Returns the upper left position of this entity
+	 * 
+	 * @return the upper left position
+	 */
+	public Position getUpperLeftPos() {
+		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
@@ -128,7 +139,7 @@ public abstract class Entity {
 	}
 
 	/**
-	 * @param pos the position to set
+	 * @param angle the angle to set
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
@@ -170,4 +181,28 @@ public abstract class Entity {
 	public void setWorld(World world) {
 		this.world = world;
 	}
+	
+	/**
+	 * Tests if the two given polygons collide
+	 * 
+	 * @param a the first polygon to be tested
+	 * @param b the second polygon to be tested
+	 * @return the result of the collision test
+	 */
+	public static boolean collide(Polygon a, Polygon b) {
+		return(a.getBounds().intersects(b.getBounds()));
+	} 
+
+	/**
+	 * Tests if this entity collides with the given entity
+	 * 
+	 * @param ent the entity that we are testing to see if it collides with this one
+	 * @return the result of the collision test
+	 */
+	public boolean collide(Entity ent) {
+        Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
+        Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
+        return(a.intersects(b));
+	}
+
 }
