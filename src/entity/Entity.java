@@ -1,11 +1,11 @@
 package entity;
 
-import java.awt.Graphics;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-
-import physics.*;
+import physics.Dimension;
+import physics.Position;
+import physics.Vector;
 import world.World;
+
+import java.awt.*;
 
 public abstract class Entity {
 	/** The position of this Entity instance */
@@ -128,8 +128,18 @@ public abstract class Entity {
 	 * @return the upper left position
 	 */
 	public Position getUpperLeftPos() {
-		return new Position(pos.getX() - dim.getWidth()/2, pos.getY() - dim.getHeight()/2);
+		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
 	}
+
+    /**
+     * Returns the upper left position given a position and a dimension
+     * @param pos
+     * @param dim
+     * @return the upper left position
+     */
+    public Position getUpperLeftPos(Position pos, Dimension dim) {
+        return new Position(pos.getX() - dim.getWidth()/2, pos.getY() - dim.getHeight()/2);
+    }
 	
 	/**
 	 * @return the angle
@@ -200,9 +210,9 @@ public abstract class Entity {
 	 * @param pos the position of the other colliding object
 	 * @return the result of the collision test
 	 */
-	public boolean collide(Dimension dim, Position pos) {
-        Rectangle a = new Rectangle((int) this.pos.getX(), (int) this.pos.getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
-        Rectangle b = new Rectangle((int) pos.getX(), (int) pos.getY(), (int) dim.getWidth(), (int) dim.getHeight());
+	public boolean collide(Position pos, Dimension dim) {
+        Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
+        Rectangle b = new Rectangle((int) getUpperLeftPos(pos, dim).getX(), (int) getUpperLeftPos(pos, dim).getY(), (int) dim.getWidth(), (int) dim.getHeight());
         return(a.intersects(b));
 	}
 
