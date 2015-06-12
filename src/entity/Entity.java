@@ -1,11 +1,10 @@
 package entity;
 
-import java.awt.Graphics;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-
-import physics.*;
+import physics.Dimension;
+import physics.Position;
 import world.World;
+
+import java.awt.*;
 
 public abstract class Entity {
 	/** The position of this Entity instance */
@@ -84,7 +83,7 @@ public abstract class Entity {
 	public void setPos(Position pos) {
 		this.pos = pos;
 	}
-	
+
 	/**
 	 * @return the angle
 	 */
@@ -93,7 +92,7 @@ public abstract class Entity {
 	}
 
 	/**
-	 * @param pos the position to set
+	 * @param angle the angle to set
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
@@ -129,15 +128,14 @@ public abstract class Entity {
 	
 	
 	public boolean collide(Polygon a, Polygon b) {
-		Rectangle aRectangle = a.getBounds();
-		Rectangle bRectangle = b.getBounds();
-		return(aRectangle.intersects(bRectangle));
+		return(a.getBounds().intersects(b.getBounds()));
 	} 
 
 	
-	public boolean collide(Dimension dim) {
-		Rectangle a = new Rectangle();
-        return true;
+	public boolean collide(Dimension dim, Position pos) {
+        Rectangle a = new Rectangle((int) this.pos.getX(), (int) this.pos.getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
+        Rectangle b = new Rectangle((int) pos.getX(), (int) pos.getY(), (int) dim.getWidth(), (int) dim.getHeight());
+        return(a.intersects(b));
 
 	}
 
