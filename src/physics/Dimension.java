@@ -11,7 +11,7 @@ public class Dimension {
 	
 	/** The height of this dimension **/
 	private double height;
-	
+
 	/** Default constructor, initializes dimension to width 0 and height 0
 	 * 
 	 */

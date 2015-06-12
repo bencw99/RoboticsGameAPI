@@ -136,7 +136,9 @@ public abstract class Entity {
 
 	
 	public boolean collide(Dimension dim) {
-		
+		Rectangle a = new Rectangle();
+        return true;
+
 	}
 
 }
