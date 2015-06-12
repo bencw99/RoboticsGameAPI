@@ -10,7 +10,10 @@ import physics.*;
 public class InputListener implements KeyListener, MouseListener, MouseMotionListener {
 	/** The array of booleans determining whether or not the given key is pressed **/
 	private static boolean keysPressed[] = new boolean[128];
-		
+	
+	/** The array of booleans determining if the key was pressed last cycle **/
+	private static boolean newPressed[] = new boolean[128];
+	
 	/** The boolean describing the mouse state **/
 	private static boolean mousePressed = false;
 	
@@ -26,6 +29,18 @@ public class InputListener implements KeyListener, MouseListener, MouseMotionLis
 	public static boolean isKeyPressed(char key) {
 		return keysPressed[(int) key];
 	}
+	
+	/**
+	 * Returns true on the initial press of a key
+	 * (Pressed for the first time and not on the last)
+	 * 
+	 * @param key The key to check
+	 * @return If the key is pressed for the first time
+	 */
+	public static boolean isKeyNewPressed(char key) {
+		return newPressed[(int) key];
+	}
+	
 	/** 
 	 * Returns the state of the mouse 
 	 * 
@@ -89,12 +104,19 @@ public class InputListener implements KeyListener, MouseListener, MouseMotionLis
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int index = (int) e.getKeyChar();
+		if(keysPressed[index] == false) {
+			newPressed[index] = true;
+		}
+		else {
+			newPressed[index] = false;
+		}
 		keysPressed[index] = true;
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int index = (int) e.getKeyChar();
+		newPressed[index] = false;
 		keysPressed[index] = false;
 	}
 
