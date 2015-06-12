@@ -15,7 +15,7 @@ public class Gui extends JFrame {
 		
 	}
 	
-	public void buttonClicked() {
+	public void buttonClicked(Button button) {
 		
 	}
 }
