@@ -14,6 +14,15 @@ public class Gui extends JFrame {
 	public Gui() {
 		super("Game");
 	}
+	
+	public void addButton(Listener<Button> actionListener, int x, int y, int width, int height, String text){
+		Button b = new Button(actionListener);
+		b.setBounds(x, y, width, height);
+		b.setText(text);
+		buttons.add(b);
+		add(b);
+	}
+	
 	/**
 	 * compares button to the list of buttons, to find index
 	 * @param button
