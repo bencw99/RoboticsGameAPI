@@ -231,13 +231,95 @@ public abstract class Entity {
         Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
         return(a.intersects(b));
 	}
-	
+
+    /**
+     *
+     * @param ent the entity that we are colliding with
+     * @return the direction the other entity is coming from
+     */
 	public Vector directionalCollide(Entity ent) {
 		Rectangle c = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
         Rectangle d = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
-		if(d.contains(this.getUpperLeftPos().getX(), this.getUpperLeftPos().getY())) {
-			return 
+
+        //Tests cases where the other entity is above this one
+        if(ent.getUpperLeftPos().getY() < ent.getUpperLeftPos().getY()) {
+		    if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
+                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                    return new Vector(0, -1);
+                }
+                else return new Vector(-1, 0);
+            }
+
+            if(ent.getLowerRightPos().getX() > this.getLowerRightPos().getX()) {
+                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                    return new Vector(0, -1);
+                }
+                else return new Vector(1, 0);
+            }
+
+            else return new Vector(0, -1);
+
 		}
+
+        //Tests cases where the other entity is below this one
+        if(ent.getLowerLeftPos().getY() > this.getLowerLeftPos().getY()) {
+            if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
+                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                    return new Vector(0, 1);
+                }
+                else return new Vector(-1, 0);
+            }
+
+            if(ent.getLowerRightPos().getX() > this.getLowerRightPos().getX()) {
+                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                    return new Vector(0, 1);
+                }
+                else return new Vector(1, 0);
+            }
+
+            else return new Vector(0, 1);
+        }
+
+        //Tests cases where the other entity is to the left of this one
+        if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
+            if(ent.getUpperLeftPos().getY() < this.getUpperLeftPos().getY()) {
+                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                    return new Vector(-1, 0);
+                }
+                else return new Vector(0, -1);
+            }
+
+            if(ent.getLowerLeftPos().getY() > this.getLowerLeftPos().getY()) {
+                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                    return new Vector(-1, 0);
+                }
+                else return new Vector(0, 1);
+            }
+
+            else return new Vector(-1, 0);
+        }
+
+        //Tests cases where the other entity is to the right of this one
+        if(ent.getLowerRightPos().getX() > this.getLowerRightPos().getX()) {
+            if(ent.getUpperRightPos().getY() < this.getUpperRightPos().getY()) {
+                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                    return new Vector(1, 0);
+                }
+                else return new Vector(0, -1);
+            }
+
+            if(ent.getLowerRightPos().getY() > this.getLowerRightPos().getY()) {
+                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                    return new Vector(1, 0);
+                }
+                else return new Vector(0, 1);
+            }
+
+            else return new Vector(1, 0);
+        }
+
+        //idk what to put here i have all the cases but i have to put an else statement so yeah
+        else return null;
 	}
 
 }
