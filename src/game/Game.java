@@ -5,11 +5,14 @@ import javax.swing.JPanel;
 import constants.Constants;
 import input.*;
 import world.*;
+import gui.*;
 
 /**
  * The class that starts up the game
  */
 public class Game extends JPanel {
+	//A Listener for this.buttonClicked(Button caller)
+	private Listener<Button> buttonClickedListenerInstance = new ButtonClickedListener<Button>(this);
 	/** The state enum of the game class **/
 	public static enum State {
 		LOADING,
@@ -24,12 +27,17 @@ public class Game extends JPanel {
 	/** The state of this game **/
 	private State state;
 	
+	private Gui GUI;
 	/** 
 	 * Default constructor, creates an empty world
 	 */
 	public Game() {
 		this.world = new World();
 		this.state = State.LOADING;
+	}
+	
+	public void addButton(int x, int y, int width, int height, String text){
+		GUI.addButton(buttonClickedListenerInstance, x, y, width, height, text);
 	}
 	
 	public static void main(String[] args) {
@@ -68,7 +76,11 @@ public class Game extends JPanel {
 			//TODO Graphically close the game
 		}
 	}
-
+	
+	//to be completed
+	public void buttonClicked(Button caller){
+		
+	}
 	/**
 	 * @return the world object
 	 */
