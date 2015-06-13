@@ -233,25 +233,61 @@ public abstract class Entity {
 	}
 
     /**
+     * Tests the direction of an existing collision
      *
-     * @param ent the entity that we are colliding with
-     * @return the direction the other entity is coming from
+     * @param ent the entity that this entity is colliding with
+     * @return the direction the other entity is colliding from
      */
 	public Vector directionalCollide(Entity ent) {
-		Rectangle c = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
-        Rectangle d = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
+		/*
+		if(collide(ent)) {
+			//The distance between the left side of this entity and the right side of the colliding one
+			double leftDistance = Math.abs((pos.getX() - dim.getWidth()/2) - (ent.pos.getX() + ent.dim.getWidth()/2));
+			//The distance between the right side of this entity and the left side of the colliding one
+			double rightDistance = Math.abs((pos.getX() + dim.getWidth()/2) - (ent.pos.getX() - ent.dim.getWidth()/2));
+			//The distance between the upper side of this entity and the lower side of the colliding one
+			double upperDistance = Math.abs((pos.getY() - dim.getHeight()/2) - (ent.pos.getY() + ent.dim.getHeight()/2));
+			//The distance between the lower side of this entity and the upper side of the colliding one
+			double lowerDistance = Math.abs((pos.getY() + dim.getHeight()/2) - (ent.pos.getY() - ent.dim.getHeight()/2));
+			
+			//Compares to find the lowest of the four distances
+			double minimumDistance = Math.min(Math.min(leftDistance, rightDistance), Math.min(upperDistance, lowerDistance));
+			
+			//Returns the vector matching the lowest distance
+			if(minimumDistance == leftDistance) {
+				return new Vector(0, 1);
+			}
+			if(minimumDistance == rightDistance) {
+				return new Vector(0, -1);
+			}
+			if(minimumDistance == upperDistance) {
+				return new Vector(1, 0);
+			}
+			if(minimumDistance == lowerDistance) {
+				return new Vector(-1, 0);
+			}
+			
+			System.out.println("Collision detection failed: directionalCollide minimum not found");
+			//return null;
+		}
+		else {
+			return null;
+		}
+		*/
+		Rectangle thisRectangle = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
+        Rectangle collidingRectangle = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
 
         //Tests cases where the other entity is above this one
         if(ent.getUpperLeftPos().getY() < ent.getUpperLeftPos().getY()) {
 		    if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
-                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() > collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(0, -1);
                 }
                 else return new Vector(-1, 0);
             }
 
             if(ent.getLowerRightPos().getX() > this.getLowerRightPos().getX()) {
-                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() > collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(0, -1);
                 }
                 else return new Vector(1, 0);
@@ -264,14 +300,14 @@ public abstract class Entity {
         //Tests cases where the other entity is below this one
         if(ent.getLowerLeftPos().getY() > this.getLowerLeftPos().getY()) {
             if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
-                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() > collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(0, 1);
                 }
                 else return new Vector(-1, 0);
             }
 
             if(ent.getLowerRightPos().getX() > this.getLowerRightPos().getX()) {
-                if(d.createIntersection(c).getWidth() > d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() > collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(0, 1);
                 }
                 else return new Vector(1, 0);
@@ -283,14 +319,14 @@ public abstract class Entity {
         //Tests cases where the other entity is to the left of this one
         if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
             if(ent.getUpperLeftPos().getY() < this.getUpperLeftPos().getY()) {
-                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() < collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(-1, 0);
                 }
                 else return new Vector(0, -1);
             }
 
             if(ent.getLowerLeftPos().getY() > this.getLowerLeftPos().getY()) {
-                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() < collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(-1, 0);
                 }
                 else return new Vector(0, 1);
@@ -302,14 +338,14 @@ public abstract class Entity {
         //Tests cases where the other entity is to the right of this one
         if(ent.getLowerRightPos().getX() > this.getLowerRightPos().getX()) {
             if(ent.getUpperRightPos().getY() < this.getUpperRightPos().getY()) {
-                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() < collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(1, 0);
                 }
                 else return new Vector(0, -1);
             }
 
             if(ent.getLowerRightPos().getY() > this.getLowerRightPos().getY()) {
-                if(d.createIntersection(c).getWidth() < d.createIntersection(c).getHeight()) {
+                if(collidingRectangle.createIntersection(thisRectangle).getWidth() < collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(1, 0);
                 }
                 else return new Vector(0, 1);
