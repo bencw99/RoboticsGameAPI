@@ -40,7 +40,7 @@ public abstract class Entity {
 	 * @param pos the position of this entity
 	 * @param dim the dimension of this entity
 	 */
-	public Entity(World world, Position pos, double angle, Vector vector, Dimension dim) {
+	public Entity(World world, Position pos, double angle, Dimension dim) {
 		this.world = world;
 		this.pos = pos;
 		this.angle = angle;
