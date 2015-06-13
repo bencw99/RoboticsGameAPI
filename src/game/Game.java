@@ -1,22 +1,20 @@
 package game;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.swing.JFrame;
 =======
 <<<<<<< HEAD
 >>>>>>> Added framework for displaying test images, awaiting JPanel and JFrame
-import javax.swing.JPanel;
 =======
+>>>>>>> Cleaning up from rebase onto GUI
+import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
->>>>>>> Added framework for displaying test images, awaiting JPanel and JFrame
 
 import constants.Constants;
-<<<<<<< HEAD
 import implementaion.Implementor;
-=======
 import entity.Entity;
 import entity.TestEntity;
->>>>>>> Added framework for displaying test images, awaiting JPanel and JFrame
 import input.*;
 import world.*;
 import gui.*;
@@ -51,7 +49,6 @@ public class Game{
 	public Game(Implementor imp) {
 		this.world = new World();
 		this.state = State.LOADING;
-<<<<<<< HEAD
 		GUI = new Gui(this);
 		JFrame frame = new JFrame();
 		frame.setTitle("Game");
@@ -60,11 +57,8 @@ public class Game{
 		frame.setVisible(true);
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-=======
-		GUI = new Gui();
 		world.add(new TestEntity(world));
 		this.state = State.RUNNING;
->>>>>>> Added framework for displaying test images, awaiting JPanel and JFrame
 	}
 	
 	
@@ -95,11 +89,8 @@ public class Game{
 				state = State.PAUSED;
 			}
 			world.update();
-<<<<<<< HEAD
 			GUI.update(world.getButtons());
-=======
 			world.draw(bi.getGraphics());
->>>>>>> Added framework for displaying test images, awaiting JPanel and JFrame
 		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {
 				state = State.RUNNING;
