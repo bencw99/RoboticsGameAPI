@@ -3,6 +3,7 @@ package game;
 import javax.swing.JPanel;
 
 import constants.Constants;
+import implementaion.Implementor;
 import input.*;
 import world.*;
 import gui.*;
@@ -13,6 +14,8 @@ import gui.*;
 public class Game{
 	//A Listener for this.buttonClicked(Button caller)
 	private Listener<gui.Button> buttonClickedListenerInstance = new ButtonClickedListener<gui.Button>(this);
+	
+	private Implementor implementor;
 	/** The state enum of the game class **/
 	public static enum State {
 		LOADING,
@@ -31,20 +34,17 @@ public class Game{
 	/** 
 	 * Default constructor, creates an empty world
 	 */
-	public Game() {
+	public Game(Implementor imp) {
+		implementor = imp;
 		this.world = new World();
 		this.state = State.LOADING;
 		GUI = new Gui();
 	}
 	
-	public void addButton(int x, int y, int width, int height, String text){
-		GUI.addButton(buttonClickedListenerInstance, x, y, width, height, text);
-	}
 	
 	public void main() {
-		Game game = new Game();
-		while(game.state != State.FINISHED) {
-			game.update();	
+		while(state != State.FINISHED) {
+			update();	
 			try {
 				Thread.sleep(1000/Constants.UPDATES_PER_SEC);
 			} catch (InterruptedException e) { 
@@ -58,6 +58,7 @@ public class Game{
 	 */
 	public void update() {
 		//Different keys pressed to start stuff
+		GUI.update(world.getButtons());
 		switch(state) {
 		case LOADING:
 			if(InputListener.isKeyPressed(' ')) {
@@ -78,9 +79,8 @@ public class Game{
 		}
 	}
 	
-	//to be completed
-	public void buttonClicked(gui.Button button){
-		
+	public void buttonClicked(AbstractButton button){
+		implementor.buttonPressed(button);
 	}
 	/**
 	 * @return the world object

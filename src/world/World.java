@@ -1,9 +1,12 @@
 package world;
 
 import java.awt.Graphics;
+
 import java.util.*;
 
 import entity.*;
+
+import game.*;
 
 /**
  * A class representing the world of a game
@@ -12,12 +15,13 @@ import entity.*;
 public class World {
 	/** List of entities in this world */
 	private ArrayList<Entity> entities;
-	
+	private ArrayList<AbstractButton> buttons;
 	/** 
 	 * Default constructor, initializes elements
 	 */
 	public World() {
 		entities = new ArrayList<Entity>();
+		buttons = new ArrayList<AbstractButton>();
 	}
 	
 	/**
@@ -26,6 +30,9 @@ public class World {
 	public void init() {
 		for(Entity entity : entities) {
 			entity.init();
+		}
+		for(AbstractButton button : buttons){
+			button.init();
 		}
 	}
 	
@@ -69,7 +76,10 @@ public class World {
 		entities.add(ent);
 		ent.setWorld(this);
 	}
-	
+	public void add(AbstractButton button){
+		button.init();
+		buttons.add(button);
+	}
 	/**
 	 * Remove an entity from this world
 	 * 
@@ -80,11 +90,16 @@ public class World {
 		ent.setWorld(null);
 		entities.remove(ent);
 	}
-
+	public void remove(AbstractButton button) {
+		buttons.remove(button);
+	}
 	/**
 	 * @return the entity list
 	 */
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+	public ArrayList<AbstractButton> getButtons(){
+		return buttons;
 	}
 }

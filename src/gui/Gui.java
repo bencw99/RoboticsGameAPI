@@ -2,10 +2,11 @@ package gui;
 
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+
+import game.*;
 
 public class Gui extends JPanel {
-	private static ArrayList<Button> buttons = new ArrayList<Button>();
 	/**
 	 * Default serial ID
 	 */
@@ -15,12 +16,11 @@ public class Gui extends JPanel {
 		super();
 	}
 	
-	public void addButton(Listener<gui.Button> buttonClickedListenerInstance, int x, int y, int width, int height, String text){
-		Button b = new Button(buttonClickedListenerInstance);
-		b.setBounds(x, y, width, height);
-		b.setText(text);
-		buttons.add(b);
-		add(b);
+	public void update(ArrayList<AbstractButton> buttons){
+		this.removeAll();
+		for(AbstractButton button : buttons){
+			add(button.getButton());
+		}
 	}
 	
 }
