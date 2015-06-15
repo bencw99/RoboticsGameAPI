@@ -14,7 +14,7 @@ public class Button extends JButton implements ActionListener {
 		//thisGui = gui;
 	}
 	public void actionPerformed(ActionEvent e) {
-		listener.callMethod(this);
+		listener.callMethod((Button)e.getSource());
 	}
 
 }

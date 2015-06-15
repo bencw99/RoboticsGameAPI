@@ -10,9 +10,9 @@ import gui.*;
 /**
  * The class that starts up the game
  */
-public class Game extends JPanel {
+public class Game{
 	//A Listener for this.buttonClicked(Button caller)
-	private Listener<Button> buttonClickedListenerInstance = new ButtonClickedListener<Button>(this);
+	private Listener<gui.Button> buttonClickedListenerInstance = new ButtonClickedListener<gui.Button>(this);
 	/** The state enum of the game class **/
 	public static enum State {
 		LOADING,
@@ -34,13 +34,14 @@ public class Game extends JPanel {
 	public Game() {
 		this.world = new World();
 		this.state = State.LOADING;
+		GUI = new Gui();
 	}
 	
 	public void addButton(int x, int y, int width, int height, String text){
 		GUI.addButton(buttonClickedListenerInstance, x, y, width, height, text);
 	}
 	
-	public static void main(String[] args) {
+	public void main() {
 		Game game = new Game();
 		while(game.state != State.FINISHED) {
 			game.update();	
@@ -78,7 +79,7 @@ public class Game extends JPanel {
 	}
 	
 	//to be completed
-	public void buttonClicked(Button caller){
+	public void buttonClicked(gui.Button button){
 		
 	}
 	/**
