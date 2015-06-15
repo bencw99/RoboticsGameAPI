@@ -2,13 +2,13 @@ package game;
 
 import gui.*;
 
-public class ButtonClickedListener<Button> extends Listener<Button> {
+public class ButtonClickedListener<AbstractButton> extends Listener<AbstractButton> {
 	private Game game;
 	ButtonClickedListener(Game g){
 		game = g;
 	}
-	public void callMethod(Button button) {
-		game.buttonClicked((gui.Button) button);
+	public void callMethod(AbstractButton button) {
+		game.buttonClicked((game.AbstractButton) button);
 		
 	}
 
