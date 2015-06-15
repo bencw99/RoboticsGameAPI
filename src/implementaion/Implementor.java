@@ -47,7 +47,34 @@ public abstract class Implementor {
 		}
 		return false;
 	}
-	
+	/**
+	 * @param buttonName
+	 * @return button with matching name
+	 */
+	public AbstractButton getButton(String buttonName){
+		for(AbstractButton button : game.getWorld().getButtons()){
+			if(button.getName().equals(buttonName)){
+				return button;
+			}
+		}
+		return null;
+	}
+	/**
+	 * 
+	 * @param index
+	 * @return button at index (index)
+	 */
+	public AbstractButton getButton(int index){
+		return game.getWorld().getButtons().get(index);
+	}
+	/**
+	 * 
+	 * @param index
+	 * @return entity at index (index)
+	 */
+	public Entity getEntity(int index){
+		return game.getWorld().getEntities().get(index);
+	}
 	/**
 	 * Initializer
 	 * -call this in subclass's main
@@ -55,10 +82,16 @@ public abstract class Implementor {
 	public void main() {
 		game = new Game(this);
 	}
+	/**
+	 * Starts the game
+	 */
 	public void begin(){
 		game.main();
 	}
-	
+	/**
+	 * called when button is pressed
+	 * @param button - sender
+	 */
 	public abstract void buttonPressed(AbstractButton button);
 
 }
