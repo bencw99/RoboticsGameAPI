@@ -26,7 +26,16 @@ public class Implementation extends Implementor{
 	public void buttonPressed(AbstractButton button){
 		//Name of Button
 		String buttonName = button.getName();
+		if(buttonName.equals("Button1")){
+			button.getButton().setText("Button 1 was Pressed");
+		}
+		else if(buttonName.equals("Button2")){
+			button.getButton().setText("Button 2 was Pressed");
+		}
+	}
+	public class Button1 extends AbstractButton{
+		public void init(){
 		
+		}
 	}
 }
-
