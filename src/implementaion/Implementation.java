@@ -8,7 +8,6 @@ import input.*;
 import physics.*;
 import world.*;
 public class Implementation extends Implementor{
-	
 	/**
 	 * Called when game starts
 	 */
@@ -17,7 +16,6 @@ public class Implementation extends Implementor{
 		super.main();
 		
 		//Write code here
-		
 		
 		
 		//Ignore
