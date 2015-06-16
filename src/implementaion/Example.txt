@@ -18,7 +18,8 @@ public class Implementation extends Implementor{
 		
 		//Write code here
 		
-		
+		addButton(new Button1());
+		addButton(new Button2());
 		
 		//Ignore
 		begin();
@@ -35,7 +36,16 @@ public class Implementation extends Implementor{
 	}
 	public class Button1 extends AbstractButton{
 		public void init(){
-		
+			setBounds(0,0,50,50);
+			setText("Button1");
+			setVisible(true);
+		}
+	}
+	public class Button2 extends AbstractButton{
+		public void init(){
+			setBounds(100,100,50,50);
+			setText("Button2");
+			setVisible(true);
 		}
 	}
 }
