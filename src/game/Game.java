@@ -1,13 +1,20 @@
 package game;
 
+import javax.swing.JPanel;
+
 import constants.Constants;
+import implementaion.Implementor;
 import input.*;
 import world.*;
+import gui.*;
 
 /**
  * The class that starts up the game
  */
-public class Game {
+public class Game{
+	//A Listener for this.buttonClicked(Button caller)
+	private Listener<gui.Button> buttonClickedListenerInstance = new ButtonClickedListener<gui.Button>(this);
+	
 	/** The state enum of the game class **/
 	public static enum State {
 		LOADING,
@@ -22,18 +29,20 @@ public class Game {
 	/** The state of this game **/
 	private State state;
 	
+	private Gui GUI;
 	/** 
 	 * Default constructor, creates an empty world
 	 */
-	public Game() {
+	public Game(Implementor imp) {
 		this.world = new World();
 		this.state = State.LOADING;
+		GUI = new Gui();
 	}
 	
-	public static void main(String[] args) {
-		Game game = new Game();
-		while(game.state != State.FINISHED) {
-			game.update();	
+	
+	public void main() {
+		while(state != State.FINISHED) {
+			update();	
 			try {
 				Thread.sleep(1000/Constants.UPDATES_PER_SEC);
 			} catch (InterruptedException e) { 
@@ -47,6 +56,7 @@ public class Game {
 	 */
 	public void update() {
 		//Different keys pressed to start stuff
+		GUI.update(world.getButtons());
 		switch(state) {
 		case LOADING:
 			if(InputListener.isKeyPressed(' ')) {
@@ -66,20 +76,21 @@ public class Game {
 			//TODO Graphically close the game
 		}
 	}
-
+	
+	public void buttonClicked(AbstractButton button){
+		
+	}
 	/**
 	 * @return the world object
 	 */
-	public World getWorld()
-	{
+	public World getWorld() {
 		return world;
 	}
 
 	/**
 	 * @return the state of the game
 	 */
-	public State getState()
-	{
+	public State getState() {
 		return state;
 	}
 }
