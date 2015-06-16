@@ -92,6 +92,5 @@ public abstract class Implementor {
 	 * called when button is pressed
 	 * @param button - sender
 	 */
-	public abstract void buttonPressed(AbstractButton button);
 
 }

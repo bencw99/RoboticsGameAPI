@@ -23,10 +23,5 @@ public class Implementation extends Implementor{
 		//Ignore
 		begin();
 	}
-	public void buttonPressed(AbstractButton button){
-		//Name of Button
-		String buttonName = button.getName();
-		
-	}
 }
 
