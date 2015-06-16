@@ -132,6 +132,33 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Returns the upper right position of this entity
+	 * 
+	 * @return the upper right position
+	 */
+	public Position getUpperRightPos() {
+		return new Position(this.pos.getX() + this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
+	}
+	
+	/**
+	 * Returns the lower left position of this entity
+	 * 
+	 * @return the lower left position
+	 */
+	public Position getLowerLeftPos() {
+		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() + this.dim.getHeight()/2);
+	}
+	
+	/**
+	 * Returns the lower right position of this entity
+	 * 
+	 * @return the lower right position
+	 */
+	public Position getLowerRightPos() {
+		return new Position(this.pos.getX() + this.dim.getWidth()/2, this.pos.getY() + this.dim.getHeight()/2);
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
@@ -204,5 +231,46 @@ public abstract class Entity {
         Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
         return(a.intersects(b));
 	}
+
+    /**
+     * Tests the direction of an existing collision
+     *
+     * @param ent the entity that this entity is colliding with
+     * @return the direction the other entity is colliding from
+     */
+	public Vector directionalCollide(Entity ent) {
+		
+		if(collide(ent)) {
+			//The distance between the left side of this entity and the right side of the colliding one
+			double leftDistance = Math.abs((pos.getX() - dim.getWidth()/2) - (ent.pos.getX() + ent.dim.getWidth()/2));
+			//The distance between the right side of this entity and the left side of the colliding one
+			double rightDistance = Math.abs((pos.getX() + dim.getWidth()/2) - (ent.pos.getX() - ent.dim.getWidth()/2));
+			//The distance between the upper side of this entity and the lower side of the colliding one
+			double upperDistance = Math.abs((pos.getY() - dim.getHeight()/2) - (ent.pos.getY() + ent.dim.getHeight()/2));
+			//The distance between the lower side of this entity and the upper side of the colliding one
+			double lowerDistance = Math.abs((pos.getY() + dim.getHeight()/2) - (ent.pos.getY() - ent.dim.getHeight()/2));
+			
+			//Compares to find the lowest of the four distances
+			double minimumDistance = Math.min(Math.min(leftDistance, rightDistance), Math.min(upperDistance, lowerDistance));
+			
+			//Returns the vector matching the lowest distance
+			if(minimumDistance == leftDistance) {
+				return new Vector(0, 1);
+			}
+			if(minimumDistance == rightDistance) {
+				return new Vector(0, -1);
+			}
+			if(minimumDistance == upperDistance) {
+				return new Vector(1, 0);
+			}
+			if(minimumDistance == lowerDistance) {
+				return new Vector(-1, 0);
+			}
+			
+			System.out.println("Collision detection failed: directionalCollide minimum not found");
+		}	
+		return null;
+	}
+
 
 }
