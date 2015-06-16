@@ -279,7 +279,9 @@ public abstract class Entity {
         Rectangle collidingRectangle = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
 
         //Tests to see if there is any collision
-        if(collide(ent)) {
+        if(!collide(ent)) {
+        	return null;
+        }
 
         //Tests to see if the center of the colliding object is above the center of this object
         if(ent.getPos().getY() < this.getPos().getY()) {
@@ -337,13 +339,8 @@ public abstract class Entity {
             else return new Vector(0, 1);
         }
 
-        //Stuff I had to put
-        else return null;
-
-        }
-
         //If there is no collision return null
-        else return null;
+        return null;
 
         /**
         //Tests cases where the other entity is above this one
