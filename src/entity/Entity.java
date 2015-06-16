@@ -274,11 +274,80 @@ public abstract class Entity {
 			return null;
 		}
 		*/
+
 		Rectangle thisRectangle = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
         Rectangle collidingRectangle = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
 
+        //Tests to see if there is any collision
+        if(collide(ent)) {
+
+        //Tests to see if the center of the colliding object is above the center of this object
+        if(ent.getPos().getY() < this.getPos().getY()) {
+            //Tests to see if the center of the colliding object is between the left and right sides of this object
+            if(ent.getPos().getX() < this.getLowerRightPos().getX() && ent.getPos().getX() > this.getLowerLeftPos().getX()) {
+                return new Vector(0, -1);
+            }
+            //Tests to see if the center of the colliding object is to the left of this object
+            if(ent.getPos().getX() < this.getLowerLeftPos().getX()) {
+                return new Vector(-1, 0);
+            }
+            //The only remaining case is if the center of the colliding object is to the right of this object
+            else return new Vector(1, 0);
+        }
+
+        //Tests to see if the center of the colliding object is below the center of this object
+        if(ent.getPos().getY() > this.getPos().getY()) {
+            //Tests to see if the center of the colliding object is between the left and right sides of this object
+            if(ent.getPos().getX() < this.getLowerRightPos().getX() && ent.getPos().getX() > this.getLowerLeftPos().getX()) {
+                return new Vector(0, 1);
+            }
+            //Tests to see if the center of the collidingRectangle object is to the left of this object
+            if(ent.getPos().getX() < this.getLowerLeftPos().getX()) {
+                return new Vector(-1, 0);
+            }
+            //The only remaining case is if the center of the colliding object is to the right of this object
+            else return new Vector(1, 0);
+        }
+
+        //Tests to see if the center of the colliding object is to the left of the center of this object
+        if(ent.getPos().getX() < this.getPos().getX()) {
+            //Tests to see if the center of the colliding object is between the top and bottom sides of this object
+            if(ent.getPos().getY() > this.getUpperLeftPos().getY() && ent.getPos().getY() < this.getLowerLeftPos().getY()) {
+                return new Vector(-1, 0);
+            }
+            //Tests to see if the center of the colliding object is above the top of this object
+            if(ent.getPos().getY() < this.getUpperLeftPos().getY()) {
+                return new Vector(0, -1);
+            }
+            //The only remaining case is if the center of the colliding object is below the bottom of this object
+            else return new Vector(0, 1);
+        }
+
+        //Tests to see if the center of the colliding object is to the right of the center of this object
+        if(ent.getPos().getX() > this.getPos().getX()) {
+            //Tests to see if the center of the colliding object is between the top and bottom sides of this object
+            if(ent.getPos().getY() > this.getUpperLeftPos().getY() && ent.getPos().getY() < this.getLowerLeftPos().getY()) {
+                return new Vector(1, 0);
+            }
+            //Tests to see if the center of the colliding object is above the top of this object
+            if(ent.getPos().getY() < this.getUpperLeftPos().getY()) {
+                return new Vector(0, -1);
+            }
+            //The only remaining case is if the center of the colliding object is below the bottom of this object
+            else return new Vector(0, 1);
+        }
+
+        //Stuff I had to put
+        else return null;
+
+        }
+
+        //If there is no collision return null
+        else return null;
+
+        /**
         //Tests cases where the other entity is above this one
-        if(ent.getUpperLeftPos().getY() < ent.getUpperLeftPos().getY()) {
+        if(ent.getUpperLeftPos().getY() < this.getUpperLeftPos().getY()) {
 		    if(ent.getLowerLeftPos().getX() < this.getLowerLeftPos().getX()) {
                 if(collidingRectangle.createIntersection(thisRectangle).getWidth() > collidingRectangle.createIntersection(thisRectangle).getHeight()) {
                     return new Vector(0, -1);
@@ -356,6 +425,8 @@ public abstract class Entity {
 
         //idk what to put here i have all the cases but i have to put an else statement so yeah
         else return null;
-	}
+	*/
+    }
+
 
 }
