@@ -1,6 +1,10 @@
 package entity;
 
+import physics.Vector;
+
+import input.InputListener;
 import world.World;
+import game.Game.State;
 import graphics.Sprite;
 import graphics.SpriteManager;
 
@@ -8,19 +12,16 @@ public class TestEntity extends Entity {
 	
 	public TestEntity(World world) {
 		super(world);
-		spriteManager = new SpriteManager(new Sprite("happy", "happy.jpg"));
+		setSpriteManager(new SpriteManager(this, new Sprite(this, "happy", "happy.jpg")));
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		
+		translate(new Vector(100, 100));
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -3,22 +3,28 @@ package graphics;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import entity.Entity;
+
 public class SpriteManager {
 	private ArrayList<Sprite> sprites;
 	
 	private int currentSprite = 0;
 	
+	private Entity entity;
+	
 	boolean cycleMode = false;
 	private int ticksPerCycle = 1;
 	
 	// loading single sprites
-	public SpriteManager(Sprite sprite) {
+	public SpriteManager(Entity entity, Sprite sprite) {
+		this.entity = entity;
 		sprites = new ArrayList<Sprite>();
 		sprites.add(sprite);
 	}
 	
 	// loading a 'sprite AL'
-	public SpriteManager(ArrayList<Sprite> sprites) {
+	public SpriteManager(Entity entity, ArrayList<Sprite> sprites) {
+		this.entity = entity;
 		this.sprites = sprites;
 	}
 	

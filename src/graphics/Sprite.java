@@ -7,16 +7,21 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import entity.Entity;
+
 public class Sprite {
 	private String imageLocation, name;
 	private File imageFile;
 	private BufferedImage image;
-	private int displayHeight, displayWidth;
+	//private int displayHeight, displayWidth;
 	private Graphics g;
+	private Entity entity;
 	
-	public Sprite(String name, String imageLocation) {
+	public Sprite(Entity entity, String name, String imageLocation) {
+		this.entity = entity;
 		this.name = name;
 		loadSprite(imageLocation);
+		//loadDimensions();
 	}
 	
 	// takes a sprite location and sets the IV for this class
@@ -29,26 +34,30 @@ public class Sprite {
 			System.out.println("Illegal path for " + name + " : " + imageLocation);
 			e.printStackTrace();
 		}
-		displayHeight = image.getHeight();
-		displayWidth = image.getWidth();
 	}
 	
 	public void draw(Graphics g) {
-		g.drawImage(image, 50, 50, null);
+		g.drawImage(image, (int) entity.getPos().getX(), (int) entity.getPos().getY(), 
+				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), 
+				null);
 	}
 
-	public void setDisplayHeight(int height) {
-		displayHeight = height;
-	}
-	
-	public void setDisplayWidth(int width) {
-		displayWidth = width;
-	}
-	
-	public void scale(double scaleFactor) {
-		displayHeight *= scaleFactor;
-		displayWidth *= scaleFactor;
-	}
+//	private void loadDimensions() {
+//	displayHeight = entity.getDim().getHeight();
+//	displayWidth = entity.getDim().getWidth();
+//}
+//	public void setDisplayHeight(int height) {
+//		displayHeight = height;
+//	}
+//	
+//	public void setDisplayWidth(int width) {
+//		displayWidth = width;
+//	}
+//	
+//	public void scale(double scaleFactor) {
+//		displayHeight *= scaleFactor;
+//		displayWidth *= scaleFactor;
+//	}
 	
 	public String getName() {
 		return name;

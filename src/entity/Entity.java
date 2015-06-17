@@ -23,7 +23,7 @@ public abstract class Entity {
 	private World world;
 	
 	/** Draws and manages the graphics for this entity */
-	protected SpriteManager spriteManager;
+	private SpriteManager spriteManager;
 
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
@@ -214,6 +214,14 @@ public abstract class Entity {
 		this.world = world;
 	}
 	
+	public SpriteManager getSpriteManager() {
+		return spriteManager;
+	}
+
+	public void setSpriteManager(SpriteManager spriteManager) {
+		this.spriteManager = spriteManager;
+	}
+
 	/**
 	 * Tests if the two given polygons collide
 	 * 
