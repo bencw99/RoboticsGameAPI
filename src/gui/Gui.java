@@ -28,20 +28,19 @@ public class Gui extends JPanel {
 	
 	public Gui(Game g) {
 		super();
-<<<<<<< HEAD
 		listener = new InputListener();
 		addKeyListener(listener);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 		game = g;
 	}
+	
 	public void paintComponent(Graphics g){
 		game.getWorld().draw(g);
-=======
 		setName("GUI");
 		setVisible(true);
->>>>>>> Changed game to a JFrame, basic image display now functional
 	}
+	
 	public void update(ArrayList<AbstractButton> buttons){
 		this.removeAll();
 		for(AbstractButton button : buttons){

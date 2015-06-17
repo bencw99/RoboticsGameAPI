@@ -1,19 +1,8 @@
 package game;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.swing.JFrame;
-=======
-<<<<<<< HEAD
->>>>>>> Added framework for displaying test images, awaiting JPanel and JFrame
-=======
->>>>>>> Cleaning up from rebase onto GUI
-=======
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
->>>>>>> Changed game to a JFrame, basic image display now functional
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
@@ -64,7 +53,6 @@ public class Game extends JFrame{
 	    
 		this.world = new World();
 		this.state = State.LOADING;
-<<<<<<< HEAD
 		GUI = new Gui(this);
 		JFrame frame = new JFrame();
 		frame.setTitle("Game");
@@ -74,12 +62,6 @@ public class Game extends JFrame{
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		world.add(new TestEntity(world));
-=======
-		
-		GUI = new Gui();	
-		add(GUI);
-		
->>>>>>> Changed game to a JFrame, basic image display now functional
 		this.state = State.RUNNING;
 	}
 	
@@ -114,12 +96,8 @@ public class Game extends JFrame{
 				state = State.PAUSED;
 			}
 			world.update();
-<<<<<<< HEAD
 			GUI.update(world.getButtons());
-			world.draw(bi.getGraphics());
-=======
 			world.draw(getGraphics());
->>>>>>> Changed game to a JFrame, basic image display now functional
 			break;
 		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {
