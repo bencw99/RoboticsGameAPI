@@ -1,17 +1,7 @@
 package game;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
-
 import constants.Constants;
 import implementaion.Implementor;
-import entity.Entity;
-import entity.TestEntity;
 import input.*;
 import world.*;
 import gui.*;
@@ -19,7 +9,7 @@ import gui.*;
 /**
  * The class that starts up the game
  */
-public class Game extends JFrame{
+public class Game{
 	//A Listener for this.buttonClicked(Button caller)
 	private Listener<gui.Button> buttonClickedListenerInstance = new ButtonClickedListener<gui.Button>(this);
 	
@@ -38,30 +28,25 @@ public class Game extends JFrame{
 	private State state;
 	
 	private Gui GUI;
+	
+	private JFrame frame;
 		
 	/** 
 	 * Default constructor, creates an empty world
 	 */
 	public Game(Implementor imp) {	
-	    super("Game");
-
-	    setSize(1000, 1000);
-	    setLocationRelativeTo(null);
-	    setResizable(false);
-	    setDefaultCloseOperation(EXIT_ON_CLOSE);
-	    setVisible(true);
-	    
 		this.world = new World();
 		this.state = State.LOADING;
 		GUI = new Gui(this);
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setTitle("Game");
-		frame.setSize(500, 500);
+		frame.setSize(1000, 1000);
 		frame.add(GUI);
 		frame.setVisible(true);
 		frame.setLayout(null);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		world.add(new TestEntity(world));
 		this.state = State.RUNNING;
 	}
 	
@@ -97,7 +82,7 @@ public class Game extends JFrame{
 			}
 			world.update();
 			GUI.update(world.getButtons());
-			world.draw(getGraphics());
+			world.draw(frame.getGraphics());
 			break;
 		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {

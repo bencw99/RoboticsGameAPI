@@ -1,15 +1,7 @@
 package gui;
 import input.InputListener;
-
-import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.*;

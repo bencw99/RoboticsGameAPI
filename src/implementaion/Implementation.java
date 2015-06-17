@@ -18,11 +18,8 @@ public class Implementation extends Implementor{
 		super.main();
 		
 		//Write code here
-<<<<<<< HEAD
 		addButton(new Button1());
-=======
 		super.addEntity(new TestEntity(game.getWorld()));
->>>>>>> Changed game to a JFrame, basic image display now functional
 		
 		//Ignore
 		begin();
