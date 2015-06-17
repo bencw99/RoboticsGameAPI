@@ -1,5 +1,7 @@
 package gui;
 
+import input.InputListener;
+
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -7,6 +9,7 @@ import javax.swing.JPanel;
 import game.*;
 
 public class Gui extends JPanel {
+	private InputListener  listener;
 	/**
 	 * Default serial ID
 	 */
@@ -14,6 +17,10 @@ public class Gui extends JPanel {
 	
 	public Gui() {
 		super();
+		listener = new InputListener();
+		addKeyListener(listener);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
 	}
 	
 	public void update(ArrayList<AbstractButton> buttons){
