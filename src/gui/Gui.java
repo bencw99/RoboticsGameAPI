@@ -1,10 +1,7 @@
 package gui;
-<<<<<<< HEAD
 import input.InputListener;
-=======
 
 import java.awt.BorderLayout;
->>>>>>> Changed game to a JFrame, basic image display now functional
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
