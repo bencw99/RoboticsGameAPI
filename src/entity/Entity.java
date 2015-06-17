@@ -68,7 +68,7 @@ public abstract class Entity {
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
-		
+		g.fillRect((int) getUpperLeftPos().getX(),(int) getUpperLeftPos().getY(), (int)dim.getWidth(), (int)dim.getHeight());
 	}
 	
 	/**
