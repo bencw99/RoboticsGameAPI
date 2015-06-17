@@ -1,4 +1,6 @@
 package implementaion;
+import java.awt.event.ActionEvent;
+
 import constants.*;
 import entity.*;
 import game.*;
@@ -16,10 +18,20 @@ public class Implementation extends Implementor{
 		super.main();
 		
 		//Write code here
-		
+		addButton(new Button1());
 		
 		//Ignore
 		begin();
+	}
+	public class Button1 extends AbstractButton{
+		public void init(){
+			getButton().setBounds(0,0,50,50);
+			getButton().setText("Button1");
+			getButton().setVisible(true);
+		}
+		public void actionPerformed(ActionEvent e) {
+			
+		}
 	}
 }
 

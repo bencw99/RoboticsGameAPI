@@ -1,5 +1,6 @@
 package game;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import constants.Constants;
@@ -37,6 +38,13 @@ public class Game{
 		this.world = new World();
 		this.state = State.LOADING;
 		GUI = new Gui();
+		JFrame frame = new JFrame();
+		frame.setTitle("Game");
+		frame.setSize(500, 500);
+		frame.add(GUI);
+		frame.setVisible(true);
+		frame.setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	
