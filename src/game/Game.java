@@ -37,7 +37,7 @@ public class Game{
 	public Game(Implementor imp) {
 		this.world = new World();
 		this.state = State.LOADING;
-		GUI = new Gui();
+		GUI = new Gui(this);
 		JFrame frame = new JFrame();
 		frame.setTitle("Game");
 		frame.setSize(500, 500);
