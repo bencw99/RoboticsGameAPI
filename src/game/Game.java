@@ -75,6 +75,7 @@ public class Game{
 				state = State.PAUSED;
 			}
 			world.update();
+			GUI.update(world.getButtons());
 		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {
 				state = State.RUNNING;
