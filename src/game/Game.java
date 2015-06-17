@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 =======
 >>>>>>> Cleaning up from rebase onto GUI
 import javax.swing.JPanel;
+
 import java.awt.image.BufferedImage;
 
 import constants.Constants;
@@ -41,8 +42,6 @@ public class Game{
 	private State state;
 	
 	private Gui GUI;
-	// NEW
-	BufferedImage bi = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
 	/** 
 	 * Default constructor, creates an empty world
 	 */
@@ -76,14 +75,18 @@ public class Game{
 	/** 
 	 * Updates this game
 	 */
+	BufferedImage bi = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
 	public void update() {
 		//Different keys pressed to start stuff
+		
 		GUI.update(world.getButtons());
+		GUI.paintComponents(bi.getGraphics());
 		switch(state) {
 		case LOADING:
 			if(InputListener.isKeyPressed(' ')) {
 				state = State.RUNNING;
 			}
+			break;
 		case RUNNING:
 			if(InputListener.isKeyNewPressed('p')) {
 				state = State.PAUSED;
@@ -91,12 +94,15 @@ public class Game{
 			world.update();
 			GUI.update(world.getButtons());
 			world.draw(bi.getGraphics());
+			break;
 		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {
 				state = State.RUNNING;
 			}
+			break;
 		case FINISHED: 
 			world.disable();
+			break;
 			//TODO Graphically close the game
 		}
 	}

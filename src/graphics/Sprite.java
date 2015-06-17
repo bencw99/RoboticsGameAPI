@@ -34,6 +34,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g) {
+		System.out.println("g.drawImage called");
 		g.drawImage(image, 50, 50, null);
 	}
 

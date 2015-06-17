@@ -1,11 +1,9 @@
 package world;
 
 import java.awt.Graphics;
-
 import java.util.*;
 
 import entity.*;
-
 import game.*;
 
 /**
