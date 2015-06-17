@@ -13,7 +13,7 @@ public abstract class Implementor {
 	
 	//Private instance variables used to control the Game
 	
-	private Game game;
+	protected Game game;
 	
 	/**
 	 * Adds an entity to world

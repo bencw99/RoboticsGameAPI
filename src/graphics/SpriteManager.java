@@ -29,21 +29,21 @@ public class SpriteManager {
 	}
 	
 	//gets and sets
-							public void setCycleMode(boolean cycleMode) {
-								this.cycleMode = cycleMode;
-							}
-							
-							public boolean getCycleMode() {
-								return cycleMode;
-							}
-							
-							public int getTicksPerCycle() {
-								return ticksPerCycle;
-							}
-						
-							public void setTicksPerCycle(int ticksPerCycle) {
-								this.ticksPerCycle = ticksPerCycle;
-							}
+	public void setCycleMode(boolean cycleMode) {
+		this.cycleMode = cycleMode;
+	}
+	
+	public boolean getCycleMode() {
+		return cycleMode;
+	}
+	
+	public int getTicksPerCycle() {
+		return ticksPerCycle;
+	}
+
+	public void setTicksPerCycle(int ticksPerCycle) {
+		this.ticksPerCycle = ticksPerCycle;
+	}
 
 	private int getIndex(String name) {
 		for(int i = 0; i <= sprites.size(); i++) {
