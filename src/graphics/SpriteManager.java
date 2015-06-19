@@ -11,7 +11,9 @@ public class SpriteManager {
 	private Entity entity;
 	
 	boolean cycleMode = false;
+	
 	private int ticksPerCycle = 1;
+	private int currentTick = 0, currentCycle = 0;
 	
 	// loading single sprites
 	public SpriteManager(Entity entity, Sprite sprite) {
@@ -27,6 +29,11 @@ public class SpriteManager {
 	}
 	
 	public void update(Graphics g, String activeSprite) {
+		if(cycleMode) {
+			cycleUpdate(g);
+			return;
+		}
+		
 		boolean caught = false;
 		for(Sprite s : sprites) {
 			if (s.getName() == activeSprite) {
@@ -39,6 +46,18 @@ public class SpriteManager {
 			System.out.println("Invalid sprite name: " + activeSprite);
 			System.exit(0);
 		}
+	}
+	
+	public void cycleUpdate(Graphics g) {
+		currentTick++;
+		if(currentTick == ticksPerCycle) {
+			currentTick = 1;
+			currentCycle++;
+			if(currentCycle == sprites.size()) {
+				currentCycle = 0;
+			}
+		}
+		sprites.get(currentCycle).draw(g);
 	}
 	
 	//gets and sets

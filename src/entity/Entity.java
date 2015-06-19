@@ -239,6 +239,14 @@ public abstract class Entity {
 		}
 		spriteManager = new SpriteManager(this, spritesList);
 	}
+	
+	public void setCycleMode(boolean cycleMode) {
+		spriteManager.setCycleMode(cycleMode);
+	}
+	
+	public void setCycleLength(int length) {
+		spriteManager.setTicksPerCycle(length);
+	}
 
 	/**
 	 * Tests if the two given polygons collide

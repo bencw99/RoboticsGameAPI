@@ -15,7 +15,7 @@ public class Rafi extends Entity {
 
 	@Override
 	public void init() {
-		spritesArray = new String[]{"rafi", "images\\rafi.png"};
+		spritesArray = new String[]{"rafi", "images\\rafi.png", "ok-rafi", "images\\rafi-2.png"};
 		loadSprites();
 		
 		activeSprite = "INVISIBLE";
@@ -26,8 +26,10 @@ public class Rafi extends Entity {
 	@Override
 	public void update() {
 		cycle++;
-		if(cycle == 5000) {
+		if(cycle == 6000) {
 			activeSprite = "rafi";
+			setCycleLength(600);
+			setCycleMode(true);
 		}
 	}
 
