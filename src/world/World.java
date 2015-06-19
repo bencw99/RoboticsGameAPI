@@ -58,8 +58,13 @@ public class World {
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
-		for(Entity entity : entities) {
-			entity.draw(g);
+		try{
+			for(Entity entity : entities) {
+				entity.draw(g);
+			}
+		}
+		catch (ConcurrentModificationException e){
+			// ignored, this is caught at the beginner of entity loading
 		}
 	}
 	

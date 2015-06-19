@@ -8,6 +8,7 @@ import graphics.Sprite;
 import graphics.SpriteManager;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Entity {
 	/** The position of this Entity instance */
@@ -22,8 +23,16 @@ public abstract class Entity {
 	/** Reference to the world this entity is in */
 	private World world;
 	
+	
+	// ALL NEW
 	/** Draws and manages the graphics for this entity */
 	private SpriteManager spriteManager;
+	
+	protected String[] spritesArray;
+	
+	private ArrayList<Sprite> spritesList;
+	
+	String activeSprite;
 
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
@@ -73,7 +82,7 @@ public abstract class Entity {
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
-		spriteManager.update(g);
+		spriteManager.update(g, activeSprite);
 	}
 	
 	/**
@@ -220,6 +229,15 @@ public abstract class Entity {
 
 	public void setSpriteManager(SpriteManager spriteManager) {
 		this.spriteManager = spriteManager;
+	}
+	
+	// added
+	public void loadSprites() {
+		spritesList = new ArrayList<Sprite>();
+		for(int i = 0; i < spritesArray.length; i += 2) {
+			spritesList.add(new Sprite(this, spritesArray[i], spritesArray[i + 1]));
+		}
+		spriteManager = new SpriteManager(this, spritesList);
 	}
 
 	/**

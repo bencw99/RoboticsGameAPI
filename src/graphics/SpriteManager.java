@@ -7,9 +7,7 @@ import entity.Entity;
 
 public class SpriteManager {
 	private ArrayList<Sprite> sprites;
-	
-	private int currentSprite = 0;
-	
+		
 	private Entity entity;
 	
 	boolean cycleMode = false;
@@ -28,10 +26,19 @@ public class SpriteManager {
 		this.sprites = sprites;
 	}
 	
-	public void update(Graphics g) {
-		//update dimensions
-		//update mode
-		sprites.get(currentSprite).draw(g);
+	public void update(Graphics g, String activeSprite) {
+		boolean caught = false;
+		for(Sprite s : sprites) {
+			if (s.getName() == activeSprite) {
+				s.draw(g);
+				caught = true;
+				break;
+			}
+		}
+		if(!caught) {
+			System.out.println("Invalid sprite name: " + activeSprite);
+			System.exit(0);
+		}
 	}
 	
 	//gets and sets

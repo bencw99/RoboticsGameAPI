@@ -30,8 +30,9 @@ public class Sprite {
 		try {
 			image = ImageIO.read(imageFile);
 		} catch (IOException e) {
-			System.out.println("Illegal path for " + name + " : " + imageLocation);
 			e.printStackTrace();
+			System.out.println("Illegal path for " + name + ": " + imageLocation);
+			System.exit(0);
 		}
 	}
 	

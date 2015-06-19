@@ -18,11 +18,9 @@ public class Implementation extends Implementor{
 		super.main();
 		
 		//Write code here
-		addButton(new Button1());
-		super.addEntity(new CrazyEntity(game.getWorld()));
-		super.addEntity(new CrazyEntity(game.getWorld()));
-		super.addEntity(new CrazyEntity(game.getWorld()));
-		super.addEntity(new CrazyEntity(game.getWorld()));
+		for(int i = 1; i <= 12; i++) {
+			super.addEntity(new CrazyEntity(game.getWorld()));
+		}
 		
 		//Ignore
 		begin();
