@@ -27,8 +27,10 @@ public class Game{
 	/** The state of this game **/
 	private State state;
 	
+	/** A JPanel used to hold the entities **/
 	private Gui GUI;
 	
+	/** A JFrame that will contain GUI **/
 	private JFrame frame;
 		
 	/** 
@@ -79,6 +81,7 @@ public class Game{
 				state = State.PAUSED;
 			}
 			world.update();
+			// GUI.update will draw all the entities
 			GUI.update(world.getButtons());
 			break;
 		case PAUSED:

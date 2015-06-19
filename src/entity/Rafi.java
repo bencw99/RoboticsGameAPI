@@ -28,8 +28,8 @@ public class Rafi extends Entity {
 		cycle++;
 		if(cycle == 6000) {
 			activeSprite = "rafi";
-			setCycleLength(600);
-			setCycleMode(true);
+			setFrameLength(600);
+			setAnimationMode(true);
 		}
 	}
 

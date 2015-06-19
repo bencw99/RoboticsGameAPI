@@ -23,15 +23,16 @@ public abstract class Entity {
 	/** Reference to the world this entity is in */
 	private World world;
 	
-	
-	// ALL NEW
 	/** Draws and manages the graphics for this entity */
 	private SpriteManager spriteManager;
 	
+	/** An array that will prestore the Sprite information in the form name, filepath **/
 	protected String[] spritesArray;
 	
+	/** An <code>ArrayList<code> of the Sprites corresponding to this object **/
 	private ArrayList<Sprite> spritesList;
 	
+	/** The current Sprite this Entity is displaying outside of animation mode **/
 	String activeSprite;
 
 	/**
@@ -222,31 +223,6 @@ public abstract class Entity {
 	public void setWorld(World world) {
 		this.world = world;
 	}
-	
-	public SpriteManager getSpriteManager() {
-		return spriteManager;
-	}
-
-	public void setSpriteManager(SpriteManager spriteManager) {
-		this.spriteManager = spriteManager;
-	}
-	
-	// added
-	public void loadSprites() {
-		spritesList = new ArrayList<Sprite>();
-		for(int i = 0; i < spritesArray.length; i += 2) {
-			spritesList.add(new Sprite(this, spritesArray[i], spritesArray[i + 1]));
-		}
-		spriteManager = new SpriteManager(this, spritesList);
-	}
-	
-	public void setCycleMode(boolean cycleMode) {
-		spriteManager.setCycleMode(cycleMode);
-	}
-	
-	public void setCycleLength(int length) {
-		spriteManager.setTicksPerCycle(length);
-	}
 
 	/**
 	 * Tests if the two given polygons collide
@@ -311,5 +287,33 @@ public abstract class Entity {
 		return null;
 	}
 
+	// GRAPHICS:
+	
+	public SpriteManager getSpriteManager() {
+		return spriteManager;
+	}
 
+	public void setSpriteManager(SpriteManager spriteManager) {
+		this.spriteManager = spriteManager;
+	}
+	
+	public void setAnimationMode(boolean animationMode) {
+		spriteManager.setAnimationMode(animationMode);
+	}
+	
+	public void setFrameLength(int length) {
+		spriteManager.setTicksPerFrame(length);
+	}
+	
+	/**
+	 * Takes the easy to use array that the user makes when extending
+	 * this class and loads it into an <code>ArrayList<code> of {@link  sprite.Sprite}s
+	 */
+	public void loadSprites() {
+		spritesList = new ArrayList<Sprite>();
+		for(int i = 0; i < spritesArray.length; i += 2) {
+			spritesList.add(new Sprite(this, spritesArray[i], spritesArray[i + 1]));
+		}
+		spriteManager = new SpriteManager(this, spritesList);
+	}
 }

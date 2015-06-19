@@ -30,6 +30,8 @@ public class Gui extends JPanel {
 		// This line of code has cost me
 		super.paintComponent(g);
 		// More than 3 hours
+		
+		// Draws the game World
 		game.getWorld().draw(g);
 	}
 	
