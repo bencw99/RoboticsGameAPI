@@ -10,9 +10,9 @@ public class CrazyEntity extends Entity {
 	
 	final static double DEATH_SPEED = 300;
 	
-	final static double ACCEL_FACTOR = 3;
+	final static double ACCEL_FACTOR = 10;
 	final static double BOUNCE_FACTOR = 1;
-	final static double RANDOM_FACTOR = 100;
+	final static double RANDOM_FACTOR = 200;
 	
 	final static double START_LEFT_BOUND = 400;
 	final static double START_RIGHT_BOUND = 600;
@@ -40,12 +40,9 @@ public class CrazyEntity extends Entity {
 	
 	@Override
 	public void init() {
-		
-		// Game API user must do the following
-		spritesArray = new String[]{"happy", "happy.jpg", "death", "skull-transparent.png"};
+		spritesArray = new String[]{"happy", "images\\happy.jpg", "death", "images\\skull-transparent.png"};
 		loadSprites();
 		activeSprite = "happy";
-		// This is it
 		
 		resetVelocity();
 		resetPosition();
@@ -53,13 +50,6 @@ public class CrazyEntity extends Entity {
 
 	@Override
 	public void update() {
-		if(dead) {
-			return;
-		}
-		velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
-		velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
-		timeAlive++;
-		
 		translate(velocity);
 		
 		if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
@@ -78,6 +68,15 @@ public class CrazyEntity extends Entity {
 		if(velocity.getX() * velocity.getX() + velocity.getY() * velocity.getY() > DEATH_SPEED) {
 			kill();
 		}
+		
+		if(dead) {
+			velocity = velocity.scale(0.95);
+			return;
+		}
+		
+		velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
+		velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
+		timeAlive++;
 	}
 	
 	private void resetPosition() {
@@ -92,8 +91,9 @@ public class CrazyEntity extends Entity {
 
 	private void kill() {
 		dead = true;
-		resetVelocity();
+		//resetVelocity();
 		activeSprite = "death";
+		timeAlive = 0;
 	}
 	
 	@Override

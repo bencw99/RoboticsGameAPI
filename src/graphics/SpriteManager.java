@@ -35,7 +35,7 @@ public class SpriteManager {
 				break;
 			}
 		}
-		if(!caught) {
+		if(!caught && activeSprite != "INVISIBLE") {
 			System.out.println("Invalid sprite name: " + activeSprite);
 			System.exit(0);
 		}
