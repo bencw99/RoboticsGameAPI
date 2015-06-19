@@ -33,7 +33,7 @@ public abstract class Entity {
 	private ArrayList<Sprite> spritesList;
 	
 	/** The current Sprite this Entity is displaying outside of animation mode **/
-	String activeSprite;
+	protected String activeSprite;
 
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters

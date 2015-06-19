@@ -16,6 +16,11 @@ public abstract class Implementor {
 	protected Game game;
 	
 	/**
+	 * The main function of this implementor
+	 */
+	public abstract void main();
+	
+	/**
 	 * Adds an entity to world
 	 * 
 	 * @param entity
@@ -88,9 +93,5 @@ public abstract class Implementor {
 	public void run(){
 		game.main();
 	}
-	/**
-	 * called when button is pressed
-	 * @param button - sender
-	 */
 
 }

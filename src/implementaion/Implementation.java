@@ -17,11 +17,7 @@ public class Implementation extends Implementor{
 		//Ignore
 		init();
 		
-		//Write code here
-		for(int i = 1; i <= 256; i++) {
-			super.addEntity(new CrazyEntity(game.getWorld()));
-		}
-		super.addEntity(new Rafi(game.getWorld()));
+		
 		
 		//Ignore
 		run();
