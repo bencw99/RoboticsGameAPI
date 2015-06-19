@@ -20,6 +20,9 @@ public class Implementation extends Implementor{
 		//Write code here
 		addButton(new Button1());
 		super.addEntity(new CrazyEntity(game.getWorld()));
+		super.addEntity(new CrazyEntity(game.getWorld()));
+		super.addEntity(new CrazyEntity(game.getWorld()));
+		super.addEntity(new CrazyEntity(game.getWorld()));
 		
 		//Ignore
 		begin();

@@ -58,8 +58,6 @@ public class World {
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
-		System.out.println("draw called in world");
-
 		for(Entity entity : entities) {
 			entity.draw(g);
 		}

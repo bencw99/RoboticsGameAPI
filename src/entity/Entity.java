@@ -73,7 +73,6 @@ public abstract class Entity {
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
-		System.out.println("drawn in entity");
 		spriteManager.update(g);
 	}
 	

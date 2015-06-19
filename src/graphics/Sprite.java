@@ -36,8 +36,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g) {
-		System.out.println("drawn in sprite");
-		g.drawImage(image, (int) entity.getPos().getX(), (int) entity.getPos().getY(), 
+		g.drawImage(image, (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
 				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), 
 				null);
 	}

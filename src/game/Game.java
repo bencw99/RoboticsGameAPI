@@ -55,7 +55,7 @@ public class Game{
 		while(state != State.FINISHED) {
 			update();	
 			try {
-				Thread.sleep(10);
+				Thread.sleep(1000 / Constants.UPDATES_PER_SEC);
 			} catch (InterruptedException e) { 
 				e.printStackTrace();
 			}
@@ -79,7 +79,6 @@ public class Game{
 				state = State.PAUSED;
 			}
 			world.update();
-			//world.draw(GUI.getGraphics());
 			GUI.update(world.getButtons());
 			break;
 		case PAUSED:
