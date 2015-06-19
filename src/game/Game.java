@@ -32,7 +32,7 @@ public class Game{
 	
 	/** A JFrame that will contain GUI **/
 	private JFrame frame;
-		
+
 	/** 
 	 * Default constructor, creates an empty world
 	 */
@@ -49,6 +49,7 @@ public class Game{
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addKeyListener(GUI.getListener());
 		this.state = State.RUNNING;
 	}
 	
@@ -111,5 +112,13 @@ public class Game{
 	 */
 	public State getGameState() {
 		return state;
+	}
+	
+	/**
+	 * @return the frame
+	 */
+	public JFrame getFrame()
+	{
+		return frame;
 	}
 }

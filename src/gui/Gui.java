@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import game.*;
 
 public class Gui extends JPanel {
-	private InputListener  listener;
-	
+	private InputListener listener;
+
 	private Game game;
 	/**
 	 * Default serial ID
@@ -18,7 +18,6 @@ public class Gui extends JPanel {
 	public Gui(Game g) {
 		super();
 		listener = new InputListener();
-		addKeyListener(listener);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 		setName("GUI");
@@ -41,5 +40,13 @@ public class Gui extends JPanel {
 			add(button.getButton());
 		}
 		repaint();
+	}
+	
+	/**
+	 * @return the listener
+	 */
+	public InputListener getListener()
+	{
+		return listener;
 	}
 }
