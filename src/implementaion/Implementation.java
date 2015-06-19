@@ -22,14 +22,40 @@ public class Implementation extends Implementor{
 		//Ignore
 		run();
 	}
-	public class Button1 extends AbstractButton{
+	
+	private class ExampleButton extends AbstractButton {
 		public void init(){
 			getButton().setBounds(0,0,50,50);
 			getButton().setText("Button1");
 			getButton().setVisible(true);
 		}
 		public void actionPerformed(ActionEvent e) {
-			
+			System.out.println("ExampleButton pressed");
+		}
+	}
+	
+	private class ExampleEntity extends Entity {
+		public ExampleEntity()
+		{
+			super();
+		}
+
+		@Override
+		public void init()
+		{
+			System.out.println("ExampleEntity initialized");
+		}
+
+		@Override
+		public void update()
+		{
+			System.out.println("ExampleEntity updated");
+		}
+
+		@Override
+		public void disable()
+		{
+			System.out.println("ExampleEntity disabled");
 		}
 	}
 }

@@ -36,6 +36,13 @@ public abstract class Entity {
 	protected String activeSprite;
 
 	/**
+	 * Default constructor, initializes entity world to null
+	 */
+	public Entity() {
+		this(null);
+	}
+	
+	/**
 	 * Parameterized constructor, initializes entity world to given parameters
 	 * 
 	 * @param world the world of this entity
