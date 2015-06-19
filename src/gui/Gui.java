@@ -21,13 +21,16 @@ public class Gui extends JPanel {
 		addKeyListener(listener);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
+		setName("GUI");
+		setVisible(true);
 		game = g;
 	}
 	
 	public void paintComponent(Graphics g){
+		// This line of code has cost me
+		super.paintComponent(g);
+		// More than 3 hours
 		game.getWorld().draw(g);
-		setName("GUI");
-		setVisible(true);
 	}
 	
 	public void update(ArrayList<AbstractButton> buttons){

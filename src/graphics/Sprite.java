@@ -14,7 +14,6 @@ public class Sprite {
 	private File imageFile;
 	private BufferedImage image;
 	//private int displayHeight, displayWidth;
-	private Graphics g;
 	private Entity entity;
 	
 	public Sprite(Entity entity, String name, String imageLocation) {
@@ -37,6 +36,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g) {
+		System.out.println("drawn in sprite");
 		g.drawImage(image, (int) entity.getPos().getX(), (int) entity.getPos().getY(), 
 				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), 
 				null);

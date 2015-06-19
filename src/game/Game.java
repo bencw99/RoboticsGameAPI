@@ -55,7 +55,7 @@ public class Game{
 		while(state != State.FINISHED) {
 			update();	
 			try {
-				Thread.sleep(1000/Constants.UPDATES_PER_SEC);
+				Thread.sleep(10);
 			} catch (InterruptedException e) { 
 				e.printStackTrace();
 			}
@@ -67,9 +67,7 @@ public class Game{
 	 */
 	public void update() {
 		//Different keys pressed to start stuff
-		
-		GUI.update(world.getButtons());
-		
+				
 		switch(state) {
 		case LOADING:
 			if(InputListener.isKeyPressed(' ')) {
@@ -81,8 +79,8 @@ public class Game{
 				state = State.PAUSED;
 			}
 			world.update();
+			//world.draw(GUI.getGraphics());
 			GUI.update(world.getButtons());
-			world.draw(frame.getGraphics());
 			break;
 		case PAUSED:
 			if(InputListener.isKeyPressed(' ')) {
