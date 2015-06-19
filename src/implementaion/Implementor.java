@@ -79,13 +79,13 @@ public abstract class Implementor {
 	 * Initializer
 	 * -call this in subclass's main
 	 */
-	public void main() {
+	public void init() {
 		game = new Game(this);
 	}
 	/**
 	 * Starts the game
 	 */
-	public void begin(){
+	public void run(){
 		game.main();
 	}
 	/**

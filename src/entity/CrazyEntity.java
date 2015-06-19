@@ -40,7 +40,7 @@ public class CrazyEntity extends Entity {
 	
 	@Override
 	public void init() {
-		spritesArray = new String[]{"happy", "images\\happy.jpg", "death", "images\\skull-transparent.png"};
+		spritesArray = new String[]{"happy", "images/happy.jpg", "death", "images/skull-transparent.png"};
 		loadSprites();
 		activeSprite = "happy";
 		

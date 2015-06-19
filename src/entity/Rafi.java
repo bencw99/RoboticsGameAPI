@@ -15,7 +15,7 @@ public class Rafi extends Entity {
 
 	@Override
 	public void init() {
-		spritesArray = new String[]{"rafi", "images\\rafi.png", "ok-rafi", "images\\rafi-2.png"};
+		spritesArray = new String[]{"rafi", "images/rafi.png", "ok-rafi", "images/rafi-2.png"};
 		loadSprites();
 		
 		activeSprite = "INVISIBLE";

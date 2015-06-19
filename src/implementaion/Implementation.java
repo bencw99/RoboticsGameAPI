@@ -15,7 +15,7 @@ public class Implementation extends Implementor{
 	 */
 	public void main() {
 		//Ignore
-		super.main();
+		init();
 		
 		//Write code here
 		for(int i = 1; i <= 256; i++) {
@@ -24,7 +24,7 @@ public class Implementation extends Implementor{
 		super.addEntity(new Rafi(game.getWorld()));
 		
 		//Ignore
-		begin();
+		run();
 	}
 	public class Button1 extends AbstractButton{
 		public void init(){
