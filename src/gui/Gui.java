@@ -1,7 +1,11 @@
 package gui;
 import input.InputListener;
+
+import java.awt.Component;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JPanel;
 
 import game.*;
@@ -36,9 +40,11 @@ public class Gui extends JPanel {
 	}
 	
 	public void update(ArrayList<AbstractButton> buttons){
-		this.removeAll();
 		for(AbstractButton button : buttons){
-			add(button.getButton());
+			ArrayList<Component> components = new ArrayList<Component>(Arrays.asList(getComponents()));
+			if(!components.contains(button.getButton())){
+				add(button.getButton());
+			}
 		}
 		repaint();
 	}
