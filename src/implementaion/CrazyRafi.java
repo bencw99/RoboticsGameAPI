@@ -50,7 +50,7 @@ public class CrazyRafi extends Implementor{
 		final static double KILL_LOWER_BOUND = 1025;
 		
 		Vector velocity = new Vector(0, 0);
-		int cycle = 0, timeAlive = 0;
+		int timeAlive = 0;
 		boolean dead = false;
 
 		
@@ -60,6 +60,8 @@ public class CrazyRafi extends Implementor{
 		
 		@Override
 		public void init() {
+			// The 50 here is the opacity of the happy Sprite
+			// Opacity is optional, the default opacity is 100
 			spritesArray = new Object[]{"happy", "images/happy.jpg", 50, "death", "images/skull-transparent.png"};
 			loadSprites();
 			activeSprite = "happy";
@@ -111,7 +113,6 @@ public class CrazyRafi extends Implementor{
 
 		private void kill() {
 			dead = true;
-			//resetVelocity();
 			activeSprite = "death";
 			timeAlive = 0;
 		}
@@ -128,7 +129,6 @@ public class CrazyRafi extends Implementor{
 		
 		public Rafi(World world) {
 			super(world);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
@@ -152,7 +152,6 @@ public class CrazyRafi extends Implementor{
 
 		@Override
 		public void disable() {
-			// TODO Auto-generated method stub
 			
 		}
 	}
