@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 		
 		//Write code here
-		for(int i = 1; i <= 256; i++) {
+		for(int i = 1; i <= 16; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 		super.addEntity(new Rafi(game.getWorld()));
@@ -136,17 +136,16 @@ public class CrazyRafi extends Implementor{
 			spritesArray = new String[]{"rafi", "images/rafi.png", "ok-rafi", "images/rafi-2.png"};
 			loadSprites();
 			
-			activeSprite = "INVISIBLE";
 			setPos(new Position(500, 500));
-			setDim(new Dimension(512, 512));
+			setDim(new Dimension(64, 64));
+			activeSprite = "TRANSPARENT";
 		}
 
 		@Override
 		public void update() {
 			cycle++;
-			if(cycle == 6000) {
-				activeSprite = "rafi";
-				setFrameLength(600);
+			if(cycle == 600) {
+				setFrameLength(100);
 				setAnimationMode(true);
 			}
 		}

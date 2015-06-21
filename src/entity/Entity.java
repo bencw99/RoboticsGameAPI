@@ -36,9 +36,12 @@ public abstract class Entity {
 
 	/** The current {@link  sprite.Sprite} this Entity is displaying outside of animation mode **/
 	protected String activeSprite;
-=
+
 	/** An array that will hold information for constructing preset {@link  sprite.Sprite}s available to all Entities */
-	public static final String[] PRESET_SPRITE_ARRAY = {"Happy-Face", "images\\happy.jpg"};
+	public static final String[] PRESET_SPRITE_ARRAY = {"RED", "images/preset/red.png", 
+		"WHITE", "images/preset/white.png", "BLACK", "images/preset/black.png", 
+		"TRANSPARENT", "images/preset/transparent.png"};
+	
 	
 	/**
 	 * Default constructor, initializes entity world to null
@@ -329,5 +332,6 @@ public abstract class Entity {
 			spritesList.add(new Sprite(this, concatArray[i], concatArray[i + 1]));
 		}
 		spriteManager = new SpriteManager(this, spritesList);
+		activeSprite = concatArray[0];
 	}
 }

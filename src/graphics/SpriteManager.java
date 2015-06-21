@@ -69,7 +69,7 @@ public class SpriteManager {
 		}
 		
 		// Catches and quits the program if an illegal Sprite is attempted to be displayed
-		if(!caught && activeSprite != "INVISIBLE") {
+		if(!caught) {
 			System.out.println("Invalid sprite name: " + activeSprite);
 			System.exit(0);
 		}
