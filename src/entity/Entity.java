@@ -28,7 +28,7 @@ public abstract class Entity {
 	private SpriteManager spriteManager;
 	
 	/** An array that will prestore the {@link  sprite.Sprite} information in the form name, filepath **/
-	protected String[] spritesArray;
+	protected Object[] spritesArray;
 	
 	/** An <code>ArrayList<code> of the {@link  sprite.Sprite}s corresponding to this object **/
 	private ArrayList<Sprite> spritesList;
@@ -38,7 +38,7 @@ public abstract class Entity {
 	protected String activeSprite;
 
 	/** An array that will hold information for constructing preset {@link  sprite.Sprite}s available to all Entities */
-	public static final String[] PRESET_SPRITE_ARRAY = {"RED", "images/preset/red.png", 
+	public static final Object[] PRESET_SPRITE_ARRAY = {"RED", "images/preset/red.png", 
 		"WHITE", "images/preset/white.png", "BLACK", "images/preset/black.png", 
 		"TRANSPARENT", "images/preset/transparent.png"};
 	
@@ -325,13 +325,24 @@ public abstract class Entity {
 	 * this class and loads it into an <code>ArrayList<code> of {@link  sprite.Sprite}s
 	 */
 	public void loadSprites() {
-		String[] concatArray = Arrays.copyOf(PRESET_SPRITE_ARRAY, PRESET_SPRITE_ARRAY.length + spritesArray.length);
+		Object[] concatArray = Arrays.copyOf(PRESET_SPRITE_ARRAY, PRESET_SPRITE_ARRAY.length + spritesArray.length);
 		System.arraycopy(spritesArray, 0, concatArray, PRESET_SPRITE_ARRAY.length, spritesArray.length);
+
 		spritesList = new ArrayList<Sprite>();
-		for(int i = 0; i < concatArray.length; i += 2) {
-			spritesList.add(new Sprite(this, concatArray[i], concatArray[i + 1]));
+		
+		int i = 0;
+		while(i < concatArray.length) { 
+			if(i + 2 == concatArray.length || concatArray[i + 2].getClass().getName() == "java.lang.String") {
+				spritesList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1]));
+				i += 2;
+			}
+			else {
+				spritesList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1], (Integer) concatArray[i + 2]));
+				i += 3;
+			}
 		}
+		
 		spriteManager = new SpriteManager(this, spritesList);
-		activeSprite = concatArray[0];
+		activeSprite = (String) concatArray[0];
 	}
 }

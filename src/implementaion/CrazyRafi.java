@@ -60,7 +60,7 @@ public class CrazyRafi extends Implementor{
 		
 		@Override
 		public void init() {
-			spritesArray = new String[]{"happy", "images/happy.jpg", "death", "images/skull-transparent.png"};
+			spritesArray = new Object[]{"happy", "images/happy.jpg", 50, "death", "images/skull-transparent.png"};
 			loadSprites();
 			activeSprite = "happy";
 			
@@ -133,7 +133,7 @@ public class CrazyRafi extends Implementor{
 
 		@Override
 		public void init() {
-			spritesArray = new String[]{"rafi", "images/rafi.png", "ok-rafi", "images/rafi-2.png"};
+			spritesArray = new Object[]{"rafi", "images/rafi.png", "ok-rafi", "images/rafi-2.png"};
 			loadSprites();
 			
 			setPos(new Position(500, 500));
