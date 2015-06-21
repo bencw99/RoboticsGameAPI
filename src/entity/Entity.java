@@ -9,6 +9,7 @@ import graphics.SpriteManager;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Entity {
 	/** The position of this Entity instance */
@@ -26,15 +27,19 @@ public abstract class Entity {
 	/** Draws and manages the graphics for this entity */
 	private SpriteManager spriteManager;
 	
-	/** An array that will prestore the Sprite information in the form name, filepath **/
+	/** An array that will prestore the {@link  sprite.Sprite} information in the form name, filepath **/
 	protected String[] spritesArray;
 	
-	/** An <code>ArrayList<code> of the Sprites corresponding to this object **/
+	/** An <code>ArrayList<code> of the {@link  sprite.Sprite}s corresponding to this object **/
 	private ArrayList<Sprite> spritesList;
 	
-	/** The current Sprite this Entity is displaying outside of animation mode **/
-	protected String activeSprite;
 
+	/** The current {@link  sprite.Sprite} this Entity is displaying outside of animation mode **/
+	protected String activeSprite;
+=
+	/** An array that will hold information for constructing preset {@link  sprite.Sprite}s available to all Entities */
+	public static final String[] PRESET_SPRITE_ARRAY = {"Happy-Face", "images\\happy.jpg"};
+	
 	/**
 	 * Default constructor, initializes entity world to null
 	 */
@@ -317,9 +322,11 @@ public abstract class Entity {
 	 * this class and loads it into an <code>ArrayList<code> of {@link  sprite.Sprite}s
 	 */
 	public void loadSprites() {
+		String[] concatArray = Arrays.copyOf(PRESET_SPRITE_ARRAY, PRESET_SPRITE_ARRAY.length + spritesArray.length);
+		System.arraycopy(spritesArray, 0, concatArray, PRESET_SPRITE_ARRAY.length, spritesArray.length);
 		spritesList = new ArrayList<Sprite>();
-		for(int i = 0; i < spritesArray.length; i += 2) {
-			spritesList.add(new Sprite(this, spritesArray[i], spritesArray[i + 1]));
+		for(int i = 0; i < concatArray.length; i += 2) {
+			spritesList.add(new Sprite(this, concatArray[i], concatArray[i + 1]));
 		}
 		spriteManager = new SpriteManager(this, spritesList);
 	}
