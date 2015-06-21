@@ -261,7 +261,6 @@ public abstract class Entity {
      * @return the direction the other entity is colliding from
      */
 	public Vector directionalCollide(Entity ent) {
-		
 		if(collide(ent)) {
 			//The distance between the left side of this entity and the right side of the colliding one
 			double leftDistance = Math.abs((pos.getX() - dim.getWidth()/2) - (ent.pos.getX() + ent.dim.getWidth()/2));

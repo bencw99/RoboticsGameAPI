@@ -50,6 +50,7 @@ public class Game{
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(GUI.getListener());
+
 		this.state = State.RUNNING;
 	}
 	
@@ -58,7 +59,7 @@ public class Game{
 		while(state != State.FINISHED) {
 			update();	
 			try {
-				Thread.sleep(1000 / Constants.UPDATES_PER_SEC);
+				Thread.sleep(1000 / (int) Constants.UPDATES_PER_SEC);
 			} catch (InterruptedException e) { 
 				e.printStackTrace();
 			}

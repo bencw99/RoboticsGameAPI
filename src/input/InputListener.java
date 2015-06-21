@@ -27,6 +27,7 @@ public class InputListener implements KeyListener, MouseListener, MouseMotionLis
 	 * @return the pressed state of the given key
 	 */
 	public static boolean isKeyPressed(char key) {
+		newPressed[(int) key] = false;
 		return keysPressed[(int) key];
 	}
 	
@@ -38,7 +39,9 @@ public class InputListener implements KeyListener, MouseListener, MouseMotionLis
 	 * @return If the key is pressed for the first time
 	 */
 	public static boolean isKeyNewPressed(char key) {
-		return newPressed[(int) key];
+		boolean value = newPressed[(int) key];
+		newPressed[(int) key] = false;
+		return value;
 	}
 	
 	/** 
@@ -104,11 +107,8 @@ public class InputListener implements KeyListener, MouseListener, MouseMotionLis
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int index = (int) e.getKeyChar();
-		if(keysPressed[index] == false) {
+		if(!keysPressed[index]) {
 			newPressed[index] = true;
-		}
-		else {
-			newPressed[index] = false;
 		}
 		keysPressed[index] = true;
 	}
@@ -116,7 +116,6 @@ public class InputListener implements KeyListener, MouseListener, MouseMotionLis
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int index = (int) e.getKeyChar();
-		newPressed[index] = false;
 		keysPressed[index] = false;
 	}
 
