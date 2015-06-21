@@ -2,7 +2,9 @@ package graphics;
 
 import java.io.File;
 import java.io.IOException;
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -29,6 +31,12 @@ public class Sprite {
 	/** The {@link  entity.Entity} to which this Sprite belongs **/
 	private Entity entity;
 	
+	/** The Opacity of this Sprite, 0 being transparent, 100 being opaque **/
+	private int opacity;
+	
+	/** The alpha value of this Sprite, 0 being transparent, 1 being opaque **/
+	private float alpha;
+	
 	/**
 	 * Constructs a Sprite object that can be displayed to the screen and managed by a 
 	 * {@link  graphics.Graphics}, also loads the sprite.
@@ -36,11 +44,20 @@ public class Sprite {
 	 * @param entity the {@link  entity.Entity} to which this sprite belongs
 	 * @param name the name of this sprite
 	 * @param imageLocation the location in the file system where this sprite's image exists
+	 * @param the opacity of this image, 0 being transparent, 100 being opaque
 	 */
-	public Sprite(Entity entity, String name, String imageLocation) {
+	public Sprite(Entity entity, String name, String imageLocation, int opacity) {
 		this.entity = entity;
 		this.name = name;
+		this.opacity = opacity;
 		loadSprite(imageLocation);
+	}
+	
+	/**
+	 * A constructor for when no opacity is specified, 100 is default
+	 */
+	public Sprite(Entity entity, String name, String imageLocation) {
+		this(entity, name, imageLocation, 100);
 	}
 	
 	/**
@@ -59,6 +76,7 @@ public class Sprite {
 			System.out.println("Illegal path for " + name + ": " + imageLocation);
 			System.exit(0);
 		}
+		alpha = opacity * 0.01f;
 	}
 	
 	/**
@@ -68,8 +86,12 @@ public class Sprite {
 	 * @param g an AWT <code>graphics</code> object.
 	 */
 	public void draw(Graphics g) {
-		g.drawImage(image, (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
-				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
+		Graphics2D g2d = (Graphics2D) g.create();
+		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+		g2d.setComposite(composite);
+		g2d.drawImage(image, (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
+					(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
+		g2d.dispose();
 	}
 	
 	public String getName() {

@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 		
 		//Write code here
-		for(int i = 1; i <= 16; i++) {
+		for(int i = 1; i <= 32; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 		super.addEntity(new Rafi(game.getWorld()));
@@ -137,7 +137,7 @@ public class CrazyRafi extends Implementor{
 			loadSprites();
 			
 			setPos(new Position(500, 500));
-			setDim(new Dimension(64, 64));
+			setDim(new Dimension(128, 128));
 			activeSprite = "TRANSPARENT";
 		}
 
