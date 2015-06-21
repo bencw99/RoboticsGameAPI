@@ -276,16 +276,16 @@ public abstract class Entity {
 			
 			//Returns the vector matching the lowest distance
 			if(minimumDistance == leftDistance) {
-				return new Vector(0, 1);
-			}
-			if(minimumDistance == rightDistance) {
-				return new Vector(0, -1);
-			}
-			if(minimumDistance == upperDistance) {
 				return new Vector(1, 0);
 			}
-			if(minimumDistance == lowerDistance) {
+			if(minimumDistance == rightDistance) {
 				return new Vector(-1, 0);
+			}
+			if(minimumDistance == upperDistance) {
+				return new Vector(0, 1);
+			}
+			if(minimumDistance == lowerDistance) {
+				return new Vector(0, -1);
 			}
 			
 			System.out.println("Collision detection failed: directionalCollide minimum not found");

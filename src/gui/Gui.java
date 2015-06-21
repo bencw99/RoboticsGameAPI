@@ -1,7 +1,10 @@
 package gui;
 import input.InputListener;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import game.*;
@@ -22,6 +25,7 @@ public class Gui extends JPanel {
 		addMouseMotionListener(listener);
 		setName("GUI");
 		setVisible(true);
+		setBackground(Color.WHITE);
 		game = g;
 	}
 	
