@@ -1,5 +1,7 @@
 package implementaion;
 
+import java.util.ArrayList;
+
 import constants.*;
 import entity.*;
 import game.*;
@@ -77,9 +79,10 @@ public abstract class Implementor {
 	 * @param index
 	 * @return entity at index (index)
 	 */
-	public Entity getEntity(int index){
-		return game.getWorld().getEntities().get(index);
+	public ArrayList<Entity> getEntities(){
+		return game.getWorld().getEntities();
 	}
+	
 	/**
 	 * Initializer
 	 * -call this in subclass's main

@@ -107,6 +107,20 @@ public abstract class Entity {
 	public Position getPos() {
 		return pos;
 	}
+	
+	/**
+	 * @return the x position
+	 */
+	public double getX() {
+		return pos.getX();
+	}
+	
+	/**
+	 * @return the y position
+	 */
+	public double getY() {
+		return pos.getY();
+	}
 
 	/**
 	 * @param pos the position to set
@@ -269,7 +283,6 @@ public abstract class Entity {
      * @return the direction the other entity is colliding from
      */
 	public Vector directionalCollide(Entity ent) {
-		
 		if(collide(ent)) {
 			//The distance between the left side of this entity and the right side of the colliding one
 			double leftDistance = Math.abs((pos.getX() - dim.getWidth()/2) - (ent.pos.getX() + ent.dim.getWidth()/2));
@@ -285,16 +298,16 @@ public abstract class Entity {
 			
 			//Returns the vector matching the lowest distance
 			if(minimumDistance == leftDistance) {
-				return new Vector(0, 1);
-			}
-			if(minimumDistance == rightDistance) {
-				return new Vector(0, -1);
-			}
-			if(minimumDistance == upperDistance) {
 				return new Vector(1, 0);
 			}
-			if(minimumDistance == lowerDistance) {
+			if(minimumDistance == rightDistance) {
 				return new Vector(-1, 0);
+			}
+			if(minimumDistance == upperDistance) {
+				return new Vector(0, 1);
+			}
+			if(minimumDistance == lowerDistance) {
+				return new Vector(0, -1);
 			}
 			
 			System.out.println("Collision detection failed: directionalCollide minimum not found");
