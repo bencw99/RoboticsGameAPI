@@ -20,10 +20,6 @@ public class Platformer extends Implementor{
 		
 		addEntity(new Jumper(new Position(100, 100), new Dimension()));
 		addEntity(new Platform(new Position(100, 200), new Dimension()));
-		addEntity(new Platform(new Position(300, 200), new Dimension()));
-		addEntity(new Platform(new Position(400, 300), new Dimension()));
-		addEntity(new Platform(new Position(500, 400), new Dimension()));
-		addEntity(new Platform(new Position(500, 200), new Dimension()));
 		
 		for(int i = 0; i < 30; i ++) {
 			Platform p = null;
