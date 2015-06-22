@@ -99,6 +99,20 @@ public abstract class Entity {
 	public Position getPos() {
 		return pos;
 	}
+	
+	/**
+	 * @return the x position
+	 */
+	public double getX() {
+		return pos.getX();
+	}
+	
+	/**
+	 * @return the y position
+	 */
+	public double getY() {
+		return pos.getY();
+	}
 
 	/**
 	 * @param pos the position to set
