@@ -23,7 +23,7 @@ public class Implementation extends Implementor{
 	private class ExampleButton extends AbstractButton {
 		public void init(){
 			getButton().setBounds(0,0,150,150);
-			getButton().setText("Trigger 0");
+			getButton().setText("Example Button");
 			getButton().setVisible(true);
 		}
 		public void actionPerformed(ActionEvent e) {

@@ -18,6 +18,8 @@ public class Platformer extends Implementor{
 		//Ignore
 		init();
 		
+		addButton(new PlatformAdder());
+		
 		addEntity(new Jumper(new Position(100, 100), new Dimension()));
 		addEntity(new Platform(new Position(100, 200), new Dimension()));
 		
@@ -27,7 +29,7 @@ public class Platformer extends Implementor{
 			boolean possible = false;
 			
 			while(!possible) {
-				p = new Platform(new Position(Math.random()*800, Math.random()*600), new Dimension());
+				p = new Platform(new Position(Math.random()*1000, Math.random()*800), new Dimension());
 				possible = true;
 				for(Entity other : getEntities()) {
 					if(p.collide(other)) {
@@ -43,14 +45,14 @@ public class Platformer extends Implementor{
 		run();
 	}
 	
-	private class ExampleButton extends AbstractButton {
+	private class PlatformAdder extends AbstractButton {
 		public void init(){
-			getButton().setBounds(0,0,50,50);
-			getButton().setText("Button1");
+			getButton().setBounds(0,0,200,50);
+			getButton().setText("Add Platform");
 			getButton().setVisible(true);
 		}
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("ExampleButton pressed");
+			addEntity(new Platform(new Position(Math.random()*800, Math.random()*600), new Dimension()));
 		}
 	}
 	
