@@ -16,18 +16,6 @@ public class Implementation extends Implementor{
 	public void main() {
 		//Ignore
 		init();
-		
-<<<<<<< HEAD
-		
-		
-=======
-		//Write code here
-		for(int i = 1; i <= 256; i++) {
-			super.addEntity(new CrazyEntity(game.getWorld()));
-		}
-		super.addEntity(new Rafi(game.getWorld()));
-		addButton(new Button1());
->>>>>>> fix-to-GUI-Buttons
 		//Ignore
 		run();
 	}
@@ -39,7 +27,7 @@ public class Implementation extends Implementor{
 			getButton().setVisible(true);
 		}
 		public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
+
 			System.out.println("ExampleButton pressed");
 		}
 	}
@@ -65,15 +53,7 @@ public class Implementation extends Implementor{
 		@Override
 		public void disable()
 		{
-			System.out.println("ExampleEntity disabled");
-=======
-			if(((Button) e.getSource()).getText().equals("Trigger 1")){
-				((Button) e.getSource()).setText("Trigger 0");
-			}
-			else if(((Button) e.getSource()).getText().equals("Trigger 0")){
-				((Button) e.getSource()).setText("Trigger 1");
-			}
->>>>>>> fix-to-GUI-Buttons
+			
 		}
 	}
 }

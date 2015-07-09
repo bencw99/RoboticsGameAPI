@@ -1,17 +1,13 @@
 package gui;
 import input.InputListener;
 
-<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-=======
 import java.awt.Component;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
->>>>>>> fix-to-GUI-Buttons
-
 import javax.swing.JPanel;
 
 import game.*;
