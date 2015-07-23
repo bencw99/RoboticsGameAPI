@@ -9,7 +9,6 @@ import graphics.*;
 import gui.*;
 import input.*;
 import physics.*;
-import world.*;
 public class Platformer extends Implementor{
 	/**
 	 * Called when game starts
@@ -18,7 +17,7 @@ public class Platformer extends Implementor{
 		//Ignore
 		init();
 		
-		addButton(new PlatformAdder());
+		
 		
 		addEntity(new Jumper(new Position(100, 100), new Dimension()));
 		addEntity(new Platform(new Position(100, 200), new Dimension()));
@@ -45,21 +44,10 @@ public class Platformer extends Implementor{
 		run();
 	}
 	
-	private class PlatformAdder extends AbstractButton {
-		public void init(){
-			getButton().setBounds(0,0,200,50);
-			getButton().setText("Add Platform");
-			getButton().setVisible(true);
-		}
-		public void actionPerformed(ActionEvent e) {
-			addEntity(new Platform(new Position(Math.random()*800, Math.random()*600), new Dimension()));
-		}
-	}
-	
 	private class Platform extends Entity {
 		public Platform(Position pos, Dimension dim)
 		{
-			super(game.getWorld(), pos, 0, dim);
+			super( pos, 0, dim);
 			
 			spritesArray = new String[]{"smile", "images/happy.jpg"};
 			loadSprites();
@@ -92,7 +80,7 @@ public class Platformer extends Implementor{
 		
 		public Jumper(Position pos, Dimension dim)
 		{
-			super(game.getWorld(), pos, 0, dim);
+			super( pos, 0, dim);
 			
 			spritesArray = new String[]{"rafi", "images/rafi.png"};
 			loadSprites();
@@ -115,7 +103,7 @@ public class Platformer extends Implementor{
 			if(InputListener.isKeyNewPressed('w')) {
 				boolean canJump = false;
 				
-				for(Entity other : getWorld().getEntities()) {
+				for(Entity other : game.getEntities()) {
 					if(other instanceof Platform && collide(other)) {
 						canJump = true;
 					}
@@ -132,7 +120,7 @@ public class Platformer extends Implementor{
 				translateX(3);
 			}
 			
-			for(Entity other : getWorld().getEntities()) {
+			for(Entity other : game.getEntities()) {
 				if(other instanceof Platform && collide(other)) {
 					Vector dir = directionalCollide(other);
 					

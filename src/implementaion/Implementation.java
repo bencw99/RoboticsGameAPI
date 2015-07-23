@@ -8,7 +8,6 @@ import graphics.*;
 import gui.*;
 import input.*;
 import physics.*;
-import world.*;
 public class Implementation extends Implementor{
 	/**
 	 * Called when game starts
@@ -18,18 +17,6 @@ public class Implementation extends Implementor{
 		init();
 		//Ignore
 		run();
-	}
-	
-	private class ExampleButton extends AbstractButton {
-		public void init(){
-			getButton().setBounds(0,0,150,150);
-			getButton().setText("Example Button");
-			getButton().setVisible(true);
-		}
-		public void actionPerformed(ActionEvent e) {
-
-			System.out.println("ExampleButton pressed");
-		}
 	}
 	
 	private class ExampleEntity extends Entity {

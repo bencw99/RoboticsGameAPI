@@ -8,7 +8,6 @@ import graphics.*;
 import gui.*;
 import input.*;
 import physics.*;
-import world.*;
 public class CrazyRafi extends Implementor{
 	/**
 	 * Called when game starts
@@ -19,9 +18,9 @@ public class CrazyRafi extends Implementor{
 		
 		//Write code here
 		for(int i = 1; i <= 32; i++) {
-			super.addEntity(new CrazyEntity(game.getWorld()));
+			super.addEntity(new CrazyEntity());
 		}
-		super.addEntity(new Rafi(game.getWorld()));
+		super.addEntity(new Rafi());
 		
 		//Ignore
 		run();
@@ -54,8 +53,8 @@ public class CrazyRafi extends Implementor{
 		boolean dead = false;
 
 		
-		public CrazyEntity(World world) {
-			super(world);
+		public CrazyEntity() {
+			super();
 		}
 		
 		@Override
@@ -127,8 +126,8 @@ public class CrazyRafi extends Implementor{
 
 		int cycle = 0;
 		
-		public Rafi(World world) {
-			super(world);
+		public Rafi() {
+			super();
 		}
 
 		@Override

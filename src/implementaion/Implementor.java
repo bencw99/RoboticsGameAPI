@@ -2,6 +2,7 @@ package implementaion;
 
 import java.util.ArrayList;
 
+import addons.NonEntityElements;
 import constants.*;
 import entity.*;
 import game.*;
@@ -9,7 +10,6 @@ import graphics.*;
 import gui.*;
 import input.*;
 import physics.*;
-import world.*;
 
 public abstract class Implementor {
 	
@@ -32,8 +32,7 @@ public abstract class Implementor {
 	 */
 	public boolean addEntity(Entity entity){
 		if(game != null){
-			World world = game.getWorld();
-			world.add(entity);
+			game.add(entity);
 			return true;
 		}
 		return false;
@@ -46,33 +45,12 @@ public abstract class Implementor {
 	 * @return
 	 * -success?
 	 */
-	public boolean addButton(AbstractButton button){
+	public boolean addButton(NonEntityElements button){
 		if(game != null){
-			World world = game.getWorld();
-			world.add(button);
+			game.add(button);
 			return true;
 		}
 		return false;
-	}
-	/**
-	 * @param buttonName
-	 * @return button with matching name
-	 */
-	public AbstractButton getButton(String buttonName){
-		for(AbstractButton button : game.getWorld().getButtons()){
-			if(button.getName().equals(buttonName)){
-				return button;
-			}
-		}
-		return null;
-	}
-	/**
-	 * 
-	 * @param index
-	 * @return button at index (index)
-	 */
-	public AbstractButton getButton(int index){
-		return game.getWorld().getButtons().get(index);
 	}
 	/**
 	 * 
@@ -80,7 +58,7 @@ public abstract class Implementor {
 	 * @return entity at index (index)
 	 */
 	public ArrayList<Entity> getEntities(){
-		return game.getWorld().getEntities();
+		return game.getEntities();
 	}
 	
 	/**
@@ -88,13 +66,13 @@ public abstract class Implementor {
 	 * -call this in subclass's main
 	 */
 	public void init() {
-		game = new Game(this);
+		game = new Game();
 	}
 	/**
 	 * Starts the game
 	 */
 	public void run(){
-		game.main();
+		game.run();
 	}
 
 }

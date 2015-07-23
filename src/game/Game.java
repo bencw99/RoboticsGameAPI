@@ -1,3 +1,4 @@
+package game;
 //Paly Robotics - Team 8
 //Game API
 
@@ -234,5 +235,41 @@ public class Game extends JPanel{
 	public void add(Entity ent) {
 		ent.init();
 		entities.add(ent);
+	}
+	/**
+	 * Adds nonEntity
+	 * @param ent
+	 */
+	public void add(NonEntityElements ent){
+		ent.init();
+		nonEntities.add(ent);
+	}
+	/**
+	 * Remove an entity from this world
+	 * 
+	 * @param ent	the entity to remove
+	 */
+	public void remove(Entity ent) {
+		ent.disable();
+		entities.remove(ent);
+	}
+	/**
+	 * Remove an nonEntity from this world
+	 * 
+	 * @param ent	the entity to remove
+	 */
+	public void remove(NonEntityElements ent) {
+		ent.disable();
+		nonEntities.remove(ent);
+	}
+	/**
+	 * Returns entity list
+	 * @return
+	 */
+	public ArrayList<Entity> getEntities() {
+		return entities;
+	}
+	public ArrayList<NonEntityElements> getNonEntities(){
+		return nonEntities;
 	}
 }

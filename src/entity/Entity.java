@@ -3,7 +3,6 @@ package entity;
 import physics.Dimension;
 import physics.Position;
 import physics.Vector;
-import world.World;
 import graphics.Sprite;
 import graphics.SpriteManager;
 
@@ -20,9 +19,6 @@ public abstract class Entity {
 	
 	/** The dimensions of this entity */
 	private Dimension dim;
-	
-	/** Reference to the world this entity is in */
-	private World world;
 	
 	/** Draws and manages the graphics for this entity */
 	private SpriteManager spriteManager;
@@ -43,20 +39,11 @@ public abstract class Entity {
 		"TRANSPARENT", "images/preset/transparent.png"};
 	
 	
-	/**
-	 * Default constructor, initializes entity world to null
-	 */
-	public Entity() {
-		this(null);
-	}
 	
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
-	 * 
-	 * @param world the world of this entity
 	 */
-	public Entity(World world) {
-		this.world = world;
+	public Entity() {
 		this.setPos(new Position());
 		this.setDim(new Dimension());
 		this.setAngle(0);
@@ -65,13 +52,11 @@ public abstract class Entity {
 	/**
 	 * Parameterized constructor, initializes entity position and dimensions to given parameters
 	 * 
-	 * @param world the world of this entity
 	 * @param angle the angle of this entity
 	 * @param pos the position of this entity
 	 * @param dim the dimension of this entity
 	 */
-	public Entity(World world, Position pos, double angle, Dimension dim) {
-		this.world = world;
+	public Entity(Position pos, double angle, Dimension dim) {
 		this.pos = pos;
 		this.angle = angle;
 		this.dim = dim;
@@ -239,19 +224,7 @@ public abstract class Entity {
 		this.dim = dim;
 	}
 
-	/**
-	 * @return the world
-	 */
-	public World getWorld() {
-		return world;
-	}
 	
-	/**
-	 * @param world the world to set
-	 */
-	public void setWorld(World world) {
-		this.world = world;
-	}
 
 	/**
 	 * Tests if the two given polygons collide
