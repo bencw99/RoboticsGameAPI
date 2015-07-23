@@ -1,48 +1,4 @@
-package world;
 
-import java.awt.Graphics;
-import java.util.*;
-
-import entity.*;
-import game.*;
-
-/**
- * A class representing the world of a game
- * Contains all entities
- */
-public class World {
-	/** List of entities in this world */
-	private ArrayList<Entity> entities;
-	private ArrayList<AbstractButton> buttons;
-	/** 
-	 * Default constructor, initializes elements
-	 */
-	public World() {
-		entities = new ArrayList<Entity>();
-		buttons = new ArrayList<AbstractButton>();
-	}
-	
-	/**
-	 * Initializes this world instance
-	 */
-	public void init() {
-		for(Entity entity : entities) {
-			entity.init();
-		}
-		for(AbstractButton button : buttons){
-			button.init();
-		}
-	}
-	
-	/**
-	 * Updates this world instance
-	 */
-	public void update() {
-		for(Entity entity : entities) {
-			entity.update();
-		}
-	}
-	
 	/**
 	 * Disables this world instance
 	 */
