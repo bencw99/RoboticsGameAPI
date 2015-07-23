@@ -11,8 +11,10 @@ import constants.Constants;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 
 import entity.*;
 import addons.*;
@@ -112,7 +114,8 @@ public class Game extends JPanel{
 	/**
 	 * Updates the game
 	 */
-	public void update(){
+	public void update()
+	{
 		if(state == State.RUNNING){
 			if(InputListener.isKeyPressed('p')) {
 				state = State.PAUSED;
@@ -129,7 +132,8 @@ public class Game extends JPanel{
 	/**
 	 * Update world
 	 */
-	public void updateWorld(){
+	public void updateWorld()
+	{
 		for(Entity ent : entities){
 			ent.update();
 		}
@@ -140,7 +144,8 @@ public class Game extends JPanel{
 	/**
 	 * Updates GUI
 	 */
-	public void updateGUI(){
+	public void updateGUI()
+	{
 		//If the component is not in the list, add it
 		for(NonEntityElements e : nonEntities){
 			if(!contains(e, getComponents())){
@@ -154,12 +159,80 @@ public class Game extends JPanel{
 			}
 		}
 	}
-	public boolean contains(Object key, Object[] list){
+	/**
+	 * Checks if key is in list
+	 * @param key
+	 * @param list
+	 * @return true if yes
+	 */
+	public boolean contains(Object key, Object[] list)
+	{
 		for(Object o : list){
 			if(o.equals(key)){
 				return true;
 			}
 		}
 		return false;
+	}
+	/**
+	 * Disables the game
+	 */
+	public void disable()
+	{
+		state = State.FINISHED;
+		for(Entity entity : entities) {
+			entity.disable();
+		}
+		for(NonEntityElements e : nonEntities){
+			e.disable();
+		}
+	}
+	/**
+	 * Redraws
+	 * @param g
+	 */
+	public void paintComponent(Graphics g){
+		try{
+			for(Entity entity : entities) {
+				entity.draw(g);
+			}
+		}
+		catch (ConcurrentModificationException e){
+			// ignored, this is caught at the beginner of entity loading
+		}
+		repaint();
+	}
+
+	//Getters / Setters
+	
+	/**
+	 * @return the state of the game
+	 */
+	public State getGameState() 
+	{
+		return state;
+	}
+	
+	/**
+	 * @return the frame
+	 */
+	public JFrame getFrame()
+	{
+		return frame;
+	}
+	/**
+	 * @return the listener
+	 */
+	public InputListener getListener()
+	{
+		return inputListener;
+	}
+	/**
+	 * Adds entity
+	 * @param ent
+	 */
+	public void add(Entity ent) {
+		ent.init();
+		entities.add(ent);
 	}
 }
