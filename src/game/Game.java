@@ -43,6 +43,7 @@ public class Game extends JFrame {
 		super();
 		initFrame();
 		initGUI();
+		initScreens();
 	}
 	/**
 	 * Initializes frame
@@ -68,7 +69,18 @@ public class Game extends JFrame {
 		setName("Robotics Game API - GUI");
 		setBackground(Color.WHITE);
 	}
-	
+	/**
+	 * Adds default start, paused, and finished screens
+	 */
+	private void initScreens() {
+		Screen start = new Screen("START");
+		Screen paused = new Screen("PAUSED");
+		Screen finished = new Screen("FINISHED");
+		//TODO Add the actual game screen text/buttons/etc
+		screens.add(start);
+		screens.add(paused);
+		screens.add(finished);
+	}
 	/**
 	 * Adds screens to the game
 	 */
