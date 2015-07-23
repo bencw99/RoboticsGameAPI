@@ -6,6 +6,12 @@ import input.InputListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import java.awt.Color;
+import java.util.ArrayList;
+
+import entity.*;
+import addons.*;
+
 public class Game extends JPanel{
 	/**
 	 *	The possible states the game can be in
@@ -28,10 +34,23 @@ public class Game extends JPanel{
 	 */
 	private InputListener inputListener;
 	/**
+	 * A list of entities in the Game
+	 */
+	private ArrayList<Entity> entities;
+	/**
+	 * A list of non-entities in the Game
+	 * (buttons, timers, etc)s
+	 */
+	private ArrayList<NonEntityElements> nonEntities;
+	/**
 	 * Default constructor, creates an empty world
 	 */
 	public Game(){
+		super();
 		initFrame();
+		initGUI();
+		initWorld();
+		state = State.RUNNING;
 	}
 	/**
 	 * Initializes frame
@@ -50,5 +69,20 @@ public class Game extends JPanel{
 		frame.addKeyListener(inputListener);
 		frame.addMouseListener(inputListener);
 		
+	}
+	/**
+	 * Initializes GUI
+	 */
+	public void initGUI(){
+		setVisible(true);
+		setName("Robotics Game API - GUI");
+		setBackground(Color.WHITE);
+	}
+	/**
+	 * Initializes world
+	 */
+	public void initWorld(){
+		entities = new ArrayList<Entity>();
+		nonEntities = new ArrayList<NonEntityElements>();
 	}
 }
