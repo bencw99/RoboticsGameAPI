@@ -6,6 +6,8 @@ import input.InputListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import constants.Constants;
+
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -42,6 +44,9 @@ public class Game extends JPanel{
 	 * (buttons, timers, etc)s
 	 */
 	private ArrayList<NonEntityElements> nonEntities;
+	
+	//Constructors
+	
 	/**
 	 * Default constructor, creates an empty world
 	 */
@@ -85,4 +90,24 @@ public class Game extends JPanel{
 		entities = new ArrayList<Entity>();
 		nonEntities = new ArrayList<NonEntityElements>();
 	}
+	
+	//Methods
+	
+	/**
+	 * Runs the game
+	 */
+	public void run(){
+		while(state == State.RUNNING){
+			update();
+			try {
+				Thread.sleep(1000 / (int) Constants.UPDATES_PER_SEC);
+			} catch (InterruptedException e) { 
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * Updates the game
+	 */
+	
 }
