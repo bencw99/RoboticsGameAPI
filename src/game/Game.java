@@ -18,92 +18,88 @@ import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 
 import entity.*;
+import gui.Screen;
 import addons.*;
 
-public class Game extends JPanel{
+public class Game extends JFrame {
+	
 	/**
-	 *	The possible states the game can be in
-	 **/
-	public static enum State{
-		RUNNING,
-		PAUSED,
-		FINISHED
-	}
-	/**
-	 *	The current state of the game
-	 **/
-	private State state;
-	/**
-	 *	A frame that will contain the game
-	 **/
-	private JFrame frame;
+	 * Stores all the different game screens and which
+	 * screen is currently being used
+	 */
+	ArrayList<Screen> screens = new ArrayList<Screen>();
+	Screen currentScreen;
+	
 	/**
 	 * Input Listener
 	 */
 	private InputListener inputListener;
-	/**
-	 * A list of entities in the Game
-	 */
-	private ArrayList<Entity> entities;
-	/**
-	 * A list of non-entities in the Game
-	 * (buttons, timers, etc)s
-	 */
-	private ArrayList<NonEntityElements> nonEntities;
 
 	//Constructors
-
 	/**
 	 * Default constructor, creates an empty world
 	 */
-	public Game(){
+	public Game() {
 		super();
 		initFrame();
 		initGUI();
-		initWorld();
-		state = State.RUNNING;
 	}
 	/**
 	 * Initializes frame
 	 */
-	public void initFrame(){
+	private void initFrame() {
 		inputListener = new InputListener();
-		frame = new JFrame();
-		frame.setTitle("Paly Robotics Team 8 - Programming - Game API");
-		frame.setSize(1000, 1000);
-		frame.add(this);
-		frame.setVisible(true);
-		frame.setLayout(null);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addKeyListener(inputListener);
-		frame.addMouseListener(inputListener);
-
+		super.setTitle("Paly Robotics Team 8 - Programming - Game API");
+		super.setSize(1000, 1000);
+		super.add(this);
+		super.setVisible(true);
+		super.setLayout(null);
+		super.setLocationRelativeTo(null);
+		super.setResizable(false);
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super.addKeyListener(inputListener);
+		super.addMouseListener(inputListener);
 	}
 	/**
 	 * Initializes GUI
 	 */
-	public void initGUI(){
+	private void initGUI() {
 		setVisible(true);
 		setName("Robotics Game API - GUI");
 		setBackground(Color.WHITE);
 	}
+	
 	/**
-	 * Initializes world
+	 * Adds screens to the game
 	 */
-	public void initWorld(){
-		entities = new ArrayList<Entity>();
-		nonEntities = new ArrayList<NonEntityElements>();
+	public void addScreen(Screen screen) {
+		screens.add(screen);
 	}
-
+	
+	/**
+	 * Get available screens
+	 */
+	public ArrayList<Screen> getScreens() {
+		return screens;
+	}
+	/**
+	 * Switches the current screen
+	 */
+	public void switchScreen(String screenName) {
+		currentScreen.disable();
+		for(Screen screen : screens) {
+			if(screen.getName() == screenName) {
+				currentScreen = screen;
+			}
+		}
+	}
 	//Methods
 
 	/**
 	 * Runs the game
 	 */
-	public void run(){
-		while(state == State.RUNNING || state == State.PAUSED){
+	public void run() {
+		while(true) {
 			update();
 			try {
 				Thread.sleep(1000 / (int) Constants.UPDATES_PER_SEC);
@@ -115,143 +111,54 @@ public class Game extends JPanel{
 	/**
 	 * Updates the game
 	 */
-	public void update()
-	{
-		if(state == State.RUNNING){
-			if(InputListener.isKeyPressed('p')) {
-				state = State.PAUSED;
-			}
-			updateWorld();
-			updateGUI();
-		}
-		else{
-			if(InputListener.isKeyPressed(' ')) {
-				state = State.RUNNING;
-			}
-		}
+	public void update() {
+		currentScreen.update();
 	}
-	/**
-	 * Update world
-	 */
-	public void updateWorld()
-	{
-		for(Entity ent : entities){
-			ent.update();
-		}
-		for(NonEntityElements ent : nonEntities){
-			ent.update();
-		}
-	}
-	/**
-	 * Updates GUI
-	 */
-	public void updateGUI()
-	{
-		//If the component is not in the list, add it
-		for(NonEntityElements e : nonEntities){
-			if(!contains(e, getComponents())){
-				//If component is not type Component
-				try{
-					add((Component)e);
-				}
-				catch(Exception exception){
-					exception.printStackTrace();
-				}
-			}
-		}
-	}
-	/**
-	 * Checks if key is in list
-	 * @param key
-	 * @param list
-	 * @return true if yes
-	 */
-	public boolean contains(Object key, Object[] list)
-	{
-		for(Object o : list){
-			if(o.equals(key)){
-				return true;
-			}
-		}
-		return false;
-	}
+	
 	/**
 	 * Disables the game
 	 */
-	public void disable()
-	{
-		state = State.FINISHED;
-		for(Entity entity : entities) {
-			entity.disable();
-		}
-		for(NonEntityElements e : nonEntities){
-			e.disable();
-		}
-	}
-	/**
-	 * Redraws
-	 * @param g
-	 */
-	public void paintComponent(Graphics g){
-		try{
-			for(Entity entity : entities) {
-				entity.draw(g);
-			}
-		}
-		catch (ConcurrentModificationException e){
-			// ignored, this is caught at the beginner of entity loading
-		}
-		repaint();
+	public void disable() {
+		switchScreen("FINISHED");
 	}
 
 	//Getters / Setters
-	
-	/**
-	 * @return the state of the game
-	 */
-	public State getGameState() 
-	{
-		return state;
-	}
-	
 	/**
 	 * @return the frame
 	 */
-	public JFrame getFrame()
-	{
-		return frame;
+	public JFrame getFrame() {
+		return this;
 	}
 	/**
 	 * @return the listener
 	 */
-	public InputListener getListener()
-	{
+	public InputListener getListener() {
 		return inputListener;
 	}
 	/**
-	 * Adds entity
-	 * @param ent
+	 * Adds entity to the current screen
+	 * @param ent	entity to add
 	 */
 	public void add(Entity ent) {
 		ent.init();
-		entities.add(ent);
+		currentScreen.add(ent);
 	}
 	/**
-	 * Adds nonEntity
-	 * @param ent
+	 * Adds nonEntity to the current screen
+	 * @param ent	non entity to add
 	 */
 	public void add(NonEntityElements ent){
 		ent.init();
-		nonEntities.add(ent);
+		currentScreen.add(ent);
 	}
 	/**
-	 * Remove an entity from this world
+	 * Remove an entity from the current Screen
 	 * 
 	 * @param ent	the entity to remove
 	 */
 	public void remove(Entity ent) {
 		ent.disable();
-		entities.remove(ent);
+		currentScreen.remove(ent);
 	}
 	/**
 	 * Remove an nonEntity from this world
@@ -260,16 +167,16 @@ public class Game extends JPanel{
 	 */
 	public void remove(NonEntityElements ent) {
 		ent.disable();
-		nonEntities.remove(ent);
+		currentScreen.remove(ent);
 	}
 	/**
 	 * Returns entity list
 	 * @return
 	 */
 	public ArrayList<Entity> getEntities() {
-		return entities;
+		return currentScreen.getEntities();
 	}
-	public ArrayList<NonEntityElements> getNonEntities(){
-		return nonEntities;
+	public ArrayList<NonEntityElements> getNonEntities() {
+		return currentScreen.getNonEntities();
 	}
 }
