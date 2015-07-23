@@ -4,6 +4,7 @@ import physics.Dimension;
 import physics.Position;
 import physics.Vector;
 import world.World;
+import graphics.Drawable;
 import graphics.Sprite;
 import graphics.SpriteManager;
 
@@ -31,7 +32,7 @@ public abstract class Entity {
 	protected Object[] spritesArray;
 	
 	/** An <code>ArrayList<code> of the {@link  sprite.Sprite}s corresponding to this object **/
-	private ArrayList<Sprite> spritesList;
+	private ArrayList<Drawable> drawableList;
 	
 
 	/** The current {@link  sprite.Sprite} this Entity is displaying outside of animation mode **/
@@ -325,14 +326,6 @@ public abstract class Entity {
 		this.spriteManager = spriteManager;
 	}
 	
-	public void setAnimationMode(boolean animationMode) {
-		spriteManager.setAnimationMode(animationMode);
-	}
-	
-	public void setFrameLength(int length) {
-		spriteManager.setTicksPerFrame(length);
-	}
-	
 	/**
 	 * Takes the easy to use array that the user makes when extending
 	 * this class and loads it into an <code>ArrayList<code> of {@link  sprite.Sprite}s
@@ -341,21 +334,21 @@ public abstract class Entity {
 		Object[] concatArray = Arrays.copyOf(PRESET_SPRITE_ARRAY, PRESET_SPRITE_ARRAY.length + spritesArray.length);
 		System.arraycopy(spritesArray, 0, concatArray, PRESET_SPRITE_ARRAY.length, spritesArray.length);
 
-		spritesList = new ArrayList<Sprite>();
+		drawableList = new ArrayList<Drawable>();
 		
 		int i = 0;
 		while(i < concatArray.length) { 
 			if(i + 2 == concatArray.length || concatArray[i + 2].getClass().getName() == "java.lang.String") {
-				spritesList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1]));
+				drawableList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1]));
 				i += 2;
 			}
 			else {
-				spritesList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1], (Integer) concatArray[i + 2]));
+				drawableList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1], (Integer) concatArray[i + 2]));
 				i += 3;
 			}
 		}
 		
-		spriteManager = new SpriteManager(this, spritesList);
+		spriteManager = new SpriteManager(this, drawableList);
 		activeSprite = (String) concatArray[0];
 	}
 }

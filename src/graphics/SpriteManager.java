@@ -15,32 +15,20 @@ import entity.Entity;
  */
 public class SpriteManager {
 	/** An <code>ArrayList</code> that will hold all of the {@link  sprite.Sprite} that this object can manage **/
-	private ArrayList<Sprite> sprites;
+	private ArrayList<Drawable> drawableElements;
 		
 	/** The {@link  entity.Entity} that this manager belongs to **/
 	private Entity entity;
-	
-	/** Is this manager currently in animation mode? **/
-	boolean animationMode = false;
-	
-	/** How many game update cycles will be called before the {@link  sprite.Sprite} is changed in animation mode **/
-	private int ticksPerFrame = 1;
-	
-	/** How many update cycles have been played on this {@link  sprite.Sprite} **/
-	private int currentTick = 0;
-			
-	/** The current {@link  sprite.Sprite} **/
-	private int currentFrame = 0;
 	
 	/**
 	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
 	 * 
 	 * @param entity the {@link  entity.Entity} that this manager belongs to 
-	 * @param sprites the {@link  sprite.Sprite}s that this manager will manage
+	 * @param sprites the {@link  sprite.Drawable}s that this manager will manage
 	 */
-	public SpriteManager(Entity entity, ArrayList<Sprite> sprites) {
+	public SpriteManager(Entity entity, ArrayList<Drawable> drawableElements) {
 		this.entity = entity;
-		this.sprites = sprites;
+		this.drawableElements = drawableElements;
 	}
 	
 	/**
@@ -48,21 +36,14 @@ public class SpriteManager {
 	 * by delegating it to draw itself
 	 * 
 	 * @param g an AWT <code>Graphics</code> object
-	 * @param activeSprite the name of the current {@link  sprite.Sprite}
+	 * @param activeDrawables the name of the current {@link  sprite.Sprite}
 	 */
-	public void update(Graphics g, String activeSprite) {
-		// Calls the special animationUpdate method and breaks this one if in animation mode
-		if(animationMode) {
-			animationUpdate(g);
-			return;
-		}
-		
-		
-		// Loads the Sprite
+	public void update(Graphics g, String activeDrawable) {
+		// Loads the Drawable
 		boolean caught = false;
-		for(Sprite s : sprites) {
-			if (s.getName() == activeSprite) {
-				s.draw(g);
+		for(Drawable d : drawableElements) {
+			if (d.getName() == activeDrawable) {
+				d.draw(g);
 				caught = true;
 				break;
 			}
@@ -70,43 +51,9 @@ public class SpriteManager {
 		
 		// Catches and quits the program if an illegal Sprite is attempted to be displayed
 		if(!caught) {
-			System.out.println("Invalid sprite name: " + activeSprite);
+			System.out.println("Invalid drawable name: " + drawableElements + " for " + entity.getClass().getName());
 			System.exit(0);
 		}
-	}
-	
-	/**
-	 * A special update method called when in animation mode that will cycle the {@link  sprite.Sprite}s at a 
-	 * rate of 1 {@link  sprite.Sprite} every ticksPerFrame update cycles
-	 * 
-	 * @param g an AWT <code>Graphics</code> object
-	 */
-	public void animationUpdate(Graphics g) {
-		currentTick++;
-		if(currentTick == ticksPerFrame) {
-			currentTick = 1;
-			currentFrame++;
-			if(currentFrame == sprites.size()) {
-				currentFrame = 0;
-			}
-		}
-		sprites.get(currentFrame).draw(g);
-	}
-	
-	public void setAnimationMode(boolean animationMode) {
-		this.animationMode = animationMode;
-	}
-	
-	public boolean getanimationMode() {
-		return animationMode;
-	}
-	
-	public int getTicksPerFrame() {
-		return ticksPerFrame;
-	}
-
-	public void setTicksPerFrame(int ticksPerFrame) {
-		this.ticksPerFrame = ticksPerFrame;
 	}
 	
 	public Entity getEntity() {

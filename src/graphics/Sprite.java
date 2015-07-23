@@ -18,7 +18,7 @@ import entity.Entity;
  * @author Jonathan Zwiebel
  * @version June 19th, 2015
  */
-public class Sprite {
+public class Sprite implements Drawable {
 	/** The name of this Sprite **/
 	private String name;
 	

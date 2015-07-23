@@ -28,26 +28,28 @@ public class CrazyRafi extends Implementor{
 	}
 	
 	private class CrazyEntity extends Entity {	
-		final static double DEATH_SPEED = 300;
+		final static double DEATH_SPEED = 150;
 		
-		final static double ACCEL_FACTOR = 10;
+		final static double ACCEL_FACTOR = 25;
 		final static double BOUNCE_FACTOR = 1;
 		final static double RANDOM_FACTOR = 200;
 		
-		final static double START_LEFT_BOUND = 400;
-		final static double START_RIGHT_BOUND = 600;
-		final static double START_UPPER_BOUND = 400;
-		final static double START_LOWER_BOUND = 600;
+		final static double SIZE = 1000;
 		
-		final static double BOUNCE_LEFT_BOUND = 25;
-		final static double BOUNCE_RIGHT_BOUND = 975;
-		final static double BOUNCE_UPPER_BOUND = 25;
-		final static double BOUNCE_LOWER_BOUND = 975;
+		final static double START_LEFT_BOUND = 0.4 * SIZE;
+		final static double START_RIGHT_BOUND = 0.6 * SIZE;
+		final static double START_UPPER_BOUND = 0.4 * SIZE;
+		final static double START_LOWER_BOUND = 0.6 * SIZE;
 		
-		final static double KILL_LEFT_BOUND = -25;
-		final static double KILL_RIGHT_BOUND = 1025;
-		final static double KILL_UPPER_BOUND = -25;
-		final static double KILL_LOWER_BOUND = 1025;
+		final static double BOUNCE_LEFT_BOUND = 0.05 * SIZE;
+		final static double BOUNCE_RIGHT_BOUND = 0.95 * SIZE;
+		final static double BOUNCE_UPPER_BOUND = 0.05 * SIZE;
+		final static double BOUNCE_LOWER_BOUND = 0.95 * SIZE;
+		
+		final static double KILL_LEFT_BOUND = -0.05 * SIZE;
+		final static double KILL_RIGHT_BOUND = 1.05 * SIZE;
+		final static double KILL_UPPER_BOUND = -0.05 * SIZE;
+		final static double KILL_LOWER_BOUND = 1.05 * SIZE;
 		
 		Vector velocity = new Vector(0, 0);
 		int timeAlive = 0;
@@ -62,7 +64,7 @@ public class CrazyRafi extends Implementor{
 		public void init() {
 			// The 50 here is the opacity of the happy Sprite
 			// Opacity is optional, the default opacity is 100
-			spritesArray = new Object[]{"happy", "images/happy.jpg", 50, "death", "images/skull-transparent.png"};
+			spritesArray = new Object[]{"happy", "images/yellow-smile.png", "death", "images/purple-smile.png", 25};
 			loadSprites();
 			activeSprite = "happy";
 			
@@ -136,18 +138,14 @@ public class CrazyRafi extends Implementor{
 			spritesArray = new Object[]{"rafi", "images/rafi.png", "ok-rafi", "images/rafi-2.png"};
 			loadSprites();
 			
-			setPos(new Position(500, 500));
-			setDim(new Dimension(128, 128));
-			activeSprite = "TRANSPARENT";
+			setPos(new Position(0, 0));
+			setDim(new Dimension(32, 32));
+			activeSprite = "rafi";
 		}
 
 		@Override
 		public void update() {
 			cycle++;
-			if(cycle == 600) {
-				setFrameLength(100);
-				setAnimationMode(true);
-			}
 		}
 
 		@Override
