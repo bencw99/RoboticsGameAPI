@@ -3,13 +3,16 @@
 
 import input.InputListener;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import constants.Constants;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import entity.*;
 import addons.*;
@@ -17,7 +20,7 @@ import addons.*;
 public class Game extends JPanel{
 	/**
 	 *	The possible states the game can be in
-	**/
+	 **/
 	public static enum State{
 		RUNNING,
 		PAUSED,
@@ -25,11 +28,11 @@ public class Game extends JPanel{
 	}
 	/**
 	 *	The current state of the game
-	**/
+	 **/
 	private State state;
 	/**
 	 *	A frame that will contain the game
-	**/
+	 **/
 	private JFrame frame;
 	/**
 	 * Input Listener
@@ -44,9 +47,9 @@ public class Game extends JPanel{
 	 * (buttons, timers, etc)s
 	 */
 	private ArrayList<NonEntityElements> nonEntities;
-	
+
 	//Constructors
-	
+
 	/**
 	 * Default constructor, creates an empty world
 	 */
@@ -73,7 +76,7 @@ public class Game extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(inputListener);
 		frame.addMouseListener(inputListener);
-		
+
 	}
 	/**
 	 * Initializes GUI
@@ -90,14 +93,14 @@ public class Game extends JPanel{
 		entities = new ArrayList<Entity>();
 		nonEntities = new ArrayList<NonEntityElements>();
 	}
-	
+
 	//Methods
-	
+
 	/**
 	 * Runs the game
 	 */
 	public void run(){
-		while(state == State.RUNNING){
+		while(state == State.RUNNING || state == State.PAUSED){
 			update();
 			try {
 				Thread.sleep(1000 / (int) Constants.UPDATES_PER_SEC);
@@ -109,5 +112,54 @@ public class Game extends JPanel{
 	/**
 	 * Updates the game
 	 */
-	
+	public void update(){
+		if(state == State.RUNNING){
+			if(InputListener.isKeyPressed('p')) {
+				state = State.PAUSED;
+			}
+			updateWorld();
+			updateGUI();
+		}
+		else{
+			if(InputListener.isKeyPressed(' ')) {
+				state = State.RUNNING;
+			}
+		}
+	}
+	/**
+	 * Update world
+	 */
+	public void updateWorld(){
+		for(Entity ent : entities){
+			ent.update();
+		}
+		for(NonEntityElements ent : nonEntities){
+			ent.update();
+		}
+	}
+	/**
+	 * Updates GUI
+	 */
+	public void updateGUI(){
+		//If the component is not in the list, add it
+		for(NonEntityElements e : nonEntities){
+			if(!contains(e, getComponents())){
+				//If component is not type Component
+				try{
+					add((Component)e);
+				}
+				catch(Exception exception){
+					exception.printStackTrace();
+				}
+			}
+		}
+	}
+	public boolean contains(Object key, Object[] list){
+		for(Object o : list){
+			if(o.equals(key)){
+				return true;
+			}
+		}
+		return false;
+	}
 }
