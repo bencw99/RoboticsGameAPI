@@ -49,7 +49,7 @@ public class Game extends JPanel{
 	 * A list of non-entities in the Game
 	 * (buttons, timers, etc)s
 	 */
-	private ArrayList<NonEntityElements> nonEntities;
+	private ArrayList<NonEntityElement> nonEntities;
 
 	//Constructors
 
@@ -94,7 +94,7 @@ public class Game extends JPanel{
 	 */
 	public void initWorld(){
 		entities = new ArrayList<Entity>();
-		nonEntities = new ArrayList<NonEntityElements>();
+		nonEntities = new ArrayList<NonEntityElement>();
 	}
 
 	//Methods
@@ -138,7 +138,7 @@ public class Game extends JPanel{
 		for(Entity ent : entities){
 			ent.update();
 		}
-		for(NonEntityElements ent : nonEntities){
+		for(NonEntityElement ent : nonEntities){
 			ent.update();
 		}
 	}
@@ -148,7 +148,7 @@ public class Game extends JPanel{
 	public void updateGUI()
 	{
 		//If the component is not in the list, add it
-		for(NonEntityElements e : nonEntities){
+		for(NonEntityElement e : nonEntities){
 			if(!contains(e, getComponents())){
 				//If component is not type Component
 				try{
@@ -184,7 +184,7 @@ public class Game extends JPanel{
 		for(Entity entity : entities) {
 			entity.disable();
 		}
-		for(NonEntityElements e : nonEntities){
+		for(NonEntityElement e : nonEntities){
 			e.disable();
 		}
 	}
@@ -240,7 +240,7 @@ public class Game extends JPanel{
 	 * Adds nonEntity
 	 * @param ent
 	 */
-	public void add(NonEntityElements ent){
+	public void add(NonEntityElement ent){
 		ent.init();
 		nonEntities.add(ent);
 	}
@@ -258,7 +258,7 @@ public class Game extends JPanel{
 	 * 
 	 * @param ent	the entity to remove
 	 */
-	public void remove(NonEntityElements ent) {
+	public void remove(NonEntityElement ent) {
 		ent.disable();
 		nonEntities.remove(ent);
 	}
@@ -269,7 +269,7 @@ public class Game extends JPanel{
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
-	public ArrayList<NonEntityElements> getNonEntities(){
+	public ArrayList<NonEntityElement> getNonEntities(){
 		return nonEntities;
 	}
 }

@@ -2,7 +2,7 @@ package implementaion;
 
 import java.util.ArrayList;
 
-import addons.NonEntityElements;
+import addons.NonEntityElement;
 import constants.*;
 import entity.*;
 import game.*;
@@ -45,7 +45,7 @@ public abstract class Implementor {
 	 * @return
 	 * -success?
 	 */
-	public boolean addButton(NonEntityElements button){
+	public boolean addButton(NonEntityElement button){
 		if(game != null){
 			game.add(button);
 			return true;
