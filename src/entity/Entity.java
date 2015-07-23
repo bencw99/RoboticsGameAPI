@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Entity {
-	/** The position of this Entity instance */
+	/** The position of this Entity instance (Center)*/
 	private Position pos;
 	
 	/** The angle of this Entity instance **/

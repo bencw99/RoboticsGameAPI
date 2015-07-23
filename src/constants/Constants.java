@@ -9,4 +9,11 @@ public class Constants {
 	
 	/** The default dimension size **/
 	public final static int DEFAULT_DIMENSION = 32;
+	
+	/**
+	 * The default wall width
+	 */
+	public final static double DEFAULT_WALL_WIDTH = 5.0;
+	
+	
 }
