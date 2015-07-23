@@ -3,9 +3,9 @@ package graphics;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class Animation implements Drawable {
-	private ArrayList<Sprite> sprites;	
-	
+import entity.Entity;
+
+public class Animation extends SpriteManager implements Drawable {	
 	/** The name of this Sprite **/
 	private String name;
 	
@@ -23,6 +23,10 @@ public class Animation implements Drawable {
 		
 	}
 	
+	public Animation(Entity entity, ArrayList<Drawable> sprites) {
+		super(entity, sprites);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -38,11 +42,11 @@ public class Animation implements Drawable {
 		if(currentTick == ticksPerFrame) {
 			currentTick = 1;
 			currentFrame++;
-			if(currentFrame == sprites.size()) {
+			if(currentFrame == drawableElements.size()) {
 				currentFrame = 0;
 			}
 		}
-		sprites.get(currentFrame).draw(g);
+		drawableElements.get(currentFrame).draw(g);
 	}
 	
 	public int getTicksPerFrame() {

@@ -15,7 +15,7 @@ import entity.Entity;
  */
 public class SpriteManager {
 	/** An <code>ArrayList</code> that will hold all of the {@link  sprite.Sprite} that this object can manage **/
-	private ArrayList<Drawable> drawableElements;
+	protected ArrayList<Drawable> drawableElements;
 		
 	/** The {@link  entity.Entity} that this manager belongs to **/
 	private Entity entity;
