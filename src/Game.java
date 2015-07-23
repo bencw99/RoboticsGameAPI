@@ -5,7 +5,7 @@ package game;
 
 public class Game extends JPanel{
 	/**
-		The possible states the game can be in
+	 *	The possible states the game can be in
 	**/
 	public static enum State{
 		RUNNING,
@@ -13,11 +13,11 @@ public class Game extends JPanel{
 		FINISHED
 	}
 	/**
-		The current state of the game
+	 *	The current state of the game
 	**/
 	private State state;
 	/**
-		
+	 *	A frame that will contain the game
 	**/
-	
+	private JFrame frame;
 }
