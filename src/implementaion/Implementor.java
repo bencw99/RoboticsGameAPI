@@ -45,9 +45,9 @@ public abstract class Implementor {
 	 * @return
 	 * -success?
 	 */
-	public boolean addButton(NonEntityElements button){
+	public boolean addNonEntity(NonEntityElements nonEntity){
 		if(game != null){
-			game.add(button);
+			game.add(nonEntity);
 			return true;
 		}
 		return false;
@@ -60,7 +60,9 @@ public abstract class Implementor {
 	public ArrayList<Entity> getEntities(){
 		return game.getEntities();
 	}
-	
+	public ArrayList<NonEntityElements> getNonEntities(){
+		return game.getNonEntities();
+	}
 	/**
 	 * Initializer
 	 * -call this in subclass's main

@@ -2,7 +2,6 @@ package entity;
 
 import physics.Position;
 import physics.Dimension;
-
 import constants.Direction;
 import constants.Constants;
 
@@ -10,7 +9,7 @@ public class Wall extends Entity {
 	/**
 	 * Default constructor
 	 */
-	Wall(){
+	public Wall(){
 		super();
 	}
 	/**
@@ -19,7 +18,7 @@ public class Wall extends Entity {
 	 * @param direction
 	 * @param length
 	 */
-	Wall(Position p, Direction direction, double length){
+	public Wall(Position p, Direction direction, double length){
 		super();
 		double angle;
 		Dimension d = new Dimension(Constants.DEFAULT_WALL_WIDTH, length);
@@ -51,7 +50,7 @@ public class Wall extends Entity {
 	 * @param angle
 	 * @param length
 	 */
-	Wall(Position p, double angle, double length){
+	public Wall(Position p, double angle, double length){
 		super();
 		Dimension d = new Dimension(Constants.DEFAULT_WALL_WIDTH, length);
 		setPos(p);
@@ -64,7 +63,7 @@ public class Wall extends Entity {
 	 * @param direction
 	 * @param d
 	 */
-	Wall(Position p, Direction direction, Dimension d){
+	public Wall(Position p, Direction direction, Dimension d){
 		super();
 		double angle;
 		switch(direction){
@@ -94,14 +93,16 @@ public class Wall extends Entity {
 	 * @param angle
 	 * @param d
 	 */
-	Wall(Position p, double angle, Dimension d){
+	public Wall(Position p, double angle, Dimension d){
 		super(p, angle, d);
 	}
 	/**
 	 * Initializes this wall
 	 */
 	public void init() {
-
+		spritesArray = new Object[]{};
+		activeSprite = "black";
+		loadSprites();
 
 	}
 

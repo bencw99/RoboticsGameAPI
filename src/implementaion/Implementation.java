@@ -13,10 +13,7 @@ public class Implementation extends Implementor{
 	 * Called when game starts
 	 */
 	public void main() {
-		//Ignore
-		init();
-		//Ignore
-		run();
+		
 	}
 	
 	private class ExampleEntity extends Entity {
