@@ -15,6 +15,30 @@ public abstract class Implementor {
 	
 	//Private instance variables used to control the Game
 	
+	/**
+	 * A matrix of cells
+	 */
+	protected Cell[][] cells;
+	/**
+	 * Cells width (pixels)
+	 */
+	protected final int CELL_WIDTH = 30;
+	/**
+	 * Cell height (pixels)
+	 */
+	protected final int CELL_HEIGHT = 30;
+	/**
+	 * Number of rows
+	 */
+	protected int ROWS;
+	/**
+	 * Number of columns
+	 */
+	protected int COLS;
+	
+	/**
+	 * The game
+	 */
 	protected Game game;
 	
 	/**
@@ -69,6 +93,8 @@ public abstract class Implementor {
 	 */
 	public void init() {
 		game = new Game();
+		ROWS = game.getHeight()/CELL_HEIGHT;
+		COLS = game.getWidth()/CELL_WIDTH;
 	}
 	/**
 	 * Starts the game
@@ -76,5 +102,46 @@ public abstract class Implementor {
 	public void run(){
 		game.run();
 	}
-
+	
+	//Setters and getters
+	
+	/**
+	 * Returns the number of rows
+	 * @return
+	 */
+	public int ROWS(){
+		return ROWS;
+	}
+	/**
+	 * Returns the number of columns
+	 * @return
+	 */
+	public int COLS(){
+		return COLS;
+	}
+	/**
+	 * Returns cells (Cell[][])
+	 * @return
+	 */
+	public Cell[][] cells(){
+		return cells;
+	}
+	/**
+	 * Returns CELL_WIDTH
+	 * @return
+	 */
+	public int CELL_WIDTH(){
+		return CELL_WIDTH;
+	}
+	/**
+	 * Returns CELL_HEIGHT
+	 * @return
+	 */
+	public int CELL_HEIGHT(){
+		return CELL_HEIGHT;
+	}
+	public Game game(){
+		return game;
+	}
 }
+
