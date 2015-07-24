@@ -21,22 +21,22 @@ import entity.Entity;
 public class Sprite implements Drawable {
 	/** The name of this Sprite **/
 	private String name;
-	
+
 	/** The <code>File</code> of the image of this Sprite **/
 	private File imageFile;
-	
+
 	/** The <code>BufferedImage</code> that this Sprite will display **/
 	private BufferedImage image;
-	
+
 	/** The {@link  entity.Entity} to which this Sprite belongs **/
 	private Entity entity;
-	
+
 	/** The Opacity of this Sprite, 0 being transparent, 100 being opaque **/
 	private int opacity;
-	
+
 	/** The alpha value of this Sprite, 0 being transparent, 1 being opaque **/
 	private float alpha;
-	
+
 	/**
 	 * Constructs a Sprite object that can be displayed to the screen and managed by a 
 	 * {@link  graphics.Graphics}, also loads the sprite.
@@ -52,14 +52,14 @@ public class Sprite implements Drawable {
 		this.opacity = opacity;
 		loadSprite(imageLocation);
 	}
-	
+
 	/**
 	 * A constructor for when no opacity is specified, 100 is default
 	 */
 	public Sprite(Entity entity, String name, String imageLocation) {
 		this(entity, name, imageLocation, 100);
 	}
-	
+
 	/**
 	 * Takes a file location and loads it into a <code>BufferedImage</code> while also
 	 * checking to make sure the location points to a valid file
@@ -78,7 +78,7 @@ public class Sprite implements Drawable {
 		}
 		alpha = opacity * 0.01f;
 	}
-	
+
 	/**
 	 * Draws the Sprite onto the <code>JPanel</code> with {@link  physics.Position} and {@link  physics.Dimension} 
 	 * corresponding to that of the {@link  entity.Entity} it corresponds to.
@@ -90,12 +90,12 @@ public class Sprite implements Drawable {
 		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 		g2d.setComposite(composite);
 		g2d.drawImage(image, (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
-					(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
+				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
 		g2d.dispose();
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 }

@@ -16,10 +16,10 @@ import entity.Entity;
 public class SpriteManager {
 	/** An <code>ArrayList</code> that will hold all of the {@link  sprite.Sprite} that this object can manage **/
 	protected ArrayList<Drawable> drawableElements;
-		
+
 	/** The {@link  entity.Entity} that this manager belongs to **/
 	private Entity entity;
-	
+
 	/**
 	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
 	 * 
@@ -30,7 +30,7 @@ public class SpriteManager {
 		this.entity = entity;
 		this.drawableElements = drawableElements;
 	}
-	
+
 	/**
 	 * Called periodically with game updates, this will update the current graphics of the {@link  sprite.Sprite}
 	 * by delegating it to draw itself
@@ -48,11 +48,25 @@ public class SpriteManager {
 				break;
 			}
 		}
-		
+
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).animationUpdate(g);
+			}
+		}
+
 		// Catches and quits the program if an illegal Sprite is attempted to be displayed
 		if(!caught) {
-			System.out.println("Invalid drawable name: " + drawableElements + " for " + entity.getClass().getName());
+			System.out.println("Invalid drawable name: " + activeDrawable + " for " + entity.getClass().getName());
 			System.exit(0);
+		}
+	}
+
+	public void setCycleMode(boolean cycleMode) {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setCycleMode(cycleMode);;
+			}
 		}
 	}
 	

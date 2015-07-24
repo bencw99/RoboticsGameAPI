@@ -4,6 +4,7 @@ import physics.Dimension;
 import physics.Position;
 import physics.Vector;
 import world.World;
+import graphics.Animation;
 import graphics.Drawable;
 import graphics.Sprite;
 import graphics.SpriteManager;
@@ -15,25 +16,25 @@ import java.util.Arrays;
 public abstract class Entity {
 	/** The position of this Entity instance */
 	private Position pos;
-	
+
 	/** The angle of this Entity instance **/
 	private double angle;
-	
+
 	/** The dimensions of this entity */
 	private Dimension dim;
-	
+
 	/** Reference to the world this entity is in */
 	private World world;
-	
+
 	/** Draws and manages the graphics for this entity */
 	private SpriteManager spriteManager;
-	
+
 	/** An array that will prestore the {@link  sprite.Sprite} information in the form name, filepath **/
 	protected Object[] spritesArray;
-	
+
 	/** An <code>ArrayList<code> of the {@link  sprite.Sprite}s corresponding to this object **/
 	private ArrayList<Drawable> drawableList;
-	
+
 
 	/** The current {@link  sprite.Sprite} this Entity is displaying outside of animation mode **/
 	protected String activeSprite;
@@ -42,15 +43,15 @@ public abstract class Entity {
 	public static final Object[] PRESET_SPRITE_ARRAY = {"RED", "images/preset/red.png", 
 		"WHITE", "images/preset/white.png", "BLACK", "images/preset/black.png", 
 		"TRANSPARENT", "images/preset/transparent.png"};
-	
-	
+
+
 	/**
 	 * Default constructor, initializes entity world to null
 	 */
 	public Entity() {
 		this(null);
 	}
-	
+
 	/**
 	 * Parameterized constructor, initializes entity world to given parameters
 	 * 
@@ -62,7 +63,7 @@ public abstract class Entity {
 		this.setDim(new Dimension());
 		this.setAngle(0);
 	}
-	
+
 	/**
 	 * Parameterized constructor, initializes entity position and dimensions to given parameters
 	 * 
@@ -77,22 +78,22 @@ public abstract class Entity {
 		this.angle = angle;
 		this.dim = dim;
 	}
-	
+
 	/**
 	 * Initializes this entity
 	 */
 	public abstract void init();
-	
+
 	/**
 	 * Updates this entity
 	 */
 	public abstract void update();
-	
+
 	/**
 	 * Disables this entity
 	 */
 	public abstract void disable();
-	
+
 	/**
 	 * Draws this entity on the given graphics object
 	 * 
@@ -101,21 +102,21 @@ public abstract class Entity {
 	public void draw(Graphics g) {
 		spriteManager.update(g, activeSprite);
 	}
-	
+
 	/**
 	 * @return the position
 	 */
 	public Position getPos() {
 		return pos;
 	}
-	
+
 	/**
 	 * @return the x position
 	 */
 	public double getX() {
 		return pos.getX();
 	}
-	
+
 	/**
 	 * @return the y position
 	 */
@@ -139,7 +140,7 @@ public abstract class Entity {
 	public void translate(double dx, double dy) {
 		pos.translate(dx, dy);
 	}
-	
+
 	/**
 	 * Translates this position by the given vector differentials
 	 * 
@@ -148,7 +149,7 @@ public abstract class Entity {
 	public void translate(Vector vec) {
 		pos.translate(vec);
 	}
-	
+
 	/**
 	 * Translates the position by the given x differential
 	 * 
@@ -157,7 +158,7 @@ public abstract class Entity {
 	public void translateX(double dx) {
 		pos.translateX(dx);
 	}
-	
+
 	/**
 	 * Translates the position by the given y differential
 	 * 
@@ -166,7 +167,7 @@ public abstract class Entity {
 	public void translateY(double dy) {
 		pos.translateY(dy);
 	}
-	
+
 	/**
 	 * Returns the upper left position of this entity
 	 * 
@@ -175,7 +176,7 @@ public abstract class Entity {
 	public Position getUpperLeftPos() {
 		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
 	}
-	
+
 	/**
 	 * Returns the upper right position of this entity
 	 * 
@@ -184,7 +185,7 @@ public abstract class Entity {
 	public Position getUpperRightPos() {
 		return new Position(this.pos.getX() + this.dim.getWidth()/2, this.pos.getY() - this.dim.getHeight()/2);
 	}
-	
+
 	/**
 	 * Returns the lower left position of this entity
 	 * 
@@ -193,7 +194,7 @@ public abstract class Entity {
 	public Position getLowerLeftPos() {
 		return new Position(this.pos.getX() - this.dim.getWidth()/2, this.pos.getY() + this.dim.getHeight()/2);
 	}
-	
+
 	/**
 	 * Returns the lower right position of this entity
 	 * 
@@ -202,7 +203,7 @@ public abstract class Entity {
 	public Position getLowerRightPos() {
 		return new Position(this.pos.getX() + this.dim.getWidth()/2, this.pos.getY() + this.dim.getHeight()/2);
 	}
-	
+
 	/**
 	 * @return the angle
 	 */
@@ -216,7 +217,7 @@ public abstract class Entity {
 	public void setAngle(double angle) {
 		this.angle = angle;
 	}
-	
+
 	/**
 	 * Translates this angle by the given angle difference
 	 * 
@@ -246,7 +247,7 @@ public abstract class Entity {
 	public World getWorld() {
 		return world;
 	}
-	
+
 	/**
 	 * @param world the world to set
 	 */
@@ -272,17 +273,17 @@ public abstract class Entity {
 	 * @return the result of the collision test
 	 */
 	public boolean collide(Entity ent) {
-        Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
-        Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
-        return(a.intersects(b));
+		Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
+		Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
+		return(a.intersects(b));
 	}
 
-    /**
-     * Tests the direction of an existing collision
-     *
-     * @param ent the entity that this entity is colliding with
-     * @return the direction the other entity is colliding from
-     */
+	/**
+	 * Tests the direction of an existing collision
+	 *
+	 * @param ent the entity that this entity is colliding with
+	 * @return the direction the other entity is colliding from
+	 */
 	public Vector directionalCollide(Entity ent) {
 		if(collide(ent)) {
 			//The distance between the left side of this entity and the right side of the colliding one
@@ -293,10 +294,10 @@ public abstract class Entity {
 			double upperDistance = Math.abs((pos.getY() - dim.getHeight()/2) - (ent.pos.getY() + ent.dim.getHeight()/2));
 			//The distance between the lower side of this entity and the upper side of the colliding one
 			double lowerDistance = Math.abs((pos.getY() + dim.getHeight()/2) - (ent.pos.getY() - ent.dim.getHeight()/2));
-			
+
 			//Compares to find the lowest of the four distances
 			double minimumDistance = Math.min(Math.min(leftDistance, rightDistance), Math.min(upperDistance, lowerDistance));
-			
+
 			//Returns the vector matching the lowest distance
 			if(minimumDistance == leftDistance) {
 				return new Vector(1, 0);
@@ -310,14 +311,14 @@ public abstract class Entity {
 			if(minimumDistance == lowerDistance) {
 				return new Vector(0, -1);
 			}
-			
+
 			System.out.println("Collision detection failed: directionalCollide minimum not found");
 		}	
 		return null;
 	}
 
 	// GRAPHICS:
-	
+
 	public SpriteManager getSpriteManager() {
 		return spriteManager;
 	}
@@ -326,6 +327,26 @@ public abstract class Entity {
 		this.spriteManager = spriteManager;
 	}
 	
+	public void setCycleMode(boolean cycleMode) {
+		spriteManager.setCycleMode(cycleMode);
+	}
+
+	public Animation newAnimation(Object[] inputArray) {
+		ArrayList<Drawable> spritesList = new ArrayList<Drawable>();
+		int i = 0;
+		while(i < inputArray.length) { 
+			if(i + 2 == inputArray.length || inputArray[i + 2].getClass().getName() == "java.lang.String") {
+				spritesList.add(new Sprite(this, (String) inputArray[i], (String) inputArray[i + 1]));
+				i += 2;
+			}
+			else {
+				spritesList.add(new Sprite(this, (String) inputArray[i], (String) inputArray[i + 1], (Integer) inputArray[i + 2]));
+				i += 3;
+			}
+		}
+		return new Animation(this, spritesList);
+	}
+
 	/**
 	 * Takes the easy to use array that the user makes when extending
 	 * this class and loads it into an <code>ArrayList<code> of {@link  sprite.Sprite}s
@@ -335,19 +356,28 @@ public abstract class Entity {
 		System.arraycopy(spritesArray, 0, concatArray, PRESET_SPRITE_ARRAY.length, spritesArray.length);
 
 		drawableList = new ArrayList<Drawable>();
-		
+
 		int i = 0;
 		while(i < concatArray.length) { 
 			if(i + 2 == concatArray.length || concatArray[i + 2].getClass().getName() == "java.lang.String") {
-				drawableList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1]));
-				i += 2;
+				if(concatArray[i + 1] instanceof String) {
+					drawableList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1]));
+					i += 2;
+				}
+				else {
+					System.out.println("Adding animation");
+					Animation a = (Animation) concatArray[i + 1];
+					a.setName((String) concatArray[i]);
+					drawableList.add(a);
+					i += 2;
+				}
 			}
 			else {
 				drawableList.add(new Sprite(this, (String) concatArray[i], (String) concatArray[i + 1], (Integer) concatArray[i + 2]));
 				i += 3;
 			}
 		}
-		
+
 		spriteManager = new SpriteManager(this, drawableList);
 		activeSprite = (String) concatArray[0];
 	}
