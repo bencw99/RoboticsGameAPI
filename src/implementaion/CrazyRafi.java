@@ -115,7 +115,7 @@ public class CrazyRafi extends Implementor{
 
 		private void kill() {
 			dead = true;
-			setCycleMode(true);
+			step();
 			timeAlive = 0;
 		}
 

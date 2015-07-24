@@ -330,6 +330,14 @@ public abstract class Entity {
 	public void setCycleMode(boolean cycleMode) {
 		spriteManager.setCycleMode(cycleMode);
 	}
+	
+	public void step() {
+		spriteManager.step();
+	}
+
+	public boolean isCycleMode() {
+		return spriteManager.isCycleMode();
+	}
 
 	public Animation newAnimation(Object[] inputArray) {
 		ArrayList<Drawable> spritesList = new ArrayList<Drawable>();
@@ -365,7 +373,6 @@ public abstract class Entity {
 					i += 2;
 				}
 				else {
-					System.out.println("Adding animation");
 					Animation a = (Animation) concatArray[i + 1];
 					a.setName((String) concatArray[i]);
 					drawableList.add(a);

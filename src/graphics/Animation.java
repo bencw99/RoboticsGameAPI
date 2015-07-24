@@ -42,16 +42,19 @@ public class Animation extends SpriteManager implements Drawable {
 	 * 
 	 * @param g an AWT <code>Graphics</code> object
 	 */
-	public void animationUpdate(Graphics g) {
+	public void animationUpdate() {
 		if(cycleMode) {
 			currentTick++;
 			if(currentTick == ticksPerFrame) {
-				currentTick = 1;
-				currentFrame++;
-				if(currentFrame == drawableElements.size()) {
-					currentFrame = 0;
-				}
+				step();
 			}
+		}
+	}
+	
+	public void step() {
+		currentFrame++;
+		if(currentFrame == drawableElements.size()) {
+			currentFrame = 0;
 		}
 	}
 
@@ -62,6 +65,11 @@ public class Animation extends SpriteManager implements Drawable {
 	public void setCycleMode(boolean cycleMode) {
 		this.cycleMode = cycleMode;
 	}
+	
+	public boolean getCycleMode() {
+		return cycleMode;
+	}
+	
 
 	public int getTicksPerFrame() {
 		return ticksPerFrame;
