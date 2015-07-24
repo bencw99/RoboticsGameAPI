@@ -22,10 +22,12 @@ public abstract class AbstractTimer extends TextArea implements NonEntityElement
 	
 	public AbstractTimer() {
 		displayText = false;
+        text = new TextArea();
 	}
 	
 	public AbstractTimer(boolean displayText) {
 		this.displayText = displayText;
+        text = new TextArea();
 	}
 	
 	public void init() {
@@ -53,8 +55,12 @@ public abstract class AbstractTimer extends TextArea implements NonEntityElement
 		currentTime = (System.currentTimeMillis() - startTime)/1000;
 		
 		if(displayText == true) {
-			text = new TextArea(String.valueOf(currentTime));
-		}	
+			text.setText(String.valueOf(currentTime));
+		}
+
+        else {
+            text.setText("");
+        }
 	}
 
 	public void setPosition(Position p) {
