@@ -95,12 +95,27 @@ public abstract class Implementor {
 		game = new Game();
 		ROWS = game.getHeight()/CELL_HEIGHT;
 		COLS = game.getWidth()/CELL_WIDTH;
+		cells = new Cell[ROWS][COLS];
+		initCells();
 	}
 	/**
 	 * Starts the game
 	 */
 	public void run(){
 		game.run();
+	}
+	
+	/**
+	 * Initializes the cells
+	 */
+	public void initCells(){
+		for(int row = 0; row < ROWS; row++){
+			for(int col = 0; col < COLS; col++){
+				Position p = new Position(col * CELL_WIDTH + 15, row*CELL_HEIGHT + 15);
+				Dimension d = new Dimension(CELL_WIDTH, CELL_HEIGHT);
+				cells[row][col] = new Cell(game, p, d);
+			}
+		}
 	}
 	
 	//Setters and getters
