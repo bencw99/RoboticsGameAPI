@@ -71,12 +71,26 @@ public class AbstractMenu implements NonEntityElement {
     }
 
     public void setPosition(double xPos, double yPos) {
+        double xDifference = xPos - this.xPos;
         this.xPos = xPos;
+
+        double yDifference = yPos = this.yPos;
         this.yPos = yPos;
+
+        for(NonEntityElement menuElement : list) {
+            menuElement.setPosition(menuElement.getXPosition() + xDifference, menuElement.getYPosition() + yDifference);
+        }
     }
 
     public void setPosition(Position pos) {
+        double xDifference = pos.getX() - xPos;
+        double yDifference = pos.getY() - yPos;
+
         p = pos;
+
+        for(NonEntityElement menuElement : list) {
+            menuElement.setPosition(menuElement.getXPosition() + xDifference, menuElement.getYPosition() + yDifference);
+        }
     }
 
 }
