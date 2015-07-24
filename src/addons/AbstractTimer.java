@@ -1,12 +1,8 @@
 package addons;
 
-import java.awt.TextArea;
-
-import javax.swing.Timer;
-
-import java.awt.event.ActionEvent.*;
-
 import physics.Position;
+
+import java.awt.*;
 
 public abstract class AbstractTimer extends TextArea implements NonEntityElement{
 	
@@ -35,7 +31,16 @@ public abstract class AbstractTimer extends TextArea implements NonEntityElement
 	public void init() {
 		startTime = System.currentTimeMillis();
 	}
-	
+
+    public void reset() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public double getTime() {
+        currentTime = (System.currentTimeMillis() - startTime)/1000;
+        return currentTime;
+    }
+
 	public void show() {
 		displayText = true;
 	}
