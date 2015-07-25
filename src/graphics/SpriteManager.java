@@ -22,9 +22,9 @@ public class SpriteManager {
 	
 	Drawable activeDrawable;
 	
-	boolean cycleMode;
+	boolean cycleMode = false;
 	
-	boolean autoMode;
+	boolean autoMode = false;
 
 	/**
 	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
@@ -77,33 +77,27 @@ public class SpriteManager {
 		}
 	}
 	
-	private void updateCycleMode() {
+	protected void updateCycleMode() {
 		if(activeDrawable instanceof Animation) {
 			((Animation) activeDrawable).setCycleMode(cycleMode);
 		}
 	}
 	
 	public void setCycleMode(boolean cycleMode) {
-		this.cycleMode = true;
+		this.cycleMode = cycleMode;
 	}
 
-	public boolean isCycleMode() {
-		return cycleMode;
-	}
 	
-	private void updateAutoMode() {
+	protected void updateAutoMode() {
 		if(activeDrawable instanceof Animation) {
 			((Animation) activeDrawable).setAutoMode(autoMode);
 		}
 	}
 	
 	public void setAutoMode(boolean autoMode) {
-		this.autoMode = true;
+		this.autoMode = autoMode;
 	}
 
-	public boolean isAutoMode() {
-		return autoMode;
-	}
 	
 	public Entity getEntity() {
 		return entity;

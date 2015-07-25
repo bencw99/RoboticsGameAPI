@@ -335,22 +335,15 @@ public abstract class Entity {
 		spriteManager.setCycleMode(cycleMode);
 	}
 
-	public boolean isCycleMode() {
-		return spriteManager.isCycleMode();
-	}
 	
 	public void setAutoMode(boolean autoMode) {
 		spriteManager.setAutoMode(autoMode);
 	}
 
-	public boolean isAutoMode() {
-		return spriteManager.isAutoMode();
-	}
 
 	public Animation newAnimation(Object[] inputArray) {
 		ArrayList<Drawable> spritesList = new ArrayList<Drawable>();
 		int i = 0;
-		System.out.println(inputArray.length);
 		while(i < inputArray.length) { 
 			if(i + 2 == inputArray.length || inputArray[i + 2].getClass().getName() == "java.lang.String") {
 				spritesList.add(new Sprite(this, (String) inputArray[i], (String) inputArray[i + 1]));

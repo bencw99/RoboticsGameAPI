@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
-		for(int i = 1; i <= 64; i++) {
+		for(int i = 1; i <= 128; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 
@@ -27,7 +27,7 @@ public class CrazyRafi extends Implementor{
 	}
 
 	private class CrazyEntity extends Entity {	
-		final static double DEATH_SPEED = 150;
+		final static double DEATH_SPEED = 100;
 
 		final static double ACCEL_FACTOR = 25;
 		final static double BOUNCE_FACTOR = 1;
@@ -125,6 +125,7 @@ public class CrazyRafi extends Implementor{
 			setDim(new Dimension(64, 64));
 			activeSprite = "explosion";
 			setAutoMode(true);
+			setCycleMode(false);
 			timeAlive = 0;
 		}
 
