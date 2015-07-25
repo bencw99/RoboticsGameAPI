@@ -19,6 +19,7 @@ import entity.Entity;
  * @version June 19th, 2015
  */
 public class Sprite {
+	private static int number = 0;
 	/** The name of this Sprite **/
 	private String name;
 	
@@ -51,6 +52,8 @@ public class Sprite {
 		this.name = name;
 		this.opacity = opacity;
 		loadSprite(imageLocation);
+		System.out.println(number);
+		number++;
 	}
 	
 	/**
