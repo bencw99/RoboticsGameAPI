@@ -21,6 +21,8 @@ public class SpriteManager {
 	private Entity entity;
 	
 	Drawable activeDrawable;
+	
+	boolean cycleMode;
 
 	/**
 	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
@@ -51,6 +53,8 @@ public class SpriteManager {
 				break;
 			}
 		}
+		
+		updateCycleMode();
 
 		for(Drawable d : drawableElements) {
 			if(d instanceof Animation) {
@@ -65,10 +69,14 @@ public class SpriteManager {
 		}
 	}
 
-	public void setCycleMode(boolean cycleMode) {
+	private void updateCycleMode() {
 		if(activeDrawable instanceof Animation) {
 			((Animation) activeDrawable).setCycleMode(cycleMode);
 		}
+	}
+	
+	public void setCycleMode(boolean cycleMode) {
+		this.cycleMode = true;
 	}
 
 	public void step() {
@@ -78,10 +86,7 @@ public class SpriteManager {
 	}
 
 	public boolean isCycleMode() {
-		if(activeDrawable instanceof Animation) {
-			return ((Animation) activeDrawable).getCycleMode();
-		}
-		return false;
+		return cycleMode;
 	}
 
 

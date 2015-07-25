@@ -10,7 +10,7 @@ public class Animation extends SpriteManager implements Drawable {
 	private String name;
 
 	/** How many game update cycles will be called before the {@link  sprite.Sprite} is changed in animation mode **/
-	private int ticksPerFrame = 400;
+	private int ticksPerFrame = 10;
 
 	/** How many update cycles have been played on this {@link  sprite.Sprite} **/
 	private int currentTick = 0;
@@ -47,11 +47,13 @@ public class Animation extends SpriteManager implements Drawable {
 			currentTick++;
 			if(currentTick == ticksPerFrame) {
 				step();
+				currentTick = 1;
 			}
 		}
 	}
 	
 	public void step() {
+		System.out.println("current frame stepped");
 		currentFrame++;
 		if(currentFrame == drawableElements.size()) {
 			currentFrame = 0;

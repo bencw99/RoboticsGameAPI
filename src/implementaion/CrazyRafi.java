@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
-		for(int i = 1; i <= 32; i++) {
+		for(int i = 1; i <= 2; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 
@@ -63,10 +63,16 @@ public class CrazyRafi extends Implementor{
 		public void init() {
 			// The 50 here is the opacity of the happy Sprite
 			// Opacity is optional, the default opacity is 100
-			Animation a = newAnimation(new Object[]{"yellow", "images/yellow-smile.png", 50, "purple", "images/purple-smile.png"});
-			spritesArray = new Object[]{"animation", a, "death", "images/skull-transparent.png", 100};
+			Animation explosion = newAnimation(new Object[]{"e0", "images/explosion/tmp-0.gif", "e1", "images/explosion/tmp-1.gif", "e2", "images/explosion/tmp-2.gif",
+					"e3", "images/explosion/tmp-3.gif", "e4", "images/explosion/tmp-4.gif", "e5", "images/explosion/tmp-5.gif", "e6", "images/explosion/tmp-6.gif",
+					"e7", "images/explosion/tmp-7.gif", "e8", "images/explosion/tmp-8.gif", "e9", "images/explosion/tmp-9.gif", "e10", "images/explosion/tmp-10.gif",
+					"e11", "images/explosion/tmp-11.gif", "e12", "images/explosion/tmp-12.gif", "e13", "images/explosion/tmp-13.gif", "e14", "images/explosion/tmp-14.gif",
+					"e15", "images/explosion/tmp-15.gif", "e16", "images/explosion/tmp-16.gif", "e17", "images/explosion/tmp-17.gif", "e18", "images/explosion/tmp-18.gif"});
+			
+			spritesArray = new Object[]{"happy", "images/happy.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
 			loadSprites();
-			activeSprite = "animation";
+			activeSprite = "happy";
+			setCycleMode(false);
 
 			resetVelocity();
 			resetPosition();
@@ -115,7 +121,9 @@ public class CrazyRafi extends Implementor{
 
 		private void kill() {
 			dead = true;
-			step();
+			setDim(new Dimension(64, 64));
+			activeSprite = "explosion";
+			setCycleMode(true);
 			timeAlive = 0;
 		}
 
