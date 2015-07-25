@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
-		for(int i = 1; i <= 2; i++) {
+		for(int i = 1; i <= 64; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 
@@ -72,8 +72,9 @@ public class CrazyRafi extends Implementor{
 			spritesArray = new Object[]{"happy", "images/happy.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
 			loadSprites();
 			activeSprite = "happy";
+			setAutoMode(false);
 			setCycleMode(false);
-
+			
 			resetVelocity();
 			resetPosition();
 		}
@@ -123,7 +124,7 @@ public class CrazyRafi extends Implementor{
 			dead = true;
 			setDim(new Dimension(64, 64));
 			activeSprite = "explosion";
-			setCycleMode(true);
+			setAutoMode(true);
 			timeAlive = 0;
 		}
 

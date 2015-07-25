@@ -327,16 +327,24 @@ public abstract class Entity {
 		this.spriteManager = spriteManager;
 	}
 	
-	public void setCycleMode(boolean cycleMode) {
-		spriteManager.setCycleMode(cycleMode);
-	}
-	
 	public void step() {
 		spriteManager.step();
+	}
+	
+	public void setCycleMode(boolean cycleMode) {
+		spriteManager.setCycleMode(cycleMode);
 	}
 
 	public boolean isCycleMode() {
 		return spriteManager.isCycleMode();
+	}
+	
+	public void setAutoMode(boolean autoMode) {
+		spriteManager.setAutoMode(autoMode);
+	}
+
+	public boolean isAutoMode() {
+		return spriteManager.isAutoMode();
 	}
 
 	public Animation newAnimation(Object[] inputArray) {

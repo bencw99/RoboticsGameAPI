@@ -18,6 +18,8 @@ public class Animation extends SpriteManager implements Drawable {
 	/** The current {@link  sprite.Sprite} **/
 	private int currentFrame = 0;
 
+	private boolean autoMode = false;
+	
 	private boolean cycleMode = false;
 
 	@Override
@@ -56,7 +58,12 @@ public class Animation extends SpriteManager implements Drawable {
 		System.out.println("current frame stepped");
 		currentFrame++;
 		if(currentFrame == drawableElements.size()) {
-			currentFrame = 0;
+			if(!cycleMode) {
+				autoMode = false;
+			}
+			else {
+				currentFrame = 0;
+			}
 		}
 	}
 
@@ -70,6 +77,19 @@ public class Animation extends SpriteManager implements Drawable {
 	
 	public boolean getCycleMode() {
 		return cycleMode;
+	}
+	
+
+	public boolean isAutoMode() {
+		return autoMode;
+	}
+
+	public void setAutoMode(boolean autoMode) {
+		this.autoMode = autoMode;
+	}
+	
+	public boolean getAutoMode() {
+		return autoMode;
 	}
 	
 
