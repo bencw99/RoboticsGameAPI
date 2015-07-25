@@ -36,7 +36,7 @@ public class Sprite implements Drawable {
 
 	/** The alpha value of this Sprite, 0 being transparent, 1 being opaque **/
 	private float alpha;
-
+	
 	/**
 	 * Constructs a Sprite object that can be displayed to the screen and managed by a 
 	 * {@link  graphics.Graphics}, also loads the sprite.

@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import graphics.Animation;
 
 import entity.Entity;
 
@@ -49,18 +50,15 @@ public class SpriteManager {
 		boolean caught = false;
 		for(Drawable d : drawableElements) {
 			if (d.getName() == activeDrawable) {
+				if(d instanceof Animation) {
+					((Animation) d).animationUpdate();
+					updateAutoMode();
+					updateCycleMode();
+				}
 				this.activeDrawable = d;
 				d.draw(g);
 				caught = true;
 				break;
-			}
-		}
-		
-		updateAutoMode();
-
-		for(Drawable d : drawableElements) {
-			if(d instanceof Animation) {
-				((Animation) d).animationUpdate();
 			}
 		}
 
