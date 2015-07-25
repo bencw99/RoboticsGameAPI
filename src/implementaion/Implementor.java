@@ -1,8 +1,7 @@
 package implementaion;
 
 import java.util.ArrayList;
-
-import addons.NonEntityElement;
+import addons.SpritelessElement;
 import constants.*;
 import entity.*;
 import game.*;
@@ -38,16 +37,16 @@ public abstract class Implementor {
 		return false;
 	}
 	/**
-	 * Adds a button to world
+	 * Adds a element without a sprite to world
 	 * 
-	 * @param button
-	 * -the button to add
+	 * @param spriteLess
+	 * -the spriteless element to add
 	 * @return
 	 * -success?
 	 */
-	public boolean addButton(NonEntityElement button){
+	public boolean addSpritelessElement(SpritelessElement spriteLess){
 		if(game != null){
-			game.add(button);
+			game.add(spriteLess);
 			return true;
 		}
 		return false;

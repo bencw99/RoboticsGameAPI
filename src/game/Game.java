@@ -49,7 +49,7 @@ public class Game extends JPanel{
 	 * A list of non-entities in the Game
 	 * (buttons, timers, etc)s
 	 */
-	private ArrayList<NonEntityElement> nonEntities;
+	private ArrayList<SpritelessElement> spritelessElements;
 
 	//Constructors
 
@@ -94,7 +94,7 @@ public class Game extends JPanel{
 	 */
 	public void initWorld(){
 		entities = new ArrayList<Entity>();
-		nonEntities = new ArrayList<NonEntityElement>();
+		spritelessElements = new ArrayList<SpritelessElement>();
 	}
 
 	//Methods
@@ -138,7 +138,7 @@ public class Game extends JPanel{
 		for(Entity ent : entities){
 			ent.update();
 		}
-		for(NonEntityElement ent : nonEntities){
+		for(SpritelessElement ent : spritelessElements){
 			ent.update();
 		}
 	}
@@ -148,7 +148,7 @@ public class Game extends JPanel{
 	public void updateGUI()
 	{
 		//If the component is not in the list, add it
-		for(NonEntityElement e : nonEntities){
+		for(SpritelessElement e : spritelessElements){
 			if(!contains(e, getComponents())){
 				//If component is not type Component
 				try{
@@ -184,7 +184,7 @@ public class Game extends JPanel{
 		for(Entity entity : entities) {
 			entity.disable();
 		}
-		for(NonEntityElement e : nonEntities){
+		for(SpritelessElement e : spritelessElements){
 			e.disable();
 		}
 	}
@@ -192,7 +192,8 @@ public class Game extends JPanel{
 	 * Redraws
 	 * @param g
 	 */
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g){ 
+		super.paintComponent(g);
 		try{
 			for(Entity entity : entities) {
 				entity.draw(g);
@@ -240,9 +241,9 @@ public class Game extends JPanel{
 	 * Adds nonEntity
 	 * @param ent
 	 */
-	public void add(NonEntityElement ent){
+	public void add(SpritelessElement ent){
 		ent.init();
-		nonEntities.add(ent);
+		spritelessElements.add(ent);
 	}
 	/**
 	 * Remove an entity from this world
@@ -258,9 +259,9 @@ public class Game extends JPanel{
 	 * 
 	 * @param ent	the entity to remove
 	 */
-	public void remove(NonEntityElement ent) {
+	public void remove(SpritelessElement ent) {
 		ent.disable();
-		nonEntities.remove(ent);
+		spritelessElements.remove(ent);
 	}
 	/**
 	 * Returns entity list
@@ -269,7 +270,7 @@ public class Game extends JPanel{
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
-	public ArrayList<NonEntityElement> getNonEntities(){
-		return nonEntities;
+	public ArrayList<SpritelessElement> getNonEntities(){
+		return spritelessElements;
 	}
 }

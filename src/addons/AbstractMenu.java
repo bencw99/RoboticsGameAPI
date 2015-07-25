@@ -2,68 +2,72 @@ package addons;
 
 import physics.Position;
 
+import java.awt.Component;
 import java.util.ArrayList;
 
 /**
  *
  */
-public class AbstractMenu implements NonEntityElement {
+public class AbstractMenu extends Component implements SpritelessElement {
 
     private Position p;
 
-    private double xPos;
-    private double yPos;
-
-    private ArrayList<NonEntityElement> list;
+    public ArrayList<SpritelessElement> list;
 
     public AbstractMenu() {
-        list = new ArrayList<NonEntityElement>();
+    	p = new Position(0, 0);
+        list = new ArrayList<SpritelessElement>();
+    }
+    
+    public AbstractMenu(double xPos, double yPos) {
+    	p = new Position(xPos, yPos);
+    	list = new ArrayList<SpritelessElement>();
     }
 
-    public void addNonEntityElement(NonEntityElement menuElement) {
+    public void addSpritelessElement(SpritelessElement menuElement) {
         changeToMenuPosition(menuElement);
         list.add(menuElement);
         menuElement.init();
     }
 
-    public void changeToMenuPosition(NonEntityElement menuElement) {
+    public void changeToMenuPosition(SpritelessElement menuElement) {
         menuElement.setPosition(this.getXPosition() + menuElement.getXPosition(), this.getYPosition() + menuElement.getYPosition());
     }
 
     public void update() {
-        for(NonEntityElement menuElement : list) {
+    	System.out.println(list.size());
+        for(SpritelessElement menuElement : list) {
             menuElement.update();
         }
     }
 
     public void init() {
-        list = new ArrayList<NonEntityElement>();
     }
 
     public void disable() {
-        for(NonEntityElement menuElement : list) {
+        for(SpritelessElement menuElement : list) {
             menuElement.disable();
         }
     }
 
     public void show() {
-        for(NonEntityElement menuElement : list) {
+        for(SpritelessElement menuElement : list) {
             menuElement.show();
         }
     }
 
     public void hide() {
-        for(NonEntityElement menuElement : list) {
+        for(SpritelessElement menuElement : list) {
             menuElement.hide();
         }
     }
-
+    
     public double getXPosition() {
-        return xPos;
+        return this.p.getX();
     }
 
     public double getYPosition() {
-        return yPos;
+        return this.p.getY();
     }
 
     public Position getPosition() {
@@ -71,24 +75,24 @@ public class AbstractMenu implements NonEntityElement {
     }
 
     public void setPosition(double xPos, double yPos) {
-        double xDifference = xPos - this.xPos;
-        this.xPos = xPos;
+        double xDifference = xPos - this.p.getX();
+        this.p.setX(xPos);
 
-        double yDifference = yPos = this.yPos;
-        this.yPos = yPos;
+        double yDifference = yPos = this.p.getY();
+        this.p.setY(yPos);
 
-        for(NonEntityElement menuElement : list) {
+        for(SpritelessElement menuElement : list) {
             menuElement.setPosition(menuElement.getXPosition() + xDifference, menuElement.getYPosition() + yDifference);
         }
     }
 
     public void setPosition(Position pos) {
-        double xDifference = pos.getX() - xPos;
-        double yDifference = pos.getY() - yPos;
+        double xDifference = pos.getX() - this.p.getX();
+        double yDifference = pos.getY() - this.p.getY();
 
         p = pos;
 
-        for(NonEntityElement menuElement : list) {
+        for(SpritelessElement menuElement : list) {
             menuElement.setPosition(menuElement.getXPosition() + xDifference, menuElement.getYPosition() + yDifference);
         }
     }

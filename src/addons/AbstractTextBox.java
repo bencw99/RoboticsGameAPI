@@ -4,14 +4,11 @@ import physics.Position;
 
 import java.awt.*;
 
-public abstract class AbstractTextBox extends TextArea implements NonEntityElement{
+public abstract class AbstractTextBox extends TextArea implements SpritelessElement{
 
     private TextArea text;
 
     private Position p;
-
-    private double xPos;
-    private double yPos;
 
     private int numberOfRows;
     private int numberOfColumns;
@@ -21,11 +18,18 @@ public abstract class AbstractTextBox extends TextArea implements NonEntityEleme
     public abstract void update();
 
     public AbstractTextBox(String s) {
-        text = new TextArea(s);
+    	text = new TextArea("");
+        p = new Position(0, 0);
+        this.setEditable(false);
+        this.setFocusable(false);
+        this.setText(s);
     }
 
     public AbstractTextBox() {
         text = new TextArea("");
+        p = new Position(0, 0);
+        this.setEditable(false);
+        this.setFocusable(false);
     }
 
     public AbstractTextBox(int numberOfRows, int numberOfColumns) {
@@ -37,11 +41,11 @@ public abstract class AbstractTextBox extends TextArea implements NonEntityEleme
     }
 
 	public void init() {
-        text.setEnabled(true);
+        this.setEnabled(true);
 	}
 
 	public void disable() {
-        text.setEnabled(false);
+        this.setEnabled(false);
 	}
 
 	public void setPosition(Position p) {
@@ -49,8 +53,8 @@ public abstract class AbstractTextBox extends TextArea implements NonEntityEleme
 	}
 
 	public void setPosition(double xPos, double yPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+        this.p.setX(xPos);
+        this.p.setY(yPos);
 	}
 	
 	public Position getPosition() {
@@ -58,20 +62,20 @@ public abstract class AbstractTextBox extends TextArea implements NonEntityEleme
 	}
 
 	public double getXPosition() {
-        return this.xPos;
+        return this.p.getX();
 	}
 
 	public double getYPosition() {
-		return this.yPos;
+		return this.p.getY();
 	}
 
 	public void show() {
-        text.setText(hiddenText);
+        this.setText(hiddenText);
 	}
 
 	public void hide() {
         hiddenText = text.getText();
-		text.setText("");
+		this.setText("");
 	}
 
 }
