@@ -15,7 +15,10 @@ public class Mazerunner extends Implementor {
 	public void main() {
 		for(Cell[] CELLS : cells){
 			for(Cell c : CELLS){
-				c.setFillWallVisibility(true);
+				c.setNorthernWallVisibility(true);
+				c.setSouthernWallVisibility(true);
+				c.setEasternWallVisibility(true);
+				c.setWesternWallVisibility(true);
 			}
 		}
 	}
