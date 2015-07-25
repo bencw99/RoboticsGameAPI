@@ -193,6 +193,7 @@ public class Game extends JPanel{
 	 * @param g
 	 */
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		try{
 			for(Entity entity : entities) {
 				entity.draw(g);
