@@ -22,10 +22,6 @@ public class SpriteManager {
 	private Entity entity;
 	
 	Drawable activeDrawable;
-	
-	boolean cycleMode = false;
-	
-	boolean autoMode = false;
 
 	/**
 	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
@@ -48,12 +44,11 @@ public class SpriteManager {
 	public void update(Graphics g, String activeDrawable) {
 		// Loads the Drawable
 		boolean caught = false;
-		for(Drawable d : drawableElements) {
+		for(int i = 0; i < drawableElements.size(); i++) {
+		Drawable d = drawableElements.get(i);
 			if (d.getName() == activeDrawable) {
 				if(d instanceof Animation) {
 					((Animation) d).animationUpdate();
-					updateAutoMode();
-					updateCycleMode();
 				}
 				this.activeDrawable = d;
 				d.draw(g);
@@ -75,25 +70,21 @@ public class SpriteManager {
 		}
 	}
 	
-	protected void updateCycleMode() {
-		if(activeDrawable instanceof Animation) {
-			((Animation) activeDrawable).setCycleMode(cycleMode);
-		}
-	}
-	
 	public void setCycleMode(boolean cycleMode) {
-		this.cycleMode = cycleMode;
-	}
-
-	
-	protected void updateAutoMode() {
-		if(activeDrawable instanceof Animation) {
-			((Animation) activeDrawable).setAutoMode(autoMode);
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setCycleMode(cycleMode);
+			}
 		}
 	}
+	
 	
 	public void setAutoMode(boolean autoMode) {
-		this.autoMode = autoMode;
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setAutoMode(autoMode);
+			}
+		}
 	}
 
 	

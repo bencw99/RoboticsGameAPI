@@ -13,11 +13,15 @@ public class Animation extends SpriteManager implements Drawable {
 	private int ticksPerFrame = 2;
 
 	/** How many update cycles have been played on this {@link  sprite.Sprite} **/
-	private int currentTick = 0;
+	private int currentTick = -1;
 
 	/** The current {@link  sprite.Sprite} **/
 	private int currentFrame = 0;
 
+	protected boolean cycleMode = false;
+	
+	protected boolean autoMode = false;
+	
 	@Override
 	public void draw(Graphics g) {
 		drawableElements.get(currentFrame).draw(g);
@@ -41,49 +45,39 @@ public class Animation extends SpriteManager implements Drawable {
 	 * @param g an AWT <code>Graphics</code> object
 	 */
 	public void animationUpdate() {
-		if(currentFrame == drawableElements.size() && !cycleMode) {
-			autoMode = false;
-			currentFrame = 0;
-		}
-		if(getAutoMode()) {
+		if(autoMode) {
 			currentTick++;
 			if(currentTick == ticksPerFrame) {
 				step();
-				currentTick = 1;
+				currentTick = 0;
 			}
 		}
+
 	}
 	
 	public void step() {
 		currentFrame++;
-		//System.out.println("step: " + currentFrame);
-		if(currentFrame == drawableElements.size()) {
+		if(currentFrame == drawableElements.size() - 1) {
 			if(!cycleMode) {
-				autoMode = false;
-				currentFrame = 0;
+				setAutoMode(false);
 			}
 			else {
 				currentFrame = 0;
 			}
 		}
 	}
-
+	
+	public void setAutoMode(boolean myMode) {
+		autoMode = myMode;
+	}
+	
 	public void setCycleMode(boolean myMode) {
-		super.setCycleMode(myMode);
+		cycleMode = myMode;
 	}
 	
 	public boolean getCycleMode() {
 		return cycleMode;
 	}
-
-	public void setAutoMode(boolean myMode) {
-		super.setAutoMode(myMode);
-	}
-	
-	public boolean getAutoMode() {
-		return autoMode;
-	}
-	
 
 	public int getTicksPerFrame() {
 		return ticksPerFrame;

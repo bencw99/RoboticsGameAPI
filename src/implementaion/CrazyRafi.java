@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
-		for(int i = 1; i <= 1280; i++) {
+		for(int i = 1; i <= 128; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 
@@ -27,9 +27,9 @@ public class CrazyRafi extends Implementor{
 	}
 
 	private class CrazyEntity extends Entity {	
-		final static double DEATH_SPEED = 20;
+		final static double DEATH_SPEED = 150;
 
-		final static double ACCEL_FACTOR = 25;
+		final static double ACCEL_FACTOR = 20;
 		final static double BOUNCE_FACTOR = 1;
 		final static double RANDOM_FACTOR = 200;
 
@@ -67,8 +67,8 @@ public class CrazyRafi extends Implementor{
 					"e3", "images/explosion/tmp-3.gif", "e4", "images/explosion/tmp-4.gif", "e5", "images/explosion/tmp-5.gif", "e6", "images/explosion/tmp-6.gif",
 					"e7", "images/explosion/tmp-7.gif", "e8", "images/explosion/tmp-8.gif", "e9", "images/explosion/tmp-9.gif", "e10", "images/explosion/tmp-10.gif",
 					"e11", "images/explosion/tmp-11.gif", "e12", "images/explosion/tmp-12.gif", "e13", "images/explosion/tmp-13.gif", "e14", "images/explosion/tmp-14.gif",
-					"e15", "images/explosion/tmp-15.gif", "e16", "images/explosion/tmp-16.gif", "e17", "images/explosion/tmp-17.gif", "e18", "images/explosion/tmp-18.gif"});
-			
+					"e15", "images/explosion/tmp-15.gif", "e16", "images/explosion/tmp-16.gif", "e17", "images/explosion/tmp-17.gif", "e18", "images/explosion/tmp-18.gif",});
+		
 			spritesArray = new Object[]{"happy", "images/happy.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
 			loadSprites();
 			activeSprite = "happy";
@@ -81,7 +81,9 @@ public class CrazyRafi extends Implementor{
 
 		@Override
 		public void update() {
-			translate(velocity);
+			if(!dead) {
+				translate(velocity);
+			}
 
 			if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
 				velocity.setX(velocity.getX() * -BOUNCE_FACTOR);
@@ -96,7 +98,7 @@ public class CrazyRafi extends Implementor{
 				kill();
 			}
 
-			if(velocity.getX() * velocity.getX() + velocity.getY() * velocity.getY() > DEATH_SPEED) {
+			if(!dead && velocity.getX() * velocity.getX() + velocity.getY() * velocity.getY() > DEATH_SPEED) {
 				kill();
 			}
 

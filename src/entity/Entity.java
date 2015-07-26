@@ -354,6 +354,7 @@ public abstract class Entity {
 				i += 3;
 			}
 		}
+		spritesList.add(new Sprite(this, "animationEnd", "images/preset/transparent.png"));
 		return new Animation(this, spritesList);
 	}
 
