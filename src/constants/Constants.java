@@ -8,5 +8,5 @@ public class Constants {
 	public final static double UPDATES_PER_SEC = 120;
 	
 	/** The default dimension size **/
-	public final static int DEFAULT_DIMENSION = 32;
+	public final static int DEFAULT_DIMENSION = 16;
 }

@@ -18,6 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
+		super.addEntity(new Rafi(game.getWorld()));
 		for(int i = 1; i <= 128; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
@@ -27,23 +28,24 @@ public class CrazyRafi extends Implementor{
 	}
 
 	private class CrazyEntity extends Entity {	
-		final static double DEATH_SPEED = 150;
+		final static double DEATH_SPEED = 3000;
 
-		final static double ACCEL_FACTOR = 20;
+		final static double ACCEL_FACTOR = 0.1;
 		final static double BOUNCE_FACTOR = 1;
-		final static double RANDOM_FACTOR = 200;
+		final static double RANDOM_FACTOR = 100;
 
+		final static double START_BOX_SCALAR = 0.8;
 		final static double SIZE = 1000;
 
-		final static double START_LEFT_BOUND = 0.4 * SIZE;
-		final static double START_RIGHT_BOUND = 0.6 * SIZE;
-		final static double START_UPPER_BOUND = 0.4 * SIZE;
-		final static double START_LOWER_BOUND = 0.6 * SIZE;
+		final static double START_LEFT_BOUND = (1 - START_BOX_SCALAR) / 2 * SIZE;
+		final static double START_RIGHT_BOUND = (1 + START_BOX_SCALAR) / 2 * SIZE;
+		final static double START_UPPER_BOUND = (1 - START_BOX_SCALAR) / 2 * SIZE;
+		final static double START_LOWER_BOUND = (1 + START_BOX_SCALAR) / 2 * SIZE;
 
-		final static double BOUNCE_LEFT_BOUND = 0.05 * SIZE;
-		final static double BOUNCE_RIGHT_BOUND = 0.95 * SIZE;
-		final static double BOUNCE_UPPER_BOUND = 0.05 * SIZE;
-		final static double BOUNCE_LOWER_BOUND = 0.95 * SIZE;
+		final static double BOUNCE_LEFT_BOUND = 0.01 * SIZE;
+		final static double BOUNCE_RIGHT_BOUND = 0.99 * SIZE;
+		final static double BOUNCE_UPPER_BOUND = 0.01 * SIZE;
+		final static double BOUNCE_LOWER_BOUND = 0.99 * SIZE;
 
 		final static double KILL_LEFT_BOUND = -0.05 * SIZE;
 		final static double KILL_RIGHT_BOUND = 1.05 * SIZE;
@@ -68,13 +70,13 @@ public class CrazyRafi extends Implementor{
 					"e7", "images/explosion/tmp-7.gif", "e8", "images/explosion/tmp-8.gif", "e9", "images/explosion/tmp-9.gif", "e10", "images/explosion/tmp-10.gif",
 					"e11", "images/explosion/tmp-11.gif", "e12", "images/explosion/tmp-12.gif", "e13", "images/explosion/tmp-13.gif", "e14", "images/explosion/tmp-14.gif",
 					"e15", "images/explosion/tmp-15.gif", "e16", "images/explosion/tmp-16.gif", "e17", "images/explosion/tmp-17.gif", "e18", "images/explosion/tmp-18.gif",});
-		
+
 			spritesArray = new Object[]{"happy", "images/happy.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
 			loadSprites();
 			activeSprite = "happy";
 			setAutoMode(false);
 			setCycleMode(false);
-			
+
 			resetVelocity();
 			resetPosition();
 		}
@@ -83,28 +85,28 @@ public class CrazyRafi extends Implementor{
 		public void update() {
 			if(!dead) {
 				translate(velocity);
-			}
+				if(collide(this.getWorld().getEntities().get(0))) {
+					rafiCollide();
+				};
 
-			if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
-				velocity.setX(velocity.getX() * -BOUNCE_FACTOR);
-			}
+				if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
+					velocity.setX(velocity.getX() * -BOUNCE_FACTOR);
+					velocity.setY(velocity.getY() * BOUNCE_FACTOR);
+				}
 
-			if(getPos().getY() > BOUNCE_LOWER_BOUND || getPos().getY() < BOUNCE_UPPER_BOUND) {
-				velocity.setY(velocity.getY() * -BOUNCE_FACTOR);
-			}
+				if(getPos().getY() > BOUNCE_LOWER_BOUND || getPos().getY() < BOUNCE_UPPER_BOUND) {
+					velocity.setY(velocity.getY() * -BOUNCE_FACTOR);
+					velocity.setX(velocity.getX() * BOUNCE_FACTOR);
+				}
 
-			if(getPos().getX() > KILL_RIGHT_BOUND || getPos().getX() < KILL_LEFT_BOUND || 
-					getPos().getY() > KILL_LOWER_BOUND || getPos().getX() < KILL_UPPER_BOUND) {
-				kill();
-			}
+				if(getPos().getX() > KILL_RIGHT_BOUND || getPos().getX() < KILL_LEFT_BOUND || 
+						getPos().getY() > KILL_LOWER_BOUND || getPos().getX() < KILL_UPPER_BOUND) {
+					kill();
+				}
 
-			if(!dead && velocity.getX() * velocity.getX() + velocity.getY() * velocity.getY() > DEATH_SPEED) {
-				kill();
-			}
-
-			if(dead) {
-				velocity = velocity.scale(0.95);
-				return;
+				if(!dead && velocity.getX() * velocity.getX() + velocity.getY() * velocity.getY() > DEATH_SPEED) {
+					kill();
+				}
 			}
 
 			velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
@@ -122,9 +124,13 @@ public class CrazyRafi extends Implementor{
 			velocity.setY(0);
 		}
 
+		private void rafiCollide() {
+			kill();
+		}
+
 		private void kill() {
 			dead = true;
-			setDim(new Dimension(64, 64));
+			setDim(new Dimension(32, 32));
 			activeSprite = "explosion";
 			setCycleMode(false);
 			setAutoMode(true);
@@ -137,9 +143,26 @@ public class CrazyRafi extends Implementor{
 		}
 	}
 
-	private class Rafi extends Entity {
+	private class Rafi extends Entity {	
+		final static double ACCEL_FACTOR = 2;
+		final static double BOUNCE_FACTOR = 1;
+		final static double RANDOM_FACTOR = 1000;
 
-		int cycle = 0;
+		final static double START_BOX_SCALAR = 0.8;
+		final static double SIZE = 1000;
+
+		final static double START_LEFT_BOUND = (1 - START_BOX_SCALAR) / 2 * SIZE;
+		final static double START_RIGHT_BOUND = (1 + START_BOX_SCALAR) / 2 * SIZE;
+		final static double START_UPPER_BOUND = (1 - START_BOX_SCALAR) / 2 * SIZE;
+		final static double START_LOWER_BOUND = (1 + START_BOX_SCALAR) / 2 * SIZE;
+
+		final static double BOUNCE_LEFT_BOUND = 0.01 * SIZE;
+		final static double BOUNCE_RIGHT_BOUND = 0.99 * SIZE;
+		final static double BOUNCE_UPPER_BOUND = 0.01 * SIZE;
+		final static double BOUNCE_LOWER_BOUND = 0.99 * SIZE;
+
+		Vector velocity = new Vector(0, 0);
+		int timeAlive = 0;
 
 		public Rafi(World world) {
 			super(world);
@@ -147,17 +170,48 @@ public class CrazyRafi extends Implementor{
 
 		@Override
 		public void init() {
-			spritesArray = new Object[]{"rafi", "images/rafi.png", "ok-rafi", "images/rafi-2.png"};
+			setDim(new Dimension(16, 16));
+			spritesArray = new Object[]{"rafi", "images/skull-transparent.png"};
 			loadSprites();
-
-			setPos(new Position(0, 0));
-			setDim(new Dimension(32, 32));
 			activeSprite = "rafi";
+			setAutoMode(false);
+			setCycleMode(false);
+
+			resetVelocity();
+			resetPosition();
 		}
 
 		@Override
 		public void update() {
-			cycle++;
+			translate(velocity);
+
+			if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
+				velocity.setX(velocity.getX() * -BOUNCE_FACTOR);
+				velocity.setY(velocity.getY() * BOUNCE_FACTOR);
+			}
+
+			if(getPos().getY() > BOUNCE_LOWER_BOUND || getPos().getY() < BOUNCE_UPPER_BOUND) {
+				velocity.setY(velocity.getY() * -BOUNCE_FACTOR);
+				velocity.setX(velocity.getX() * BOUNCE_FACTOR);
+			}
+
+			velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
+			velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
+			timeAlive++;
+			
+			if(timeAlive % 120 == 0) {
+				setDim(new Dimension(getDim().getWidth() * 1.05, getDim().getHeight() * 1.05));
+			}
+		}
+
+		private void resetPosition() {
+			setPos(new Position(START_LEFT_BOUND + Math.random() * (START_RIGHT_BOUND - START_LEFT_BOUND), 
+					START_UPPER_BOUND + Math.random() * (START_LOWER_BOUND - START_UPPER_BOUND)));
+		}
+
+		private void resetVelocity() {
+			velocity.setX(0);
+			velocity.setY(0);
 		}
 
 		@Override
