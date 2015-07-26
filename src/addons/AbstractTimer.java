@@ -75,7 +75,6 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
 	
 	public void update() {
 		currentTime = (System.currentTimeMillis() - startTime)/1000;
-		
 		if(displayText == true) {
 			this.setText(String.valueOf(currentTime));
 		}

@@ -24,12 +24,16 @@ public class SpritelessTestGame extends Implementor {
 		addSpritelessElement(text);
 		*/
 		
-		/** Menu test - FAILED :(
 		MyMenu menu = new MyMenu();
+		MyTextArea text = new MyTextArea("HELLO HELLO HELLO");
 		MyTimer timer = new MyTimer();
+		MyButton button = new MyButton();
+		
 		addSpritelessElement(menu);
+		
+		menu.addSpritelessElement(text);
 		menu.addSpritelessElement(timer);
-		*/
+		menu.addSpritelessElement(button);
 		
 		run();
 	}
@@ -38,6 +42,10 @@ public class SpritelessTestGame extends Implementor {
 	private class MyMenu extends AbstractMenu {
 		MyMenu() {
 			super();
+		}
+		
+		MyMenu(double xPos, double yPos) {
+			super(xPos, yPos);
 		}
 		
 	}
@@ -68,6 +76,10 @@ public class SpritelessTestGame extends Implementor {
 
 		MyTimer() {
 			super();
+		}
+		
+		MyTimer(double xPos, double yPos) {
+			super(xPos, yPos);
 		}
 		
 		public void disable() {

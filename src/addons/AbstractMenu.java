@@ -2,31 +2,35 @@ package addons;
 
 import physics.Position;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.ArrayList;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 
-/**
- *
- */
-public class AbstractMenu extends Component implements SpritelessElement {
+import javax.swing.BoxLayout;
 
-    private Position p;
+public class AbstractMenu extends Container implements SpritelessElement {
 
-    public ArrayList<SpritelessElement> list;
+	private static final long serialVersionUID = 1L;
+
+	private Position p;
 
     public AbstractMenu() {
-    	p = new Position(0, 0);
-        list = new ArrayList<SpritelessElement>();
+    	super();
+    	p = new Position(0, 0);  
     }
     
     public AbstractMenu(double xPos, double yPos) {
+    	super();
     	p = new Position(xPos, yPos);
-    	list = new ArrayList<SpritelessElement>();
     }
 
     public void addSpritelessElement(SpritelessElement menuElement) {
         changeToMenuPosition(menuElement);
-        list.add(menuElement);
+        add((Component) menuElement);
         menuElement.init();
     }
 
@@ -35,9 +39,10 @@ public class AbstractMenu extends Component implements SpritelessElement {
     }
 
     public void update() {
-    	System.out.println(list.size());
-        for(SpritelessElement menuElement : list) {
-            menuElement.update();
+    	this.setLayout(new FlowLayout());
+    	for(int x = 0; x < this.getComponentCount(); x++) {
+        	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
+            element.update();
         }
     }
 
@@ -45,20 +50,23 @@ public class AbstractMenu extends Component implements SpritelessElement {
     }
 
     public void disable() {
-        for(SpritelessElement menuElement : list) {
-            menuElement.disable();
+    	for(int x = 0; x < this.getComponentCount(); x++) {
+        	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
+            element.disable();
         }
     }
 
     public void show() {
-        for(SpritelessElement menuElement : list) {
-            menuElement.show();
+        for(int x = 0; x < this.getComponentCount(); x++) {
+        	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
+            element.show();
         }
     }
 
     public void hide() {
-        for(SpritelessElement menuElement : list) {
-            menuElement.hide();
+        for(int x = 0; x < this.getComponentCount(); x++) {
+        	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
+            element.hide();
         }
     }
     
@@ -81,19 +89,19 @@ public class AbstractMenu extends Component implements SpritelessElement {
         double yDifference = yPos = this.p.getY();
         this.p.setY(yPos);
 
-        for(SpritelessElement menuElement : list) {
-            menuElement.setPosition(menuElement.getXPosition() + xDifference, menuElement.getYPosition() + yDifference);
+        for(int x = 0; x < this.getComponentCount(); x++) {
+        	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
+            element.setPosition(element.getXPosition() + xDifference, element.getYPosition() + yDifference);
         }
     }
 
     public void setPosition(Position pos) {
         double xDifference = pos.getX() - this.p.getX();
         double yDifference = pos.getY() - this.p.getY();
-
         p = pos;
-
-        for(SpritelessElement menuElement : list) {
-            menuElement.setPosition(menuElement.getXPosition() + xDifference, menuElement.getYPosition() + yDifference);
+        for(int x = 0; x < this.getComponentCount(); x++) {
+        	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
+            element.setPosition(element.getXPosition() + xDifference, element.getYPosition() + yDifference);
         }
     }
 
