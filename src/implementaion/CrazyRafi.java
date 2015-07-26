@@ -17,10 +17,9 @@ public class CrazyRafi extends Implementor{
 		init();
 		
 		//Write code here
-		for(int i = 1; i <= 32; i++) {
+		for(int i = 1; i <= 300; i++) {
 			super.addEntity(new CrazyEntity());
 		}
-		super.addEntity(new Rafi());
 		
 		//Ignore
 		run();
@@ -61,7 +60,7 @@ public class CrazyRafi extends Implementor{
 		public void init() {
 			// The 50 here is the opacity of the happy Sprite
 			// Opacity is optional, the default opacity is 100
-			spritesArray = new Object[]{"happy", "images/happy.jpg", 50, "death", "images/skull-transparent.png"};
+			spritesArray = new Object[]{"happy", "images/skull-transparent.png", 50, "death", "images/happy.jpg"};
 			loadSprites();
 			activeSprite = "happy";
 			

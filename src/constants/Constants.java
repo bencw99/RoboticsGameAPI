@@ -8,7 +8,7 @@ public class Constants {
 	public final static double UPDATES_PER_SEC = 100;
 	
 	/** The default dimension size **/
-	public final static int DEFAULT_DIMENSION = 32;
+	public final static int DEFAULT_DIMENSION = 60;
 	
 	/**
 	 * The default wall width

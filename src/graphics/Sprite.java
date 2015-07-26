@@ -69,6 +69,8 @@ public class Sprite {
 	 * 
 	 * @param load the location to check for the file
 	 */
+	
+	
 	private void loadSprite(String load) {
 		String imageLocation = load;
 		imageFile = new File(imageLocation);

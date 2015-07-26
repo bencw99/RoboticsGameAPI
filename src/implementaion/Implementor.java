@@ -22,11 +22,11 @@ public abstract class Implementor {
 	/**
 	 * Cells width (pixels)
 	 */
-	protected final int CELL_WIDTH = 30;
+	protected final int CELL_WIDTH = Constants.DEFAULT_DIMENSION;
 	/**
 	 * Cell height (pixels)
 	 */
-	protected final int CELL_HEIGHT = 30;
+	protected final int CELL_HEIGHT = Constants.DEFAULT_DIMENSION;
 	/**
 	 * Number of rows
 	 */
@@ -111,7 +111,7 @@ public abstract class Implementor {
 	public void initCells(){
 		for(int row = 0; row < ROWS; row++){
 			for(int col = 0; col < COLS; col++){
-				Position p = new Position(col * CELL_WIDTH + 15, row*CELL_HEIGHT + 15);
+				Position p = new Position(col * CELL_WIDTH + Constants.DEFAULT_DIMENSION/2, row*CELL_HEIGHT + Constants.DEFAULT_DIMENSION/2);
 				Dimension d = new Dimension(CELL_WIDTH, CELL_HEIGHT);
 				cells[row][col] = new Cell(game, p, d);
 			}

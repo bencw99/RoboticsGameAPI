@@ -104,11 +104,17 @@ public class Game extends JPanel{
 	 */
 	public void run(){
 		while(state == State.RUNNING || state == State.PAUSED){
+			long start = System.currentTimeMillis();
 			update();
+			long diff = System.currentTimeMillis() - start;
+			long timeToSleep = (1000 / (int) Constants.UPDATES_PER_SEC) - diff;
+			System.out.println("Slept: "+timeToSleep);
+			if(timeToSleep>0){
 			try {
-				Thread.sleep(1000 / (int) Constants.UPDATES_PER_SEC);
+				Thread.sleep(timeToSleep);
 			} catch (InterruptedException e) { 
 				e.printStackTrace();
+			}
 			}
 		}
 	}
@@ -159,6 +165,9 @@ public class Game extends JPanel{
 				}
 			}
 		}
+		//this line of code took me more than 8 hours
+		repaint();
+		//-orian
 	}
 	/**
 	 * Checks if key is in list
@@ -202,7 +211,6 @@ public class Game extends JPanel{
 		catch (ConcurrentModificationException e){
 			// ignored, this is caught at the beginner of entity loading
 		}
-		repaint();
 	}
 
 	//Getters / Setters
