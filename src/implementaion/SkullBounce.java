@@ -120,8 +120,8 @@ public class SkullBounce extends Implementor{
 			dead = true;
 			setDim(new Dimension(32, 32));
 			activeSprite = "explosion";
-			setCycleMode(false);
 			setAutoMode(true);
+			setTicksPerFrame(20);
 			timeAlive = 0;
 		}
 

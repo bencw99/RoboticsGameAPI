@@ -339,6 +339,10 @@ public abstract class Entity {
 	public void setAutoMode(boolean autoMode) {
 		spriteManager.setAutoMode(autoMode);
 	}
+	
+	public void setTicksPerFrame(int ticks) {
+		spriteManager.setTicksPerFrame(ticks);
+	}
 
 
 	public Animation newAnimation(Object[] inputArray) {

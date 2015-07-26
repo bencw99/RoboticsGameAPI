@@ -78,11 +78,19 @@ public class SpriteManager {
 		}
 	}
 	
-	
 	public void setAutoMode(boolean autoMode) {
 		for(Drawable d : drawableElements) {
 			if(d instanceof Animation) {
 				((Animation) d).setAutoMode(autoMode);
+			}
+		}
+	}
+	
+	
+	public void setTicksPerFrame(int ticks) {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setTicksPerFrame(ticks);
 			}
 		}
 	}
