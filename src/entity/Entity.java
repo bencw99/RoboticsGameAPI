@@ -29,14 +29,13 @@ public abstract class Entity {
 	/** Draws and manages the graphics for this entity */
 	private SpriteManager spriteManager;
 
-	/** An array that will prestore the {@link  sprite.Sprite} information in the form name, filepath **/
+	/** An array that will prestore the Sprite information in the form: name, filepath **/
 	protected Object[] spritesArray;
 
-	/** An <code>ArrayList<code> of the {@link  sprite.Sprite}s corresponding to this object **/
+	/** An ArrayList of the Drawabale to this object **/
 	private ArrayList<Drawable> drawableList;
 
-
-	/** The current {@link  sprite.Sprite} this Entity is displaying outside of animation mode **/
+	/** The name of the current Sprite or Animation this Entity is displaying outside of animation mode **/
 	protected String activeSprite;
 
 	/** An array that will hold information for constructing preset {@link  sprite.Sprite}s available to all Entities */
@@ -316,9 +315,13 @@ public abstract class Entity {
 		}	
 		return null;
 	}
-
-	// GRAPHICS:
-
+	
+	// ***************************************
+	// GRAPHICS
+	// ***************************************
+	
+	// Call Downs
+	
 	public SpriteManager getSpriteManager() {
 		return spriteManager;
 	}
@@ -345,6 +348,11 @@ public abstract class Entity {
 	}
 
 
+	/**
+	 * Creations a new animation out of an array of Strings and opacity Integers
+	 * @param inputArray array of Strings and Integer
+	 * @return end Animation
+	 */
 	public Animation newAnimation(Object[] inputArray) {
 		ArrayList<Drawable> spritesList = new ArrayList<Drawable>();
 		int i = 0;
@@ -364,7 +372,7 @@ public abstract class Entity {
 
 	/**
 	 * Takes the easy to use array that the user makes when extending
-	 * this class and loads it into an <code>ArrayList<code> of {@link  sprite.Sprite}s
+	 * this class and loads it into an ArrayList of Sprites and Animations
 	 */
 	public void loadSprites() {
 		Object[] concatArray = Arrays.copyOf(PRESET_SPRITE_ARRAY, PRESET_SPRITE_ARRAY.length + spritesArray.length);

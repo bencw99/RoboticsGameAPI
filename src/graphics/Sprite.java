@@ -12,23 +12,29 @@ import javax.imageio.ImageIO;
 import entity.Entity;
 
 /**
- * This class will hold a Sprite object which consists of a <code>BufferedImage</code> and a
+ * Implements Drawable will hold a Sprite object which consists of a pointer to a BufferedImage and a
  * name associated with the object. This class can draw the image associated with itself.
  * 
  * @author Jonathan Zwiebel
- * @version June 19th, 2015
+ * @version June 26th, 2015
  */
 public class Sprite implements Drawable {
+	/** A class ArrayList holding the filenames of the previously loaded Sprites **/
+	private static ArrayList<String> filenames = new ArrayList<String>();
+	
+	/** A class ArrayList holding pointesr to the BufferdImages **/
+	private static ArrayList<BufferedImage> bufferedImages = new ArrayList<BufferedImage>();
+	
 	/** The name of this Sprite **/
 	private String name;
 
-	/** The <code>File</code> of the image of this Sprite **/
+	/** The File of the image of this Sprite **/
 	private File imageFile;
 
-	/** The <code>BufferedImage</code> that this Sprite will display **/
+	/** The BufferedImage that this Sprite will display **/
 	private BufferedImage image;
 
-	/** The {@link  entity.Entity} to which this Sprite belongs **/
+	/** The Entity to which this Sprite belongs **/
 	private Entity entity;
 
 	/** The Opacity of this Sprite, 0 being transparent, 100 being opaque **/
@@ -37,16 +43,12 @@ public class Sprite implements Drawable {
 	/** The alpha value of this Sprite, 0 being transparent, 1 being opaque **/
 	private float alpha;
 	
+	/** The address of this Sprite in the static ArrayList **/
 	private int address;
 	
-	private static ArrayList<String> filenames = new ArrayList<String>();
-	private static ArrayList<BufferedImage> bufferedImages = new ArrayList<BufferedImage>();
-	
 	/**
-	 * Constructs a Sprite object that can be displayed to the screen and managed by a 
-	 * {@link  graphics.Graphics}, also loads the sprite.
-	 * 
-	 * @param entity the {@link  entity.Entity} to which this sprite belongs
+	 * Constructor
+	 * @param entity the Entity to which this sprite belongs
 	 * @param name the name of this sprite
 	 * @param imageLocation the location in the file system where this sprite's image exists
 	 * @param the opacity of this image, 0 being transparent, 100 being opaque
@@ -57,18 +59,44 @@ public class Sprite implements Drawable {
 		this.opacity = opacity;
 		loadSprite(imageLocation);
 	}
-
+	
 	/**
-	 * A constructor for when no opacity is specified, 100 is default
+	 * Overloaded constructor 
+	 * @param entity the Entity to which this sprite belongs
+	 * @param name the name of this sprite
+	 * @param imageLocation the location in the file system where this sprite's image exist
 	 */
 	public Sprite(Entity entity, String name, String imageLocation) {
 		this(entity, name, imageLocation, 100);
 	}
 
+	// Inherited from Drawable
+
 	/**
-	 * Takes a file location and loads it into a <code>BufferedImage</code> while also
-	 * checking to make sure the location points to a valid file
-	 * 
+	 * Draws the Sprite onto the Japne with  Postion, Dimension of associated Sprite and
+	 * Opacity and Buffered Image of this Sprite
+	 * @param g an AWT graphics object.
+	 */
+	public void draw(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g.create();
+		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+		g2d.setComposite(composite);
+		g2d.drawImage(bufferedImages.get(address), (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
+				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
+		g2d.dispose();
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Takes a file location and loads it into a BufferedImage if it is the first instance of that filename
+	 * otherwise sets the address to the existing filename location. Also sets the alpha value.
 	 * @param load the location to check for the file
 	 */
 	private void loadSprite(String load) {
@@ -98,28 +126,4 @@ public class Sprite implements Drawable {
 		alpha = opacity * 0.01f;
 
 	}
-
-	/**
-	 * Draws the Sprite onto the <code>JPanel</code> with {@link  physics.Position} and {@link  physics.Dimension} 
-	 * corresponding to that of the {@link  entity.Entity} it corresponds to.
-	 * 
-	 * @param g an AWT <code>graphics</code> object.
-	 */
-	public void draw(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
-		g2d.setComposite(composite);
-		g2d.drawImage(bufferedImages.get(address), (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
-				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
-		g2d.dispose();
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-
 }

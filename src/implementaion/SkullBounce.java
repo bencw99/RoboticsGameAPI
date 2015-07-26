@@ -3,21 +3,14 @@ import entity.*;
 import graphics.*;
 import physics.*;
 import world.*;
-public class SkullBounce extends Implementor{
-	/**
-	 * Called when game starts
-	 */
-	public void main() {
-		//Ignore
-		init();
 
-		//Write code here
+public class SkullBounce extends Implementor{
+	public void main() {
+		init();
 		super.addEntity(new Skull(game.getWorld()));
 		for(int i = 1; i <= 128; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
-
-		//Ignore
 		run();
 	}
 
@@ -55,8 +48,6 @@ public class SkullBounce extends Implementor{
 
 		@Override
 		public void init() {
-			// The 50 here is the opacity of the happy Sprite
-			// Opacity is optional, the default opacity is 100
 			Animation explosion = newAnimation(new Object[]{"e0", "images/explosion/tmp-0.gif", "e1", "images/explosion/tmp-1.gif", "e2", "images/explosion/tmp-2.gif",
 					"e3", "images/explosion/tmp-3.gif", "e4", "images/explosion/tmp-4.gif", "e5", "images/explosion/tmp-5.gif", "e6", "images/explosion/tmp-6.gif",
 					"e7", "images/explosion/tmp-7.gif", "e8", "images/explosion/tmp-8.gif", "e9", "images/explosion/tmp-9.gif", "e10", "images/explosion/tmp-10.gif",
@@ -169,6 +160,11 @@ public class SkullBounce extends Implementor{
 		}
 
 		@Override
+		public void disable() {
+
+		}
+		
+		@Override
 		public void update() {
 			translate(velocity);
 
@@ -194,16 +190,6 @@ public class SkullBounce extends Implementor{
 		private void resetPosition() {
 			setPos(new Position(START_LEFT_BOUND + Math.random() * (START_RIGHT_BOUND - START_LEFT_BOUND), 
 					START_UPPER_BOUND + Math.random() * (START_LOWER_BOUND - START_UPPER_BOUND)));
-		}
-
-		private void resetVelocity() {
-			velocity.setX(0);
-			velocity.setY(0);
-		}
-
-		@Override
-		public void disable() {
-
 		}
 	}
 }
