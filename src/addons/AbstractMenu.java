@@ -19,12 +19,12 @@ public class AbstractMenu extends Container implements SpritelessElement {
 	private Position p;
 
     public AbstractMenu() {
-    	super();
-    	p = new Position(0, 0);  
+    	this(0, 0);
     }
     
     public AbstractMenu(double xPos, double yPos) {
     	super();
+    	this.setLayout(new GridLayout(3, 0, 0, 0));
     	p = new Position(xPos, yPos);
     }
 
@@ -39,7 +39,6 @@ public class AbstractMenu extends Container implements SpritelessElement {
     }
 
     public void update() {
-    	this.setLayout(new FlowLayout());
     	for(int x = 0; x < this.getComponentCount(); x++) {
         	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
             element.update();

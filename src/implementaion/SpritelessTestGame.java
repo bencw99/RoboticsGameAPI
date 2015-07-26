@@ -24,7 +24,7 @@ public class SpritelessTestGame extends Implementor {
 		addSpritelessElement(text);
 		*/
 		
-		MyMenu menu = new MyMenu();
+		MyMenu menu = new MyMenu(500, 500);
 		MyTextArea text = new MyTextArea("HELLO HELLO HELLO");
 		MyTimer timer = new MyTimer();
 		MyButton button = new MyButton();
