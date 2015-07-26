@@ -1,15 +1,9 @@
 package implementaion;
-import java.awt.event.ActionEvent;
-
-import constants.*;
 import entity.*;
-import game.*;
 import graphics.*;
-import gui.*;
-import input.*;
 import physics.*;
 import world.*;
-public class CrazyRafi extends Implementor{
+public class SkullBounce extends Implementor{
 	/**
 	 * Called when game starts
 	 */
@@ -18,7 +12,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
-		super.addEntity(new Rafi(game.getWorld()));
+		super.addEntity(new Skull(game.getWorld()));
 		for(int i = 1; i <= 128; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
@@ -28,8 +22,6 @@ public class CrazyRafi extends Implementor{
 	}
 
 	private class CrazyEntity extends Entity {	
-		final static double DEATH_SPEED = 3000;
-
 		final static double ACCEL_FACTOR = 0.1;
 		final static double BOUNCE_FACTOR = 1;
 		final static double RANDOM_FACTOR = 100;
@@ -86,7 +78,7 @@ public class CrazyRafi extends Implementor{
 			if(!dead) {
 				translate(velocity);
 				if(collide(this.getWorld().getEntities().get(0))) {
-					rafiCollide();
+					skullCollide();
 				};
 
 				if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
@@ -101,10 +93,6 @@ public class CrazyRafi extends Implementor{
 
 				if(getPos().getX() > KILL_RIGHT_BOUND || getPos().getX() < KILL_LEFT_BOUND || 
 						getPos().getY() > KILL_LOWER_BOUND || getPos().getX() < KILL_UPPER_BOUND) {
-					kill();
-				}
-
-				if(!dead && velocity.getX() * velocity.getX() + velocity.getY() * velocity.getY() > DEATH_SPEED) {
 					kill();
 				}
 			}
@@ -124,7 +112,7 @@ public class CrazyRafi extends Implementor{
 			velocity.setY(0);
 		}
 
-		private void rafiCollide() {
+		private void skullCollide() {
 			kill();
 		}
 
@@ -143,7 +131,7 @@ public class CrazyRafi extends Implementor{
 		}
 	}
 
-	private class Rafi extends Entity {	
+	private class Skull extends Entity {	
 		final static double ACCEL_FACTOR = 2;
 		final static double BOUNCE_FACTOR = 1;
 		final static double RANDOM_FACTOR = 1000;
@@ -160,24 +148,23 @@ public class CrazyRafi extends Implementor{
 		final static double BOUNCE_RIGHT_BOUND = 0.99 * SIZE;
 		final static double BOUNCE_UPPER_BOUND = 0.01 * SIZE;
 		final static double BOUNCE_LOWER_BOUND = 0.99 * SIZE;
+		
+		final static int GROW_TIME = 120;
+		final static double GROW_SIZE = 1.05;
 
 		Vector velocity = new Vector(0, 0);
 		int timeAlive = 0;
 
-		public Rafi(World world) {
+		public Skull(World world) {
 			super(world);
 		}
 
 		@Override
 		public void init() {
 			setDim(new Dimension(16, 16));
-			spritesArray = new Object[]{"rafi", "images/skull-transparent.png"};
+			spritesArray = new Object[]{"skull", "images/skull-transparent.png"};
 			loadSprites();
-			activeSprite = "rafi";
-			setAutoMode(false);
-			setCycleMode(false);
-
-			resetVelocity();
+			activeSprite = "skull";
 			resetPosition();
 		}
 
@@ -199,8 +186,8 @@ public class CrazyRafi extends Implementor{
 			velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
 			timeAlive++;
 			
-			if(timeAlive % 120 == 0) {
-				setDim(new Dimension(getDim().getWidth() * 1.05, getDim().getHeight() * 1.05));
+			if(timeAlive % GROW_TIME == 0) {
+				setDim(new Dimension(getDim().getWidth() * 1.05, getDim().getHeight() * GROW_SIZE));
 			}
 		}
 
