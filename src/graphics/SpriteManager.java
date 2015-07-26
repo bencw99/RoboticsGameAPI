@@ -7,27 +7,27 @@ import graphics.Animation;
 import entity.Entity;
 
 /**
- * This class is used to instantiate a manager object that each {@link  entity.Entity} will have to manage
- * it's {@link  sprite.Sprite}s and make it easy for a user to choose which {@link  sprite.Sprite} to display
- * Also includes functionality to loop between various {@link  sprite.Sprite}, for animations
+ * This class is used to instantiate a manager object for every entity that controls
+ * it's Sprites and make it easy for a user to choose which Sprite to display
+ * Also includes functionality to loop between various Sprites for animations
  * 
  * @author Jonathan Zwiebel
- * @version June 19th, 2015
+ * @version June 26th, 2015
  */
 public class SpriteManager {
-	/** An <code>ArrayList</code> that will hold all of the {@link  sprite.Sprite} that this object can manage **/
+	/** An ArrayList that will hold all of the Drawable elements, Sprites and Animations, that this object can manage **/
 	protected ArrayList<Drawable> drawableElements;
 
-	/** The {@link  entity.Entity} that this manager belongs to **/
+	/** The Entity that this manager belongs to **/
 	private Entity entity;
-	
+
+	/** The current Drawable object being displayed **/
 	Drawable activeDrawable;
 
 	/**
-	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
-	 * 
-	 * @param entity the {@link  entity.Entity} that this manager belongs to 
-	 * @param sprites the {@link  sprite.Drawable}s that this manager will manage
+	 * Constructor
+	 * @param entity the Entity that this manager belongs to 
+	 * @param sprites the ArrayList of Drawables that this manager will manage
 	 */
 	public SpriteManager(Entity entity, ArrayList<Drawable> drawableElements) {
 		this.entity = entity;
@@ -35,41 +35,67 @@ public class SpriteManager {
 	}
 
 	/**
-	 * Called periodically with game updates, this will update the current graphics of the {@link  sprite.Sprite}
-	 * by delegating it to draw itself
-	 * 
-	 * @param g an AWT <code>Graphics</code> object
-	 * @param activeDrawables the name of the current {@link  sprite.Sprite}
+	 * Called periodically with game updates, this will update the Sprite to be shown
+	 * and called the Animation update method
+	 * @param g an AWT Graphics object
+	 * @param activeDrawable the name of the current Sprite or Animation to display
 	 */
 	public void update(Graphics g, String activeDrawable) {
-		// Loads the Drawable
 		boolean caught = false;
-		for(int i = 0; i < drawableElements.size(); i++) {
-		Drawable d = drawableElements.get(i);
+		for(Drawable d : drawableElements) {
 			if (d.getName() == activeDrawable) {
-				if(d instanceof Animation) {
-					((Animation) d).animationUpdate();
-				}
-				this.activeDrawable = d;
-				d.draw(g);
 				caught = true;
-				break;
+				this.activeDrawable = d;
+				if(d instanceof Animation) {
+					if(((Animation) d).getAutoMode()) {
+						((Animation) d).animationUpdate();
+					}
+				}
+				d.draw(g);
 			}
 		}
 
-		// Catches and quits the program if an illegal Sprite is attempted to be displayed
 		if(!caught) {
 			System.out.println("Invalid drawable name: " + activeDrawable + " for " + entity.getClass().getName());
 			System.exit(0);
 		}
 	}
 
-	public void step() {
-		if(activeDrawable instanceof Animation) {
-			((Animation) activeDrawable).step();
+	public ArrayList<Drawable> getDrawableElements() {
+		return drawableElements;
+	}
+
+	public void setDrawableElements(ArrayList<Drawable> drawableElements) {
+		this.drawableElements = drawableElements;
+	}
+
+	public Entity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
+	}
+
+	public Drawable getActiveDrawable() {
+		return activeDrawable;
+	}
+
+	public void setActiveDrawable(Drawable activeDrawable) {
+		this.activeDrawable = activeDrawable;
+	}
+
+
+	// Call down methods
+
+	public void stepFrame() {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).stepFrame();
+			}
 		}
 	}
-	
+
 	public void setCycleMode(boolean cycleMode) {
 		for(Drawable d : drawableElements) {
 			if(d instanceof Animation) {
@@ -77,7 +103,7 @@ public class SpriteManager {
 			}
 		}
 	}
-	
+
 	public void setAutoMode(boolean autoMode) {
 		for(Drawable d : drawableElements) {
 			if(d instanceof Animation) {
@@ -85,18 +111,12 @@ public class SpriteManager {
 			}
 		}
 	}
-	
-	
+
 	public void setTicksPerFrame(int ticks) {
 		for(Drawable d : drawableElements) {
 			if(d instanceof Animation) {
 				((Animation) d).setTicksPerFrame(ticks);
 			}
 		}
-	}
-
-	
-	public Entity getEntity() {
-		return entity;
 	}
 }

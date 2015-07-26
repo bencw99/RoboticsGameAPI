@@ -117,5 +117,9 @@ public class Sprite implements Drawable {
 	public String getName() {
 		return name;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

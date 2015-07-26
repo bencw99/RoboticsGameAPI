@@ -327,8 +327,8 @@ public abstract class Entity {
 		this.spriteManager = spriteManager;
 	}
 	
-	public void step() {
-		spriteManager.step();
+	public void stepFrame() {
+		spriteManager.stepFrame();
 	}
 	
 	public void setCycleMode(boolean cycleMode) {
