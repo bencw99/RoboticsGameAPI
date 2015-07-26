@@ -18,7 +18,7 @@ public class CrazyRafi extends Implementor{
 		init();
 
 		//Write code here
-		for(int i = 1; i <= 128; i++) {
+		for(int i = 1; i <= 1280; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 
