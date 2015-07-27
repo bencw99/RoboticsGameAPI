@@ -12,44 +12,39 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
 	private double currentTime; //In seconds
 	
 	private boolean displayText; //A boolean that tells us if we want to display text or not
-	
-	private TextArea text; //The text that gets displayed
 
 	public abstract void disable();
 	
 	public AbstractTimer() {
+        super();
 		pos = new Position(0, 0);
 		displayText = true;
         this.setEditable(true);
 		this.setFocusable(false);
-		text = new TextArea();
 	}
 	
 	public AbstractTimer(boolean displayText) {
+        super();
 		pos = new Position(0, 0);
 		this.displayText = displayText;
 		this.setEditable(true);
 		this.setFocusable(false);
-        text = new TextArea();
-        
 	}
 	
 	public AbstractTimer(double xPos, double yPos, boolean displayText) {
-		pos = new Position(xPos, yPos);
+		super();
+        pos = new Position(xPos, yPos);
 		this.displayText = displayText;
 		this.setEditable(false);
 		this.setFocusable(false);
-        text = new TextArea();
-        
 	}
 	
 	public AbstractTimer(double xPos, double yPos) {
-		pos = new Position(xPos, yPos);
+		super();
+        pos = new Position(xPos, yPos);
 		this.displayText = true;
 		this.setEditable(false);
 		this.setFocusable(false);
-        text = new TextArea();
-        
 	}
 	
 	public void init() {

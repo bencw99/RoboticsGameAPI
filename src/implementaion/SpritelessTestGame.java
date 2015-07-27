@@ -1,8 +1,11 @@
 package implementaion;
 
-import java.awt.event.ActionEvent;
+import addons.AbstractButton;
+import addons.AbstractMenu;
+import addons.AbstractTextBox;
+import addons.AbstractTimer;
 
-import addons.*;
+import java.awt.event.ActionEvent;
 
 public class SpritelessTestGame extends Implementor {
 	
@@ -23,7 +26,7 @@ public class SpritelessTestGame extends Implementor {
 		MyTextArea text = new MyTextArea("INSERT TEXT HERE");
 		addSpritelessElement(text);
 		*/
-		
+
 		MyMenu menu = new MyMenu(500, 500);
 		MyTextArea text = new MyTextArea("HELLO HELLO HELLO");
 		MyTimer timer = new MyTimer();
@@ -34,7 +37,7 @@ public class SpritelessTestGame extends Implementor {
 		menu.addSpritelessElement(text);
 		menu.addSpritelessElement(timer);
 		menu.addSpritelessElement(button);
-		
+
 		run();
 	}
 	

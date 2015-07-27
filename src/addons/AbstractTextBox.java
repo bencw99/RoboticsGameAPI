@@ -6,8 +6,6 @@ import java.awt.*;
 
 public abstract class AbstractTextBox extends TextArea implements SpritelessElement{
 
-    private TextArea text;
-
     private Position p;
 
     private int numberOfRows;
@@ -18,26 +16,25 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
     public abstract void update();
 
     public AbstractTextBox(String s) {
-    	text = new TextArea("");
+    	super(s);
         p = new Position(0, 0);
         this.setEditable(false);
         this.setFocusable(false);
-        this.setText(s);
     }
 
     public AbstractTextBox() {
-        text = new TextArea("");
+        super("");
         p = new Position(0, 0);
         this.setEditable(false);
         this.setFocusable(false);
     }
 
     public AbstractTextBox(int numberOfRows, int numberOfColumns) {
-        text = new TextArea(numberOfRows, numberOfColumns);
+        super(numberOfRows, numberOfColumns);
     }
 
     public AbstractTextBox(String text, int numberOfRows, int numberOfColumns) {
-        this.text = new TextArea(text, numberOfRows, numberOfColumns);
+        super(text, numberOfRows, numberOfColumns);
     }
 
 	public void init() {
@@ -74,7 +71,7 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
 	}
 
 	public void hide() {
-        hiddenText = text.getText();
+        hiddenText = this.getText();
 		this.setText("");
 	}
 
