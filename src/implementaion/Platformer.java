@@ -21,7 +21,7 @@ public class Platformer extends Implementor{
 		addButton(new PlatformAdder());
 		
 		addEntity(new Jumper(new Position(100, 100), new Dimension()));
-		addEntity(new Platform(new Position(100, 200), new Dimension()));
+		addEntity(new Platform(new Position(100, 200), new Dimension(500, 100)));
 		
 		for(int i = 0; i < 30; i ++) {
 			Platform p = null;
@@ -116,7 +116,7 @@ public class Platformer extends Implementor{
 				boolean canJump = false;
 				
 				for(Entity other : getWorld().getEntities()) {
-					if(other instanceof Platform && collide(other)) {
+					if(other instanceof Platform && collides(other) != null) {
 						canJump = true;
 					}
 				}
@@ -133,23 +133,23 @@ public class Platformer extends Implementor{
 			}
 			
 			for(Entity other : getWorld().getEntities()) {
-				if(other instanceof Platform && collide(other)) {
-					Vector dir = directionalCollide(other);
+				if(other instanceof Platform && collides(other) != null) {
+					Vector dir = collides(other);
 					
-					if(dir.getY() == 1) {
+					if(dir.getY() > 0.5) {
 						vel.setY(Math.max(vel.getY(), 0));
 					}
-					if(dir.getY() == -1) {
+					if(dir.getY() < -0.5) {
 						vel.setY(Math.min(vel.getY(), 0));
 					}
 					
-					if(dir.getX() == 1) {
+					if(dir.getX() > 0.5) {
 						vel.setX(Math.max(vel.getX(), 0));
 						if(InputListener.isKeyPressed('a')) {
 							translateX(3);
 						}
 					}
-					if(dir.getX() == -1) {
+					if(dir.getX() < -0.5) {
 						vel.setX(Math.min(vel.getX(), 0));
 						if(InputListener.isKeyPressed('d')) {
 							translateX(-3);

@@ -8,6 +8,8 @@ import graphics.Sprite;
 import graphics.SpriteManager;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -203,6 +205,38 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Returns the bounding polygon of this entity based off of its angle and dimension
+	 * 
+	 * @return the bounding polygon of this entity
+	 */
+	public Polygon getBounds() {
+		int xPoints[] = {(int) getUpperLeftPos().getX(), (int) getLowerLeftPos().getX(), (int) getLowerRightPos().getX(), (int) getUpperRightPos().getX()};
+		int yPoints[] = {(int) getUpperLeftPos().getY(), (int) getLowerLeftPos().getY(), (int) getLowerRightPos().getY(), (int) getUpperRightPos().getY()};
+		
+		Polygon unrotatedBounds = new Polygon(xPoints, yPoints, xPoints.length);
+	
+		return rotate(unrotatedBounds, pos, angle);
+	}
+	
+	private static Polygon rotate(Polygon poly, Position pivot, double angle) {
+		int xPoints[] = new int[poly.npoints];
+		int yPoints[] = new int[poly.npoints];
+		
+		for(int i = 0; i < poly.npoints; i ++)
+		{
+			double xCoord = poly.xpoints[i] - pivot.getX();
+			double yCoord = poly.ypoints[i] - pivot.getY();
+			double cos = Math.cos(angle);
+			double sin = Math.sin(angle);
+			
+			xPoints[i] = (int) (xCoord*cos - yCoord*sin + pivot.getX());
+			yPoints[i] = (int) (xCoord*sin + yCoord*cos + pivot.getY());
+		}
+		
+		return new Polygon(xPoints, yPoints, poly.npoints);
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
@@ -253,16 +287,65 @@ public abstract class Entity {
 		this.world = world;
 	}
 
-	/**
-	 * Tests if the two given polygons collide
-	 * 
-	 * @param a the first polygon to be tested
-	 * @param b the second polygon to be tested
-	 * @return the result of the collision test
-	 */
-	public static boolean collide(Polygon a, Polygon b) {
-		return(a.getBounds().intersects(b.getBounds()));
-	} 
+	public Vector collides(Entity other) {
+		ArrayList<Position> intersectionPoints = new ArrayList<Position>();
+		
+		Polygon thisBound = this.getBounds();
+		Polygon otherBound = other.getBounds();
+		
+		for(int i = 0; i < thisBound.npoints; i ++) {
+			for(int j = 0; j < otherBound.npoints; j++) {
+				Vector p = new Vector(thisBound.xpoints[i], thisBound.ypoints[i]);
+				Vector r = new Vector(thisBound.xpoints[i + 1 == thisBound.npoints ? 0 : i + 1] - p.getX(), thisBound.ypoints[i + 1 == thisBound.npoints ? 0 : i + 1] - p.getY());
+				
+				Vector q = new Vector(otherBound.xpoints[j], otherBound.ypoints[j]);
+				Vector s = new Vector(otherBound.xpoints[j + 1 == thisBound.npoints ? 0 : j + 1] - q.getX(), otherBound.ypoints[j + 1 == thisBound.npoints ? 0 : j + 1] - q.getY());
+				
+				if(!(Math.abs(Vector.cross(r, s)) == 0.0)) {
+					
+					double t = Vector.cross((Vector.add(q, p.scale(-1))), s)/Vector.cross(r, s);
+					double u = Vector.cross((Vector.add(q, p.scale(-1))), r)/Vector.cross(r, s);
+					
+					if(0 <= t && t <= 1 && 0 <= u && u <= 1) {
+						Vector intersection = Vector.add(p, r.scale(t));
+						intersectionPoints.add(new Position((int) intersection.getX(), (int) intersection.getY()));
+					}
+				}
+			}
+		}
+		
+		if(!intersectionPoints.isEmpty()) {
+			int distanceSum[] = new int[thisBound.npoints];
+			
+			for(int i = 0; i < thisBound.npoints; i ++) {
+				for(Position intersection : intersectionPoints) {
+					Vector perpendicular = new Vector(thisBound.ypoints[i + 1 == thisBound.npoints ? 0 : i + 1] - thisBound.ypoints[i], thisBound.xpoints[i] - thisBound.xpoints[i + 1 == thisBound.npoints ? 0 : i + 1]);
+					Vector connecting = new Vector(intersection.getX() - thisBound.xpoints[i], intersection.getY() - thisBound.ypoints[i]);
+					double distance = Math.abs(Vector.dot(perpendicular, connecting)/perpendicular.magnitude());
+					distanceSum[i] += distance;
+				}
+			}
+			
+			double minDist = distanceSum[0];
+			int minDistIndex = 0;
+			
+			for(int i = 0; i < distanceSum.length; i ++) {
+				if(distanceSum[i] < minDist) {
+					minDist = distanceSum[i];
+					minDistIndex = i;
+				}
+			}
+			
+			Vector collisionVector = new Vector( - thisBound.ypoints[minDistIndex] + thisBound.ypoints[minDistIndex + 1 == thisBound.npoints ? 0 : minDistIndex + 1],  - thisBound.xpoints[minDistIndex + 1 == thisBound.npoints ? 0 : minDistIndex + 1] + thisBound.xpoints[minDistIndex]);
+			
+			System.out.print("(" + collisionVector.scale(1/collisionVector.magnitude()).getX());
+			System.out.println(", " + collisionVector.scale(1/collisionVector.magnitude()).getY() + ")");
+			
+			return collisionVector.scale(1/collisionVector.magnitude());
+		}
+		
+		return null;
+	}
 
 	/**
 	 * Tests if this entity collides with the given entity

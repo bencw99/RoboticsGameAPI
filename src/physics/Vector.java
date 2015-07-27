@@ -75,6 +75,48 @@ public class Vector {
 	}
 	
 	/**
+	 * Returns the magnitude of this vector
+	 * 
+	 * @return the magnitude
+	 */
+	public double magnitude() {
+		return Math.sqrt(dx*dx + dy*dy);
+	}
+	
+	/**
+	 * Returns the three dimensional cross product magnitude of the two vectors
+	 * 
+	 * @param a	the first vector to be crossed
+	 * @param b	the second vector to be crossed
+	 * @return	the cross product magnitude
+	 */
+	public static double cross(Vector a, Vector b) {
+		return a.getX()*b.getY() - a.getY()*b.getX();
+	}
+	
+	/**
+	 * Returns the dot priduct of the two vectors
+	 * 
+	 * @param a	the first vector to be dotted
+	 * @param b	the second vector to be dotted
+	 * @return	the dot product
+	 */
+	public static double dot(Vector a, Vector b) {
+		return a.getX()*b.getX() + a.getY()*b.getY();
+	}
+	
+	/**
+	 * Returns the sum of the two given vectors
+	 * 
+	 * @param a	the first vector to be added
+	 * @param b	the scond vector to be added
+	 * @return	the sum
+	 */
+	public static Vector add(Vector a, Vector b) {
+		return new Vector(a.getX() + b.getX(), a.getY() + b.getY());
+	}
+	
+	/**
 	 * @return x of instance
 	 */
 	public double getX() {
