@@ -7,17 +7,17 @@ import javax.swing.JButton;
 
 import physics.Position;
 
-public abstract class AbstractButton extends JButton implements NonEntityElements, ActionListener {
+public abstract class AbstractButton extends JButton implements SpritelessElement, ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	
 	private Position p;
+
 	public AbstractButton() {
+		p = new Position(0, 0);
 		addActionListener(this);
 	}
-	
-	private double xPos;
-	private double yPos;
-	
+
 	public abstract void show();
 	public abstract void hide();
 	public abstract void update();

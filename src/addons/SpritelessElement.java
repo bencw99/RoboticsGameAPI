@@ -1,9 +1,8 @@
 package addons;
 
-import java.util.Timer;
 import physics.Position;
 
-public interface NonEntityElements{
+public interface SpritelessElement{
 	void init();
 	void update();
 	void disable();

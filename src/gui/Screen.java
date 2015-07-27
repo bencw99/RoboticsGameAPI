@@ -7,7 +7,7 @@ import java.util.ConcurrentModificationException;
 
 import javax.swing.JPanel;
 
-import addons.NonEntityElements;
+import addons.SpritelessElement;
 import entity.Entity;
 
 /**
@@ -22,7 +22,7 @@ public class Screen extends JPanel {
 	/**
 	 * A list of non-entities in the Game (buttons, timers, etc)s
 	 */
-	private ArrayList<NonEntityElements> nonEntities = new ArrayList<NonEntityElements>();
+	private ArrayList<SpritelessElement> spritelessElements = new ArrayList<SpritelessElement>();
 
 	private String screenName;
 
@@ -43,7 +43,7 @@ public class Screen extends JPanel {
 		for (Entity ent : entities) {
 			ent.update();
 		}
-		for (NonEntityElements ent : nonEntities) {
+		for (SpritelessElement ent : spritelessElements) {
 			ent.update();
 		}
 		updateGui();
@@ -54,7 +54,7 @@ public class Screen extends JPanel {
 	 */
 	public void updateGui() {
 		// If the component is not in the list, add it
-		for (NonEntityElements e : nonEntities) {
+		for (SpritelessElement e : spritelessElements) {
 			if (!contains(e, getComponents())) {
 				// If component is not type Component
 				try {
@@ -111,8 +111,8 @@ public class Screen extends JPanel {
 	/**
 	 * Add a non entity to the screen
 	 */
-	public void add(NonEntityElements ent) {
-		nonEntities.add(ent);
+	public void add(SpritelessElement ent) {
+		spritelessElements.add(ent);
 	}
 
 	/**
@@ -132,9 +132,9 @@ public class Screen extends JPanel {
 	 * @param ent
 	 *            the entity to remove
 	 */
-	public void remove(NonEntityElements ent) {
+	public void remove(SpritelessElement ent) {
 		ent.disable();
-		nonEntities.remove(ent);
+		spritelessElements.remove(ent);
 	}
 
 	/**
@@ -146,15 +146,15 @@ public class Screen extends JPanel {
 		return entities;
 	}
 
-	public ArrayList<NonEntityElements> getNonEntities() {
-		return nonEntities;
+	public ArrayList<SpritelessElement> getNonEntities() {
+		return spritelessElements;
 	}
 
 	public void disable() {
 		for (Entity entity : entities) {
 			entity.disable();
 		}
-		for (NonEntityElements e : nonEntities) {
+		for (SpritelessElement e : spritelessElements) {
 			e.disable();
 		}
 	}
