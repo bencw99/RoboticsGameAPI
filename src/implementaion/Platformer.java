@@ -32,7 +32,7 @@ public class Platformer extends Implementor{
 				p = new Platform(new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
 				possible = true;
 				for(Entity other : getEntities()) {
-					if(p.collide(other)) {
+					if(p.doesCollide(other)) {
 						possible = false;
 					}
 				}
@@ -116,7 +116,7 @@ public class Platformer extends Implementor{
 				boolean canJump = false;
 				
 				for(Entity other : getWorld().getEntities()) {
-					if(other instanceof Platform && collides(other) != null) {
+					if(other instanceof Platform && doesCollide(other)) {
 						canJump = true;
 					}
 				}
@@ -133,7 +133,7 @@ public class Platformer extends Implementor{
 			}
 			
 			for(Entity other : getWorld().getEntities()) {
-				if(other instanceof Platform && collides(other) != null) {
+				if(other instanceof Platform && doesCollide(other)) {
 					Vector dir = collides(other);
 					
 					if(dir.getY() > 0.5) {

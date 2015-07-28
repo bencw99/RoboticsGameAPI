@@ -308,6 +308,16 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Returns true of the two entities collide
+	 * 
+	 * @param other the entity colliding with
+	 * @return the collision result
+	 */
+	public boolean doesCollide(Entity other) {
+		return collides(other) != null;
+	}
+	
+	/**
 	 * @return the angle
 	 */
 	public double getAngle() {
