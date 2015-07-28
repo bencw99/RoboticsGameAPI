@@ -8,7 +8,7 @@ public class SkullBounce extends Implementor{
 	public void main() {
 		init();
 		super.addEntity(new Skull(game.getWorld()));
-		for(int i = 1; i <= 128; i++) {
+		for(int i = 1; i <= 256; i++) {
 			super.addEntity(new CrazyEntity(game.getWorld()));
 		}
 		run();
@@ -36,10 +36,14 @@ public class SkullBounce extends Implementor{
 		final static double KILL_RIGHT_BOUND = 1.05 * SIZE;
 		final static double KILL_UPPER_BOUND = -0.05 * SIZE;
 		final static double KILL_LOWER_BOUND = 1.05 * SIZE;
+		
+		final static double ROTATE_LOWER_BOUND = -0.01;
+		final static double ROTATE_UPPER_BOUND = 0.01;
 
 		Vector velocity = new Vector(0, 0);
 		int timeAlive = 0;
 		boolean dead = false;
+		double rotateSpeed;
 
 
 		public CrazyEntity(World world) {
@@ -53,21 +57,33 @@ public class SkullBounce extends Implementor{
 					"e7", "images/explosion/tmp-7.gif", "e8", "images/explosion/tmp-8.gif", "e9", "images/explosion/tmp-9.gif", "e10", "images/explosion/tmp-10.gif",
 					"e11", "images/explosion/tmp-11.gif", "e12", "images/explosion/tmp-12.gif", "e13", "images/explosion/tmp-13.gif", "e14", "images/explosion/tmp-14.gif",
 					"e15", "images/explosion/tmp-15.gif", "e16", "images/explosion/tmp-16.gif", "e17", "images/explosion/tmp-17.gif", "e18", "images/explosion/tmp-18.gif",});
+			if(Math.random() < 0.5) {
+				spritesArray = new Object[]{"red", "images/preset/red.png", "explosion", explosion, "death", "images/skull-transparent.png", 100};
+				loadSprites();
+				setDim(new Dimension(32, 32));
+				activeSprite = "red";
+			}
+			else {
+				spritesArray = new Object[]{"green", "images/preset/green.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
+				loadSprites();
+				setDim(new Dimension(16, 64));
+				activeSprite = "green";
 
-			spritesArray = new Object[]{"happy", "images/happy.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
-			loadSprites();
-			activeSprite = "happy";
+			}
 			setAutoMode(false);
 			setCycleMode(false);
 
 			resetVelocity();
 			resetPosition();
+			
+			rotateSpeed = Math.random() * (ROTATE_UPPER_BOUND - ROTATE_LOWER_BOUND) + ROTATE_LOWER_BOUND;
 		}
 
 		@Override
 		public void update() {
 			if(!dead) {
 				translate(velocity);
+				setAngle(getAngle() + rotateSpeed);
 				if(doesCollide(this.getWorld().getEntities().get(0))) {
 					skullCollide();
 				};
@@ -86,11 +102,10 @@ public class SkullBounce extends Implementor{
 						getPos().getY() > KILL_LOWER_BOUND || getPos().getX() < KILL_UPPER_BOUND) {
 					kill();
 				}
+				velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
+				velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
+				timeAlive++;
 			}
-
-			velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
-			velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
-			timeAlive++;
 		}
 
 		private void resetPosition() {
@@ -141,10 +156,13 @@ public class SkullBounce extends Implementor{
 		final static double BOUNCE_LOWER_BOUND = 0.99 * SIZE;
 		
 		final static int GROW_TIME = 120;
-		final static double GROW_SIZE = 1.05;
+		final static double GROW_FACTOR = 1.06;
+		
+		final static double ROTATIONAL_ACCELERATION = 0.0000045;
 
 		Vector velocity = new Vector(0, 0);
 		int timeAlive = 0;
+		double rotationalVelocity = 0;
 
 		public Skull(World world) {
 			super(world);
@@ -153,7 +171,7 @@ public class SkullBounce extends Implementor{
 		@Override
 		public void init() {
 			setDim(new Dimension(16, 16));
-			spritesArray = new Object[]{"skull", "images/skull-transparent.png"};
+			spritesArray = new Object[]{"skull", "images/preset/black.png"};
 			loadSprites();
 			activeSprite = "skull";
 			resetPosition();
@@ -167,6 +185,8 @@ public class SkullBounce extends Implementor{
 		@Override
 		public void update() {
 			translate(velocity);
+			rotationalVelocity += ROTATIONAL_ACCELERATION;
+			setAngle(getAngle() + rotationalVelocity);
 
 			if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
 				velocity.setX(velocity.getX() * -BOUNCE_FACTOR);
@@ -183,7 +203,7 @@ public class SkullBounce extends Implementor{
 			timeAlive++;
 			
 			if(timeAlive % GROW_TIME == 0) {
-				setDim(new Dimension(getDim().getWidth() * 1.05, getDim().getHeight() * GROW_SIZE));
+				setDim(new Dimension(getDim().getWidth() * GROW_FACTOR, getDim().getHeight() * GROW_FACTOR));
 			}
 		}
 

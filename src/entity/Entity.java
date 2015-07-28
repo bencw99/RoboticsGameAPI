@@ -42,7 +42,7 @@ public abstract class Entity {
 
 	/** An array that will hold information for constructing preset {@link  sprite.Sprite}s available to all Entities */
 	public static final Object[] PRESET_SPRITE_ARRAY = {"RED", "images/preset/red.png", 
-		"WHITE", "images/preset/white.png", "BLACK", "images/preset/black.png", 
+		"WHITE", "images/preset/white.png", "GREEN", "images/preset/green.jpg", "BLACK", "images/preset/black.png", 
 		"TRANSPARENT", "images/preset/transparent.png"};
 
 

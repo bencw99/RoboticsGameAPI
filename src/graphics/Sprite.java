@@ -83,6 +83,8 @@ public class Sprite implements Drawable {
 		Graphics2D g2d = (Graphics2D) g.create();
 		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 		g2d.setComposite(composite);
+		AffineTransform rotation = AffineTransform.getRotateInstance(entity.getAngle(), entity.getX(), entity.getY());
+		g2d.setTransform(rotation);
 		g2d.drawImage(bufferedImages.get(address), (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
 				(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
 		g2d.dispose();
