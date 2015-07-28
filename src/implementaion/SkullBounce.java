@@ -68,7 +68,7 @@ public class SkullBounce extends Implementor{
 		public void update() {
 			if(!dead) {
 				translate(velocity);
-				if(collide(this.getWorld().getEntities().get(0))) {
+				if(doesCollide(this.getWorld().getEntities().get(0))) {
 					skullCollide();
 				};
 
