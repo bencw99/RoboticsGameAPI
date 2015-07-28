@@ -21,7 +21,7 @@ public class Platformer extends Implementor{
 		addButton(new PlatformAdder());
 		
 		addEntity(new Jumper(new Position(100, 100), new Dimension()));
-		addEntity(new Platform(new Position(100, 200), new Dimension(500, 100)));
+		addEntity(new Platform(new Position(100, 200), new Dimension(100, 20), 0));
 		
 		for(int i = 0; i < 30; i ++) {
 			Platform p = null;
@@ -29,7 +29,7 @@ public class Platformer extends Implementor{
 			boolean possible = false;
 			
 			while(!possible) {
-				p = new Platform(new Position(Math.random()*1000, Math.random()*800), new Dimension());
+				p = new Platform(new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
 				possible = true;
 				for(Entity other : getEntities()) {
 					if(p.collide(other)) {
@@ -52,14 +52,14 @@ public class Platformer extends Implementor{
 			getButton().setVisible(true);
 		}
 		public void actionPerformed(ActionEvent e) {
-			addEntity(new Platform(new Position(Math.random()*800, Math.random()*600), new Dimension()));
+			addEntity(new Platform(new Position(Math.random()*800, Math.random()*600), new Dimension(), 0));
 		}
 	}
 	
 	private class Platform extends Entity {
-		public Platform(Position pos, Dimension dim)
+		public Platform(Position pos, Dimension dim, double angle)
 		{
-			super(game.getWorld(), pos, 0, dim);
+			super(game.getWorld(), pos, angle, dim);
 			
 			spritesArray = new String[]{"smile", "images/happy.jpg"};
 			loadSprites();

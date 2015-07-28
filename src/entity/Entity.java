@@ -218,6 +218,14 @@ public abstract class Entity {
 		return rotate(unrotatedBounds, pos, angle);
 	}
 	
+	/**
+	 * Rotates the given polygon by the given angle about the given pivot
+	 * 
+	 * @param poly
+	 * @param pivot
+	 * @param angle
+	 * @return
+	 */
 	private static Polygon rotate(Polygon poly, Position pivot, double angle) {
 		int xPoints[] = new int[poly.npoints];
 		int yPoints[] = new int[poly.npoints];
@@ -237,56 +245,11 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * @return the angle
+	 * Collision detection function. Returns the vector in the direction of the force applied by the other colliding entity on this one. If the entities don't collide, returns null
+	 *
+	 * @param other	the entity colliding with
+	 * @return	the collision result (see above for details)
 	 */
-	public double getAngle() {
-		return angle;
-	}
-
-	/**
-	 * @param angle the angle to set
-	 */
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-	
-	/**
-	 * Translates this angle by the given angle difference
-	 * 
-	 * @param dAngle the angle to be translated by
-	 */
-	public void translateAngle(double dAngle) {
-		this.angle += dAngle;
-	}
-
-	/**
-	 * @return the dim
-	 */
-	public Dimension getDim() {
-		return dim;
-	}
-
-	/**
-	 * @param dim the dimension to set
-	 */
-	public void setDim(Dimension dim) {
-		this.dim = dim;
-	}
-
-	/**
-	 * @return the world
-	 */
-	public World getWorld() {
-		return world;
-	}
-	
-	/**
-	 * @param world the world to set
-	 */
-	public void setWorld(World world) {
-		this.world = world;
-	}
-
 	public Vector collides(Entity other) {
 		ArrayList<Position> intersectionPoints = new ArrayList<Position>();
 		
@@ -338,64 +301,61 @@ public abstract class Entity {
 			
 			Vector collisionVector = new Vector( - thisBound.ypoints[minDistIndex] + thisBound.ypoints[minDistIndex + 1 == thisBound.npoints ? 0 : minDistIndex + 1],  - thisBound.xpoints[minDistIndex + 1 == thisBound.npoints ? 0 : minDistIndex + 1] + thisBound.xpoints[minDistIndex]);
 			
-			System.out.print("(" + collisionVector.scale(1/collisionVector.magnitude()).getX());
-			System.out.println(", " + collisionVector.scale(1/collisionVector.magnitude()).getY() + ")");
-			
 			return collisionVector.scale(1/collisionVector.magnitude());
 		}
 		
 		return null;
 	}
-
+	
 	/**
-	 * Tests if this entity collides with the given entity
-	 * 
-	 * @param ent the entity that we are testing to see if it collides with this one
-	 * @return the result of the collision test
+	 * @return the angle
 	 */
-	public boolean collide(Entity ent) {
-        Rectangle a = new Rectangle((int) this.getUpperLeftPos().getX(), (int) this.getUpperLeftPos().getY(), (int) this.dim.getWidth(), (int) this.dim.getHeight());
-        Rectangle b = new Rectangle((int) ent.getUpperLeftPos().getX(), (int) ent.getUpperLeftPos().getY(), (int) ent.getDim().getWidth(), (int) ent.getDim().getHeight());
-        return(a.intersects(b));
+	public double getAngle() {
+		return angle;
 	}
 
-    /**
-     * Tests the direction of an existing collision
-     *
-     * @param ent the entity that this entity is colliding with
-     * @return the direction the other entity is colliding from
-     */
-	public Vector directionalCollide(Entity ent) {
-		if(collide(ent)) {
-			//The distance between the left side of this entity and the right side of the colliding one
-			double leftDistance = Math.abs((pos.getX() - dim.getWidth()/2) - (ent.pos.getX() + ent.dim.getWidth()/2));
-			//The distance between the right side of this entity and the left side of the colliding one
-			double rightDistance = Math.abs((pos.getX() + dim.getWidth()/2) - (ent.pos.getX() - ent.dim.getWidth()/2));
-			//The distance between the upper side of this entity and the lower side of the colliding one
-			double upperDistance = Math.abs((pos.getY() - dim.getHeight()/2) - (ent.pos.getY() + ent.dim.getHeight()/2));
-			//The distance between the lower side of this entity and the upper side of the colliding one
-			double lowerDistance = Math.abs((pos.getY() + dim.getHeight()/2) - (ent.pos.getY() - ent.dim.getHeight()/2));
-			
-			//Compares to find the lowest of the four distances
-			double minimumDistance = Math.min(Math.min(leftDistance, rightDistance), Math.min(upperDistance, lowerDistance));
-			
-			//Returns the vector matching the lowest distance
-			if(minimumDistance == leftDistance) {
-				return new Vector(1, 0);
-			}
-			if(minimumDistance == rightDistance) {
-				return new Vector(-1, 0);
-			}
-			if(minimumDistance == upperDistance) {
-				return new Vector(0, 1);
-			}
-			if(minimumDistance == lowerDistance) {
-				return new Vector(0, -1);
-			}
-			
-			System.out.println("Collision detection failed: directionalCollide minimum not found");
-		}	
-		return null;
+	/**
+	 * @param angle the angle to set
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+	
+	/**
+	 * Translates this angle by the given angle difference
+	 * 
+	 * @param dAngle the angle to be translated by
+	 */
+	public void translateAngle(double dAngle) {
+		this.angle += dAngle;
+	}
+
+	/**
+	 * @return the dim
+	 */
+	public Dimension getDim() {
+		return dim;
+	}
+
+	/**
+	 * @param dim the dimension to set
+	 */
+	public void setDim(Dimension dim) {
+		this.dim = dim;
+	}
+
+	/**
+	 * @return the world
+	 */
+	public World getWorld() {
+		return world;
+	}
+	
+	/**
+	 * @param world the world to set
+	 */
+	public void setWorld(World world) {
+		this.world = world;
 	}
 
 	// GRAPHICS:

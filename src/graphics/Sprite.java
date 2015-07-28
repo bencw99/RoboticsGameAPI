@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -89,8 +91,15 @@ public class Sprite {
 		Graphics2D g2d = (Graphics2D) g.create();
 		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 		g2d.setComposite(composite);
-		g2d.drawImage(image, (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
-					(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
+		
+		if(entity.getAngle() != 0) {
+			g2d.fillPolygon(entity.getBounds());
+		}
+		else {
+			g2d.drawImage(image, (int) entity.getUpperLeftPos().getX(), (int) entity.getUpperLeftPos().getY(), 
+			(int) entity.getDim().getWidth(), (int) entity.getDim().getHeight(), null);
+		}
+		
 		g2d.dispose();
 	}
 	
