@@ -82,7 +82,7 @@ public class Platformer extends Implementor{
 		{
 			super(game, pos, 0, dim);
 			
-			spritesArray = new String[]{"rafi", "images/rafi.png"};
+			spritesArray = new String[]{"rafi", "images/skull-transparent.png"};
 			loadSprites();
 			activeSprite = "rafi";
 		}

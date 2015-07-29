@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import spriteless.SpritelessElement;

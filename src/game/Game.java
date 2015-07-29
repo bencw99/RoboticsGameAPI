@@ -65,14 +65,15 @@ public class Game extends JFrame{
 	 * Runs the game
 	 */
 	private void initScreens() {
-		Screen start = new Screen("START");
-		Screen paused = new Screen("PAUSED");
-		Screen finished = new Screen("FINISHED");
-		screens.add(start);
-		screens.add(paused);
-		screens.add(finished);
-		currentScreen = start;
-		currentScreen.init();
+		screens.add(new Screen("START"));
+		screens.add(new Screen("PAUSED"));
+		screens.add(new Screen("FINISHED"));
+		
+		for(Screen s : screens) {
+			s.init();
+		}
+		
+		currentScreen = screens.get(0);
 	}
 	/**
 	 * Adds screens to the game
@@ -80,6 +81,7 @@ public class Game extends JFrame{
 	public void addScreen(Screen screen) {
 		screens.add(screen);
 	}
+	
 	
 	/**
 	 * Get available screens
@@ -92,7 +94,6 @@ public class Game extends JFrame{
 	 * Switches the current screen
 	 */
 	public void switchScreen(String screenName) {
-		currentScreen.disable();
 		for(Screen screen : screens) {
 			if(screen.getName() == screenName) {
 				currentScreen = screen;
