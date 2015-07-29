@@ -5,10 +5,19 @@ import graphics.*;
 import physics.*;
 
 public class SkullBounce extends Implementor{
+	private static int hits = 0;
+
+
 	public void main() {
 		init();
+		game.switchScreen("PAUSED");
 		addEntity(new Skull(game));
-		for(int i = 1; i <= 128; i++) {
+		for(int i = 1; i <= 16; i++) {
+			addEntity(new CrazyEntity(game));
+		}
+		game.switchScreen("START");
+		addEntity(new Skull(game));
+		for(int i = 1; i <= 16; i++) {
 			addEntity(new CrazyEntity(game));
 		}
 		run();
@@ -36,7 +45,7 @@ public class SkullBounce extends Implementor{
 		final static double KILL_RIGHT_BOUND = 1.05 * SIZE;
 		final static double KILL_UPPER_BOUND = -0.05 * SIZE;
 		final static double KILL_LOWER_BOUND = 1.05 * SIZE;
-		
+
 		final static double ROTATE_LOWER_BOUND = -0.01;
 		final static double ROTATE_UPPER_BOUND = 0.01;
 
@@ -75,7 +84,7 @@ public class SkullBounce extends Implementor{
 
 			resetVelocity();
 			resetPosition();
-			
+
 			rotateSpeed = Math.random() * (ROTATE_UPPER_BOUND - ROTATE_LOWER_BOUND) + ROTATE_LOWER_BOUND;
 		}
 
@@ -120,6 +129,15 @@ public class SkullBounce extends Implementor{
 
 		private void skullCollide() {
 			kill();
+			hits++;
+			if(hits % 3 == 0) {
+				if(game.getCurrentScreen().getName() == "START") {
+					game.switchScreen("PAUSED");
+				}
+				else {
+					game.switchScreen("START");
+				}
+			}
 		}
 
 		private void kill() {
@@ -154,10 +172,10 @@ public class SkullBounce extends Implementor{
 		final static double BOUNCE_RIGHT_BOUND = 0.99 * SIZE;
 		final static double BOUNCE_UPPER_BOUND = 0.01 * SIZE;
 		final static double BOUNCE_LOWER_BOUND = 0.99 * SIZE;
-		
+
 		final static int GROW_TIME = 120;
 		final static double GROW_FACTOR = 1.06;
-		
+
 		final static double ROTATIONAL_ACCELERATION = 0.0000045;
 
 		Vector velocity = new Vector(0, 0);
@@ -181,7 +199,7 @@ public class SkullBounce extends Implementor{
 		public void disable() {
 
 		}
-		
+
 		@Override
 		public void update() {
 			translate(velocity);
@@ -201,7 +219,7 @@ public class SkullBounce extends Implementor{
 			velocity.setX(velocity.getX() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
 			velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
 			timeAlive++;
-			
+
 			if(timeAlive % GROW_TIME == 0) {
 				setDim(new Dimension(getDim().getWidth() * GROW_FACTOR, getDim().getHeight() * GROW_FACTOR));
 			}

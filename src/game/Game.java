@@ -96,7 +96,10 @@ public class Game extends JFrame{
 	public void switchScreen(String screenName) {
 		for(Screen screen : screens) {
 			if(screen.getName() == screenName) {
+				remove(currentScreen);
 				currentScreen = screen;
+				add(currentScreen);
+				break;
 			}
 		}
 	}
@@ -155,12 +158,16 @@ public class Game extends JFrame{
 		ent.disable();
 		currentScreen.remove(ent);
 	}
-
+	
 	/**
 	 * Returns entity list
 	 * @return
 	 */
 	public ArrayList<Entity> getEntities() {
 		return currentScreen.getEntities();
+	}
+	
+	public Screen getCurrentScreen() {
+		return currentScreen;
 	}
 }

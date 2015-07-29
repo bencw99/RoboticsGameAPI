@@ -47,9 +47,9 @@ public class Platformer extends Implementor{
 	private class Platform extends Entity {
 		public Platform(Game game, Position pos, Dimension dim, double angle)
 		{
-			super(game, pos, 0, dim);
+			super(game, pos, angle, dim);
 			
-			spritesArray = new String[]{"smile", "images/happy.jpg"};
+			spritesArray = new String[]{"smile", "images/preset/black.png"};
 			loadSprites();
 			activeSprite = "smile";
 		}
@@ -76,7 +76,7 @@ public class Platformer extends Implementor{
 	private class Jumper extends Entity {
 		private Vector vel;
 		
-		private final Vector gravity = new Vector(0, 800);
+		private final Vector gravity = new Vector(0, 80);
 		
 		public Jumper(Game game, Position pos, Dimension dim)
 		{
@@ -96,9 +96,8 @@ public class Platformer extends Implementor{
 		@Override
 		public void update()
 		{
-			translate(vel.scale(1/Constants.UPDATES_PER_SEC));
 			
-			vel.translate(gravity.scale(1/Constants.UPDATES_PER_SEC));
+			vel.translate(gravity.scale(1 / (double)Constants.UPDATES_PER_SEC));
 			
 			if(InputListener.isKeyNewPressed('w')) {
 				boolean canJump = false;

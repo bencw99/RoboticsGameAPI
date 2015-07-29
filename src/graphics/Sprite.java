@@ -24,7 +24,7 @@ public class Sprite implements Drawable {
 	/** A class ArrayList holding the filenames of the previously loaded Sprites **/
 	private static ArrayList<String> filenames = new ArrayList<String>();
 	
-	/** A class ArrayList holding pointesr to the BufferdImages **/
+	/** A class ArrayList holding pointers to the BufferdImages **/
 	private static ArrayList<BufferedImage> bufferedImages = new ArrayList<BufferedImage>();
 	
 	/** The name of this Sprite **/
