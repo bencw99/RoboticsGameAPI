@@ -35,7 +35,7 @@ public abstract class Entity {
 	/** The name of the current Sprite or Animation this Entity is displaying outside of animation mode **/
 	protected String activeSprite;
 
-	protected Game game;
+	private Game game;
 	
 	/** An array that will hold information for constructing preset {@link  sprite.Sprite}s available to all Entities */
 	public static final Object[] PRESET_SPRITE_ARRAY = {"RED", "images/preset/red.png", 
@@ -46,7 +46,7 @@ public abstract class Entity {
 	 * Parameterized constructor, initializes entity world to given parameters
 	 */
 	public Entity(Game game) {
-		this.game = game;
+		this.setGame(game);
 		this.setPos(new Position());
 		this.setDim(new Dimension());
 		this.setAngle(0);
@@ -339,6 +339,14 @@ public abstract class Entity {
 	 */
 	public void setDim(Dimension dim) {
 		this.dim = dim;
+	}
+	
+	public void setGame(Game game) {
+		this.game = game;
+	}
+	
+	public Game getGame() {
+		return game;
 	}
 	
 	

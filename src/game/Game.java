@@ -10,15 +10,12 @@ import spriteless.*;
 import constants.Constants;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
 import entity.*;
 import gui.Screen;
 
-public class Game {
+public class Game extends JFrame{
 	
 	/**
 	 * 
@@ -29,7 +26,7 @@ public class Game {
 	 * screen is currently being used
 	 */
 	ArrayList<Screen> screens;
-	Screen currentScreen;
+	private Screen currentScreen;
 	
 	/**
 	 * Input Listener
@@ -53,17 +50,15 @@ public class Game {
 	 */
 	private void initFrame() {
 		inputListener = new InputListener();
-		currentScreen.setTitle("Paly Robotics Team 8 - Programming - Game API");
-		currentScreen.setSize(1000, 1000);
-		currentScreen.setVisible(true);
-		currentScreen.setLayout(null);
-		currentScreen.setLocationRelativeTo(null);
-		currentScreen.setResizable(false);
-		currentScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		currentScreen.addKeyListener(inputListener);
-		currentScreen.addMouseListener(inputListener);
-		currentScreen.setName("Robotics Game API - GUI");
-		currentScreen.setBackground(Color.WHITE);
+		setTitle("Paly Robotics Team 8 - Game");
+		setResizable(false);
+		setVisible(true);
+		setSize(1000, 1000);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		addKeyListener(inputListener);
+		addMouseListener(inputListener);
+		add(currentScreen);
 	}
 
 	/**
@@ -73,11 +68,11 @@ public class Game {
 		Screen start = new Screen("START");
 		Screen paused = new Screen("PAUSED");
 		Screen finished = new Screen("FINISHED");
-		currentScreen = start;
-		//TODO Add the actual game screen text/buttons/etc
 		screens.add(start);
 		screens.add(paused);
 		screens.add(finished);
+		currentScreen = start;
+		currentScreen.init();
 	}
 	/**
 	 * Adds screens to the game
@@ -130,12 +125,6 @@ public class Game {
 	}
 	
 	//Getters / Setters
-	/**
-	 * @return the frame
-	 */
-	public JFrame getFrame() {
-		return currentScreen;
-	}
 	/**
 	 * @return the listener
 	 */

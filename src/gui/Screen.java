@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import entity.Entity;
  * A screen is a JPanel, shows various entities and non-entities
  *
  */
-public class Screen extends JFrame {
+public class Screen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Entity> entities;
 	private ArrayList<SpritelessElement> spritelessElements;
@@ -45,6 +46,13 @@ public class Screen extends JFrame {
 			ent.update();
 		}
 		updateGui();
+		super.repaint();
+	}
+	
+	public void init() {
+		setVisible(true);
+		setSize(1000, 1000);
+		setBackground(Color.WHITE);
 	}
 
 	/**
@@ -83,14 +91,15 @@ public class Screen extends JFrame {
 	 * 
 	 * @param g
 	 */
+	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		try {
 			for (Entity entity : entities) {
 				entity.draw(g);
 			}
 		} catch (ConcurrentModificationException e) {
 		}
-		repaint();
 	}
 
 	/**
