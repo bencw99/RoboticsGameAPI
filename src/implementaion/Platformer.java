@@ -19,8 +19,8 @@ public class Platformer extends Implementor{
 		
 		
 		
-		addEntity(new Jumper(new Position(100, 100), new Dimension()));
-		addEntity(new Platform(new Position(100, 200), new Dimension()));
+		addEntity(new Jumper(game, new Position(100, 100), new Dimension()));
+		addEntity(new Platform(game, new Position(100, 200), new Dimension(100, 20), 0));
 		
 		for(int i = 0; i < 30; i ++) {
 			Platform p = null;
@@ -28,10 +28,10 @@ public class Platformer extends Implementor{
 			boolean possible = false;
 			
 			while(!possible) {
-				p = new Platform(new Position(Math.random()*1000, Math.random()*800), new Dimension());
+				p = new Platform(game, new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
 				possible = true;
 				for(Entity other : getEntities()) {
-					if(p.collide(other)) {
+					if(p.doesCollide(other)) {
 						possible = false;
 					}
 				}
@@ -45,9 +45,9 @@ public class Platformer extends Implementor{
 	}
 	
 	private class Platform extends Entity {
-		public Platform(Position pos, Dimension dim)
+		public Platform(Game game, Position pos, Dimension dim, double angle)
 		{
-			super( pos, 0, dim);
+			super(game, pos, 0, dim);
 			
 			spritesArray = new String[]{"smile", "images/happy.jpg"};
 			loadSprites();
@@ -78,9 +78,9 @@ public class Platformer extends Implementor{
 		
 		private final Vector gravity = new Vector(0, 800);
 		
-		public Jumper(Position pos, Dimension dim)
+		public Jumper(Game game, Position pos, Dimension dim)
 		{
-			super( pos, 0, dim);
+			super(game, pos, 0, dim);
 			
 			spritesArray = new String[]{"rafi", "images/rafi.png"};
 			loadSprites();
@@ -102,9 +102,8 @@ public class Platformer extends Implementor{
 			
 			if(InputListener.isKeyNewPressed('w')) {
 				boolean canJump = false;
-				
 				for(Entity other : game.getEntities()) {
-					if(other instanceof Platform && collide(other)) {
+					if(other instanceof Platform && doesCollide(other)) {
 						canJump = true;
 					}
 				}
@@ -119,25 +118,24 @@ public class Platformer extends Implementor{
 			if(InputListener.isKeyPressed('d')) {
 				translateX(3);
 			}
-			
 			for(Entity other : game.getEntities()) {
-				if(other instanceof Platform && collide(other)) {
-					Vector dir = directionalCollide(other);
+				if(other instanceof Platform && doesCollide(other)) {
+					Vector dir = collides(other);
 					
-					if(dir.getY() == 1) {
+					if(dir.getY() > 0.5) {
 						vel.setY(Math.max(vel.getY(), 0));
 					}
-					if(dir.getY() == -1) {
+					if(dir.getY() < -0.5) {
 						vel.setY(Math.min(vel.getY(), 0));
 					}
 					
-					if(dir.getX() == 1) {
+					if(dir.getX() > 0.5) {
 						vel.setX(Math.max(vel.getX(), 0));
 						if(InputListener.isKeyPressed('a')) {
 							translateX(3);
 						}
 					}
-					if(dir.getX() == -1) {
+					if(dir.getX() < -0.5) {
 						vel.setX(Math.min(vel.getX(), 0));
 						if(InputListener.isKeyPressed('d')) {
 							translateX(-3);

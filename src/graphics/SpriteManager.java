@@ -2,114 +2,121 @@ package graphics;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import graphics.Animation;
 
 import entity.Entity;
 
 /**
- * This class is used to instantiate a manager object that each {@link  entity.Entity} will have to manage
- * it's {@link  sprite.Sprite}s and make it easy for a user to choose which {@link  sprite.Sprite} to display
- * Also includes functionality to loop between various {@link  sprite.Sprite}, for animations
+ * This class is used to instantiate a manager object for every entity that controls
+ * it's Sprites and make it easy for a user to choose which Sprite to display
+ * Also includes functionality to loop between various Sprites for animations
  * 
  * @author Jonathan Zwiebel
- * @version June 19th, 2015
+ * @version June 26th, 2015
  */
 public class SpriteManager {
-	/** An <code>ArrayList</code> that will hold all of the {@link  sprite.Sprite} that this object can manage **/
-	private ArrayList<Sprite> sprites;
-		
-	/** The {@link  entity.Entity} that this manager belongs to **/
+	/** An ArrayList that will hold all of the Drawable elements, Sprites and Animations, that this object can manage **/
+	protected ArrayList<Drawable> drawableElements;
+
+	/** The Entity that this manager belongs to **/
 	private Entity entity;
-	
-	/** Is this manager currently in animation mode? **/
-	boolean animationMode = false;
-	
-	/** How many game update cycles will be called before the {@link  sprite.Sprite} is changed in animation mode **/
-	private int ticksPerFrame = 1;
-	
-	/** How many update cycles have been played on this {@link  sprite.Sprite} **/
-	private int currentTick = 0;
-			
-	/** The current {@link  sprite.Sprite} **/
-	private int currentFrame = 0;
-	
+
+	/** The current Drawable object being displayed **/
+	Drawable activeDrawable;
+
 	/**
-	 * Constructs a SpriteManager object by taking an <code>ArrayList</code> of {@link  sprite.Sprite}s
-	 * 
-	 * @param entity the {@link  entity.Entity} that this manager belongs to 
-	 * @param sprites the {@link  sprite.Sprite}s that this manager will manage
+	 * Constructor
+	 * @param entity the Entity that this manager belongs to 
+	 * @param sprites the ArrayList of Drawables that this manager will manage
 	 */
-	public SpriteManager(Entity entity, ArrayList<Sprite> sprites) {
+	public SpriteManager(Entity entity, ArrayList<Drawable> drawableElements) {
 		this.entity = entity;
-		this.sprites = sprites;
+		this.drawableElements = drawableElements;
 	}
-	
+
 	/**
-	 * Called periodically with game updates, this will update the current graphics of the {@link  sprite.Sprite}
-	 * by delegating it to draw itself
-	 * 
-	 * @param g an AWT <code>Graphics</code> object
-	 * @param activeSprite the name of the current {@link  sprite.Sprite}
+	 * Called periodically with game updates, this will update the Sprite to be shown
+	 * and called the Animation update method
+	 * @param g an AWT Graphics object
+	 * @param activeDrawable the name of the current Sprite or Animation to display
 	 */
-	public void update(Graphics g, String activeSprite) {
-		// Calls the special animationUpdate method and breaks this one if in animation mode
-		if(animationMode) {
-			animationUpdate(g);
-			return;
-		}
-		
-		
-		// Loads the Sprite
+	public void update(Graphics g, String activeDrawable) {
 		boolean caught = false;
-		for(Sprite s : sprites) {
-			if (s.getName() == activeSprite) {
-				s.draw(g);
+		for(Drawable d : drawableElements) {
+			if (d.getName() == activeDrawable) {
 				caught = true;
-				break;
+				this.activeDrawable = d;
+				if(d instanceof Animation) {
+					if(((Animation) d).getAutoMode()) {
+						((Animation) d).animationUpdate();
+					}
+				}
+				d.draw(g);
 			}
 		}
-		
-		// Catches and quits the program if an illegal Sprite is attempted to be displayed
+
 		if(!caught) {
-			System.out.println("Invalid sprite name: " + activeSprite);
+			System.out.println("Invalid drawable name: " + activeDrawable + " for " + entity.getClass().getName());
 			System.exit(0);
 		}
 	}
-	
-	/**
-	 * A special update method called when in animation mode that will cycle the {@link  sprite.Sprite}s at a 
-	 * rate of 1 {@link  sprite.Sprite} every ticksPerFrame update cycles
-	 * 
-	 * @param g an AWT <code>Graphics</code> object
-	 */
-	public void animationUpdate(Graphics g) {
-		currentTick++;
-		if(currentTick == ticksPerFrame) {
-			currentTick = 1;
-			currentFrame++;
-			if(currentFrame == sprites.size()) {
-				currentFrame = 0;
-			}
-		}
-		sprites.get(currentFrame).draw(g);
-	}
-	
-	public void setAnimationMode(boolean animationMode) {
-		this.animationMode = animationMode;
-	}
-	
-	public boolean getanimationMode() {
-		return animationMode;
-	}
-	
-	public int getTicksPerFrame() {
-		return ticksPerFrame;
+
+	public ArrayList<Drawable> getDrawableElements() {
+		return drawableElements;
 	}
 
-	public void setTicksPerFrame(int ticksPerFrame) {
-		this.ticksPerFrame = ticksPerFrame;
+	public void setDrawableElements(ArrayList<Drawable> drawableElements) {
+		this.drawableElements = drawableElements;
 	}
-	
+
 	public Entity getEntity() {
 		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
+	}
+
+	public Drawable getActiveDrawable() {
+		return activeDrawable;
+	}
+
+	public void setActiveDrawable(Drawable activeDrawable) {
+		this.activeDrawable = activeDrawable;
+	}
+
+
+	// Call down methods
+
+	public void stepFrame() {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).stepFrame();
+			}
+		}
+	}
+
+	public void setCycleMode(boolean cycleMode) {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setCycleMode(cycleMode);
+			}
+		}
+	}
+
+	public void setAutoMode(boolean autoMode) {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setAutoMode(autoMode);
+			}
+		}
+	}
+
+	public void setTicksPerFrame(int ticks) {
+		for(Drawable d : drawableElements) {
+			if(d instanceof Animation) {
+				((Animation) d).setTicksPerFrame(ticks);
+			}
+		}
 	}
 }

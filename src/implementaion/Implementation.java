@@ -20,9 +20,9 @@ public class Implementation extends Implementor{
 	}
 	
 	private class ExampleEntity extends Entity {
-		public ExampleEntity()
+		public ExampleEntity(Game game)
 		{
-			super();
+			super(game);
 		}
 
 		@Override
