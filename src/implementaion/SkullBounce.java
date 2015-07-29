@@ -7,9 +7,9 @@ import physics.*;
 public class SkullBounce extends Implementor{
 	public void main() {
 		init();
-		super.addEntity(new Skull(game));
+		addEntity(new Skull(game));
 		for(int i = 1; i <= 256; i++) {
-			super.addEntity(new CrazyEntity(game));
+			addEntity(new CrazyEntity(game));
 		}
 		run();
 	}
@@ -82,6 +82,7 @@ public class SkullBounce extends Implementor{
 		@Override
 		public void update() {
 			if(!dead) {
+				System.out.println(getPos().getX());
 				translate(velocity);
 				setAngle(getAngle() + rotateSpeed);
 				if(doesCollide(game.getEntities().get(0))) {

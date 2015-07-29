@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import addons.SpritelessElement;
@@ -14,21 +15,18 @@ import entity.Entity;
  * A screen is a JPanel, shows various entities and non-entities
  *
  */
-public class Screen extends JPanel {
-	/**
-	 * A list of entities in the Game
-	 */
-	private ArrayList<Entity> entities = new ArrayList<Entity>();
-	/**
-	 * A list of non-entities in the Game (buttons, timers, etc)s
-	 */
-	private ArrayList<SpritelessElement> spritelessElements = new ArrayList<SpritelessElement>();
+public class Screen extends JFrame {
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Entity> entities;
+	private ArrayList<SpritelessElement> spritelessElements;
 
 	private String screenName;
 
 	public Screen(String screenName) {
 		super();
 		this.screenName = screenName;
+		entities = new ArrayList<Entity>();
+		spritelessElements = new ArrayList<SpritelessElement>();
 	}
 
 	public String getName() {
