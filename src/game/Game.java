@@ -6,6 +6,7 @@ import input.InputListener;
 
 import javax.swing.JFrame;
 
+import spriteless.*;
 import constants.Constants;
 
 import java.awt.Color;
@@ -16,7 +17,6 @@ import java.util.ConcurrentModificationException;
 
 import entity.*;
 import gui.Screen;
-import addons.*;
 
 public class Game {
 	

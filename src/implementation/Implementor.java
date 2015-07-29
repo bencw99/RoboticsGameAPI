@@ -1,7 +1,7 @@
-package implementaion;
+package implementation;
 
 import java.util.ArrayList;
-import addons.SpritelessElement;
+
 import constants.*;
 import entity.*;
 import game.*;
@@ -9,6 +9,7 @@ import graphics.*;
 import gui.*;
 import input.*;
 import physics.*;
+import spriteless.SpritelessElement;
 
 public abstract class Implementor {
 	

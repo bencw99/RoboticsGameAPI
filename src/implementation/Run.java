@@ -1,4 +1,4 @@
-package implementaion;
+package implementation;
 public class Run {
 
 	public static void main(String[] args) {

@@ -1,11 +1,11 @@
-package implementaion;
-
-import addons.AbstractButton;
-import addons.AbstractMenu;
-import addons.AbstractTextBox;
-import addons.AbstractTimer;
+package implementation;
 
 import java.awt.event.ActionEvent;
+
+import spriteless.AbstractButton;
+import spriteless.AbstractMenu;
+import spriteless.AbstractTextBox;
+import spriteless.AbstractTimer;
 
 public class SpritelessTestGame extends Implementor {
 	

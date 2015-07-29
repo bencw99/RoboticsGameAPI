@@ -8,7 +8,7 @@ import java.util.ConcurrentModificationException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import addons.SpritelessElement;
+import spriteless.SpritelessElement;
 import entity.Entity;
 
 /**
@@ -51,10 +51,8 @@ public class Screen extends JFrame {
 	 * Adds in missing gui elements if new ones are added
 	 */
 	public void updateGui() {
-		// If the component is not in the list, add it
 		for (SpritelessElement e : spritelessElements) {
 			if (!contains(e, getComponents())) {
-				// If component is not type Component
 				try {
 					add((Component) e);
 				} catch (Exception exception) {
@@ -91,12 +89,10 @@ public class Screen extends JFrame {
 				entity.draw(g);
 			}
 		} catch (ConcurrentModificationException e) {
-			// ignored, this is caught at the beginner of entity loading
 		}
 		repaint();
 	}
 
-	// ADDITION AND REMOVAL OF ELEMENTS
 	/**
 	 * Allows you to add an entity to the screen
 	 * 
