@@ -10,7 +10,11 @@ public class Constants {
 	/** The default dimension size **/
 	public final static int DEFAULT_DIMENSION = 32;
 	
-	
+	// ***************************************
+	// SCREENS
+	// ***************************************
+	public final static int SCREEN_WIDTH = 1000;
+	public final static int SCREEN_HEIGHT = 1000;
 	
 	// ***************************************
 	// GRAPHICS

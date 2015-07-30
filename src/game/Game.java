@@ -80,6 +80,16 @@ public class Game extends JFrame{
 		screens.put(screenName, screen);
 	}
 	
+	/**
+	 * Wipes the screen with screenName of all Elements/Entities
+	 * @return false if the screenName is invalid
+	 */
+	public boolean resetScreen(String screenName) {
+		if(screens.containsKey(screenName)) {
+			screens.get(screenName).reset();
+		}
+		return false;
+	}
 	
 	/**
 	 * Get available screens
@@ -154,7 +164,6 @@ public class Game extends JFrame{
 	 * @param ent	the entity to remove
 	 */
 	public void remove(Entity ent) {
-		ent.disable();
 		currentScreen.remove(ent);
 	}
 	

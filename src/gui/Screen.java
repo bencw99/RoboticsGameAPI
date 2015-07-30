@@ -8,7 +8,10 @@ import java.util.ConcurrentModificationException;
 
 import javax.swing.JPanel;
 
+import com.sun.corba.se.impl.orbutil.closure.Constant;
+
 import spriteless.SpritelessElement;
+import constants.Constants;
 import entity.Entity;
 
 /**
@@ -22,7 +25,7 @@ public class Screen extends JPanel {
 
 	/**
 	 * Update being called means this is the current screen, so updates all
-	 * entities/non-entities
+	 * entities/spriteless elements
 	 */
 	public void update() {
 		for (Entity ent : entities) {
@@ -34,9 +37,13 @@ public class Screen extends JPanel {
 		super.repaint();
 	}
 	
+	/**
+	 * Initializes this screen, making it visible
+	 * And setting its dimensions to the default in constants
+	 */
 	public void init() {
 		setVisible(true);
-		setSize(1000, 1000);
+		setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		setBackground(Color.WHITE);
 	}
 
@@ -99,16 +106,36 @@ public class Screen extends JPanel {
 	/**
 	 * Returns entity list
 	 * 
-	 * @return
+	 * @return ArrayList containing all entities in this screen
 	 */
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
-
-	public ArrayList<SpritelessElement> getNonEntities() {
+	
+	/**
+	 * Returns the SpritelessElements
+	 * @return ArrayList containing all SpritelessElements of the screen
+	 */
+	public ArrayList<SpritelessElement> getSpritelessElements() {
 		return spritelessElements;
 	}
-
+	
+	/**
+	 * Removes all entities and elements from this screen
+	 */
+	public void reset() {
+		for(Entity ent : entities) {
+			this.remove(ent);
+		}
+		for(SpritelessElement element : spritelessElements) {
+			this.remove(element);
+		}
+	}
+	
+	/**
+	 * Disables all the entities and elements in this screen
+	 * Can be reactivated
+	 */
 	public void disable() {
 		for (Entity entity : entities) {
 			entity.disable();

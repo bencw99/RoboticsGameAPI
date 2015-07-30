@@ -10,12 +10,12 @@ public class SkullBounce extends Implementor{
 
 	public void main() {
 		init();
-		game.switchScreen("PAUSED");
+		game.setCurrentScreen("PAUSED");
 		addEntity(new Skull(game));
 		for(int i = 1; i <= 16; i++) {
 			addEntity(new CrazyEntity(game));
 		}
-		game.switchScreen("START");
+		game.setCurrentScreen("START");
 		addEntity(new Skull(game));
 		for(int i = 1; i <= 16; i++) {
 			addEntity(new CrazyEntity(game));
@@ -132,10 +132,10 @@ public class SkullBounce extends Implementor{
 			hits++;
 			if(hits % 3 == 0) {
 				if(game.getCurrentScreen().getName() == "START") {
-					game.switchScreen("PAUSED");
+					game.setCurrentScreen("PAUSED");
 				}
 				else {
-					game.switchScreen("START");
+					game.setCurrentScreen("START");
 				}
 			}
 		}
