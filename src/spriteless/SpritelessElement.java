@@ -1,5 +1,6 @@
 package spriteless;
 
+import physics.Dimension;
 import physics.Position;
 
 public interface SpritelessElement{
@@ -8,6 +9,9 @@ public interface SpritelessElement{
 	void disable();
 	void setPosition(Position p);
 	void setPosition(double xPos, double yPos);
+    void setDimension(Dimension dim);
+    void setDimension(double width, double height);
+    Dimension getDimension();
 	Position getPosition();
 	double getXPosition();
 	double getYPosition();

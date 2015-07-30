@@ -1,12 +1,14 @@
 package spriteless;
 
 import physics.Position;
-
+import physics.Dimension;
 import java.awt.*;
 
 public abstract class AbstractTextBox extends TextArea implements SpritelessElement{
 
     private Position p;
+
+    private Dimension dim;
 
     private int numberOfRows;
     private int numberOfColumns;
@@ -18,15 +20,15 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
     public AbstractTextBox(String s) {
     	super(s);
         p = new Position(0, 0);
-        this.setEditable(false);
-        this.setFocusable(false);
+        setEditable(false);
+        setFocusable(false);
     }
 
     public AbstractTextBox() {
         super("");
         p = new Position(0, 0);
-        this.setEditable(false);
-        this.setFocusable(false);
+        setEditable(false);
+        setFocusable(false);
     }
 
     public AbstractTextBox(int numberOfRows, int numberOfColumns) {
@@ -34,16 +36,29 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
     }
 
     public AbstractTextBox(String text, int numberOfRows, int numberOfColumns) {
-        super(text, numberOfRows, numberOfColumns);
+        super(text, numberOfRows, numberOfColumns, SCROLLBARS_NONE);
     }
 
 	public void init() {
-        this.setEnabled(true);
+        setEnabled(true);
 	}
 
 	public void disable() {
-        this.setEnabled(false);
+        setEnabled(false);
 	}
+
+    public void setDimension(Dimension dim) {
+        this.dim = dim;
+    }
+
+    public void setDimension(double width, double height) {
+        this.dim.setWidth(width);
+        this.dim.setHeight(height);
+    }
+
+    public Dimension getDimension() {
+        return this.dim;
+    }
 
 	public void setPosition(Position p) {
         this.p = p;
@@ -67,12 +82,11 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
 	}
 
 	public void show() {
-        this.setText(hiddenText);
+        setVisible(true);
 	}
 
 	public void hide() {
-        hiddenText = this.getText();
-		this.setText("");
+        setVisible(false);
 	}
 
 }

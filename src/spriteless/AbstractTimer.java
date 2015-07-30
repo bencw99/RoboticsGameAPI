@@ -1,12 +1,14 @@
 package spriteless;
 
 import physics.Position;
-
+import physics.Dimension;
 import java.awt.*;
 
 public abstract class AbstractTimer extends TextArea implements SpritelessElement{
 	
-	Position pos;
+	private Position pos;
+
+    private Dimension dim;
 
 	private double startTime; //In milliseconds
 	private double currentTime; //In seconds
@@ -78,6 +80,19 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
             this.setText("");
         }
 	}
+
+    public void setDimension(Dimension dim) {
+        this.dim = dim;
+    }
+
+    public void setDimension(double width, double height) {
+        this.dim.setWidth(width);
+        this.dim.setHeight(height);
+    }
+
+    public Dimension getDimension() {
+        return this.dim;
+    }
 
 	public void setPosition(Position p) {
 		this.pos = p;
