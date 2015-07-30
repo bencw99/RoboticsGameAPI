@@ -1,22 +1,17 @@
 package spriteless;
 
+import physics.Dimension;
 import physics.Position;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
-import javax.swing.BoxLayout;
+import java.awt.*;
 
 public class AbstractMenu extends Container implements SpritelessElement {
 
 	private static final long serialVersionUID = 1L;
 
-	private Position p;
+    private Position p;
+
+    private Dimension dim;
 
     public AbstractMenu() {
     	this(0, 0);
@@ -53,6 +48,19 @@ public class AbstractMenu extends Container implements SpritelessElement {
         	SpritelessElement element = (SpritelessElement)(this.getComponent(x));
             element.disable();
         }
+    }
+
+    public void setDimension(Dimension dim) {
+        this.dim = dim;
+    }
+
+    public void setDimension(double width, double height) {
+        this.dim.setWidth(width);
+        this.dim.setHeight(height);
+    }
+
+    public Dimension getDimension() {
+        return this.dim;
     }
 
     public void show() {

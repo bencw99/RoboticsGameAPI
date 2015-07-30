@@ -1,16 +1,18 @@
 package spriteless;
 
+import physics.Dimension;
+import physics.Position;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
-import physics.Position;
 
 public abstract class AbstractButton extends JButton implements SpritelessElement, ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	
+
+    private Dimension dim;
+
 	private Position p;
 
 	public AbstractButton() {
@@ -18,32 +20,51 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 		addActionListener(this);
 	}
 
-	public abstract void show();
-	public abstract void hide();
 	public abstract void update();
 	public abstract void actionPerformed(ActionEvent e);
-	
+
+    public void show() {
+        setVisible(true);
+    }
+
+  	public void hide() {
+        setVisible(false);
+    }
+
 	public void setButtonText(String text) {
-		this.setText(text);
+		setText(text);
 	}
 	
 	public String getButtonText() {
-		return this.getText();
+		return getText();
 	}
 	
 	public void init() {
-		this.setEnabled(true);
+		setEnabled(true);
 	}
 	
 	public void disable() {
-		this.setEnabled(false);
+		setEnabled(false);
 	}
-	
+
+    public void setDimension(Dimension dim) {
+        this.dim = dim;
+    }
+
+    public void setDimension(double width, double height) {
+        this.dim.setWidth(width);
+        this.dim.setHeight(height);
+    }
+
+    public Dimension getDimension() {
+        return this.dim;
+    }
+
 	public void setPosition(Position p) {
 		this.p.setX(p.getX());
 		this.p.setY(p.getY());
 	}
-	
+
 	public void setPosition(double xPos, double yPos) {
 		this.p.setX(xPos);
 		this.p.setY(yPos);
