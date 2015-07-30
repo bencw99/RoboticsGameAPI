@@ -129,6 +129,7 @@ public class Game extends JFrame{
 	}
 	
 	//Getters / Setters
+	
 	/**
 	 * @return the listener
 	 */
