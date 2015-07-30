@@ -11,6 +11,7 @@ import constants.Constants;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import entity.*;
 import gui.Screen;
@@ -25,7 +26,7 @@ public class Game extends JFrame{
 	 * Stores all the different game screens and which
 	 * screen is currently being used
 	 */
-	ArrayList<Screen> screens;
+	HashMap<String, Screen> screens = new HashMap<String, Screen>();
 	private Screen currentScreen;
 	
 	/**
@@ -41,7 +42,6 @@ public class Game extends JFrame{
 	 */
 	public Game() {
 		super();
-		screens = new ArrayList<Screen>();
 		initScreens();
 		initFrame();
 	}
@@ -65,43 +65,41 @@ public class Game extends JFrame{
 	 * Runs the game
 	 */
 	private void initScreens() {
-		screens.add(new Screen("START"));
-		screens.add(new Screen("PAUSED"));
-		screens.add(new Screen("FINISHED"));
+		screens.put("START", new Screen());
+		screens.put("PAUSED", new Screen());
+		screens.put("FINISHED", new Screen());
 		
-		for(Screen s : screens) {
-			s.init();
-		}
+		screens.get("START").init();
 		
-		currentScreen = screens.get(0);
+		currentScreen = screens.get("START");
 	}
 	/**
 	 * Adds screens to the game
 	 */
-	public void addScreen(Screen screen) {
-		screens.add(screen);
+	public void addScreen(String screenName, Screen screen) {
+		screens.put(screenName, screen);
 	}
 	
 	
 	/**
 	 * Get available screens
 	 */
-	public ArrayList<Screen> getScreens() {
+	public HashMap<String, Screen> getScreens() {
 		return screens;
 	}
 
 	/**
 	 * Switches the current screen
+	 * @return false if screenName was invalid
 	 */
-	public void switchScreen(String screenName) {
-		for(Screen screen : screens) {
-			if(screen.getName() == screenName) {
-				remove(currentScreen);
-				currentScreen = screen;
-				add(currentScreen);
-				break;
-			}
+	public boolean setCurrentScreen(String screenName) {
+		if(screens.containsKey(screenName)) {
+			remove(currentScreen);
+			currentScreen = screens.get(screenName);
+			add(currentScreen);
+			return true;
 		}
+		return false; 
 	}
 			
 	//Methods

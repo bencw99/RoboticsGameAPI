@@ -17,21 +17,8 @@ import entity.Entity;
  */
 public class Screen extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Entity> entities;
-	private ArrayList<SpritelessElement> spritelessElements;
-
-	private String screenName;
-
-	public Screen(String screenName) {
-		super();
-		this.screenName = screenName;
-		entities = new ArrayList<Entity>();
-		spritelessElements = new ArrayList<SpritelessElement>();
-	}
-
-	public String getName() {
-		return screenName;
-	}
+	private ArrayList<Entity> entities = new ArrayList<Entity>();
+	private ArrayList<SpritelessElement> spritelessElements = new ArrayList<SpritelessElement>();
 
 	/**
 	 * Update being called means this is the current screen, so updates all
