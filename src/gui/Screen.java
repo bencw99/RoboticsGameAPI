@@ -31,7 +31,6 @@ public class Screen extends JPanel {
 		for (SpritelessElement ent : spritelessElements) {
 			ent.update();
 		}
-		updateGui();
 		super.repaint();
 	}
 	
@@ -39,37 +38,6 @@ public class Screen extends JPanel {
 		setVisible(true);
 		setSize(1000, 1000);
 		setBackground(Color.WHITE);
-	}
-
-	/**
-	 * Adds in missing gui elements if new ones are added
-	 */
-	public void updateGui() {
-		for (SpritelessElement e : spritelessElements) {
-			if (!contains(e, getComponents())) {
-				try {
-					add((Component) e);
-				} catch (Exception exception) {
-					exception.printStackTrace();
-				}
-			}
-		}
-	}
-
-	/**
-	 * Helper method Checks if key is in list
-	 * 
-	 * @param key
-	 * @param list
-	 * @return true if yes
-	 */
-	private boolean contains(Object key, Object[] list) {
-		for (Object o : list) {
-			if (o.equals(key)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -98,10 +66,11 @@ public class Screen extends JPanel {
 	}
 
 	/**
-	 * Add a non entity to the screen
+	 * Add a spriteless element to the screen
 	 */
 	public void add(SpritelessElement ent) {
 		spritelessElements.add(ent);
+		super.add((Component) ent);
 	}
 
 	/**
@@ -116,7 +85,7 @@ public class Screen extends JPanel {
 	}
 
 	/**
-	 * Remove an nonEntity from this world
+	 * Remove an spriteless element from this screen
 	 * 
 	 * @param ent
 	 *            the entity to remove
@@ -124,6 +93,7 @@ public class Screen extends JPanel {
 	public void remove(SpritelessElement ent) {
 		ent.disable();
 		spritelessElements.remove(ent);
+		super.remove((Component) ent);
 	}
 
 	/**
