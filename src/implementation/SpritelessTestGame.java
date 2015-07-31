@@ -1,11 +1,11 @@
 package implementation;
 
-import java.awt.event.ActionEvent;
-
 import spriteless.AbstractButton;
 import spriteless.AbstractMenu;
 import spriteless.AbstractTextBox;
 import spriteless.AbstractTimer;
+
+import java.awt.event.ActionEvent;
 
 public class SpritelessTestGame extends Implementor {
 	
@@ -40,8 +40,7 @@ public class SpritelessTestGame extends Implementor {
 
 		run();
 	}
-	
-	
+
 	private class MyMenu extends AbstractMenu {
 		private static final long serialVersionUID = 1L;
 		
@@ -54,15 +53,6 @@ public class SpritelessTestGame extends Implementor {
 	
 	private class MyButton extends AbstractButton {
 		private static final long serialVersionUID = 1L;
-
-		public void show() {
-			//should put show stuff here
-		}
-
-		
-		public void hide() {
-			//should put hide stuff here
-		}
 
 		public void update() {
 		}

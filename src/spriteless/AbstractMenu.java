@@ -1,6 +1,5 @@
 package spriteless;
 
-import physics.Dimension;
 import physics.Position;
 
 import java.awt.*;
@@ -21,6 +20,8 @@ public class AbstractMenu extends Container implements SpritelessElement {
     	super();
     	this.setLayout(new GridLayout(3, 0, 0, 0));
     	p = new Position(xPos, yPos);
+        dim = new Dimension(1000, 1000);
+        setPreferredSize(dim);
     }
 
     public void addSpritelessElement(SpritelessElement menuElement) {
@@ -51,12 +52,13 @@ public class AbstractMenu extends Container implements SpritelessElement {
     }
 
     public void setDimension(Dimension dim) {
+        double heightScaler = dim.getHeight() / this.dim.getHeight();
+        double widthScaler = dim.getWidth() / this.dim.getWidth();
         this.dim = dim;
     }
 
     public void setDimension(double width, double height) {
-        this.dim.setWidth(width);
-        this.dim.setHeight(height);
+        this.dim.setSize(width, height);
     }
 
     public Dimension getDimension() {

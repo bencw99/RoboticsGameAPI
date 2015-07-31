@@ -1,7 +1,8 @@
 package spriteless;
 
-import physics.Dimension;
 import physics.Position;
+
+import java.awt.*;
 
 public interface SpritelessElement{
 	void init();

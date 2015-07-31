@@ -1,7 +1,6 @@
 package spriteless;
 
 import physics.Position;
-import physics.Dimension;
 import java.awt.*;
 
 public abstract class AbstractTimer extends TextArea implements SpritelessElement{
@@ -13,41 +12,27 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
 
 	private double startTime; //In milliseconds
 	private double currentTime; //In seconds
-	
-	private boolean displayText; //A boolean that tells us if we want to display text or not
 
 	public abstract void disable();
 	
 	public AbstractTimer() {
-        super();
-		pos = new Position(0, 0);
-		displayText = true;
-        this.setEditable(true);
-		this.setFocusable(false);
+        this(0, 0, true);
 	}
 	
 	public AbstractTimer(boolean displayText) {
-        super();
-		pos = new Position(0, 0);
-		this.displayText = displayText;
-		this.setEditable(true);
-		this.setFocusable(false);
+		this(0, 0, displayText);
 	}
 	
 	public AbstractTimer(double xPos, double yPos, boolean displayText) {
 		super();
         pos = new Position(xPos, yPos);
-		this.displayText = displayText;
-		this.setEditable(false);
-		this.setFocusable(false);
+		setVisible(displayText);
+		setEditable(false);
+		setFocusable(false);
 	}
 	
 	public AbstractTimer(double xPos, double yPos) {
-		super();
-        pos = new Position(xPos, yPos);
-		this.displayText = true;
-		this.setEditable(false);
-		this.setFocusable(false);
+		this(xPos, yPos, true);
 	}
 	
 	public void init() {
@@ -64,22 +49,16 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
     }
 
 	public void show() {
-		displayText = true;
+		setVisible(true);
 	}
 	
 	public void hide() {
-		displayText = false;
+		setVisible(false);
 	}
 	
 	public void update() {
 		currentTime = (System.currentTimeMillis() - startTime)/1000;
-		if(displayText == true) {
-			this.setText(String.valueOf(currentTime));
-		}
-
-        else {
-            this.setText("");
-        }
+		setText(String.valueOf(currentTime));
 	}
 
     public void setDimension(Dimension dim) {
@@ -87,8 +66,7 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
     }
 
     public void setDimension(double width, double height) {
-        this.dim.setWidth(width);
-        this.dim.setHeight(height);
+        this.dim.setSize(width, height);
     }
 
     public Dimension getDimension() {

@@ -1,7 +1,6 @@
 package spriteless;
 
 import physics.Position;
-import physics.Dimension;
 import java.awt.*;
 
 public abstract class AbstractTextBox extends TextArea implements SpritelessElement{
@@ -14,25 +13,23 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
     public abstract void update();
 
     public AbstractTextBox(String s) {
-    	super(s);
-        p = new Position(0, 0);
-        setEditable(false);
-        setFocusable(false);
+    	this(s, 50, 50);
     }
 
     public AbstractTextBox() {
-        super("");
-        p = new Position(0, 0);
-        setEditable(false);
-        setFocusable(false);
+        this("", 50, 50);
     }
 
     public AbstractTextBox(int numberOfRows, int numberOfColumns) {
-        super(numberOfRows, numberOfColumns);
+        this("", numberOfRows, numberOfColumns);
     }
 
     public AbstractTextBox(String text, int numberOfRows, int numberOfColumns) {
         super(text, numberOfRows, numberOfColumns, SCROLLBARS_NONE);
+        p = new Position(0, 0);
+        setDimension(numberOfColumns, numberOfRows);
+        setEditable(false);
+        setFocusable(false);
     }
 
 	public void init() {
@@ -48,8 +45,7 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
     }
 
     public void setDimension(double width, double height) {
-        this.dim.setWidth(width);
-        this.dim.setHeight(height);
+        this.dim.setSize(width, height);
     }
 
     public Dimension getDimension() {

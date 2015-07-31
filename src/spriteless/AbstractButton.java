@@ -1,9 +1,9 @@
 package spriteless;
 
-import physics.Dimension;
 import physics.Position;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,17 +17,18 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 
 	public AbstractButton() {
 		p = new Position(0, 0);
+        dim = new Dimension(10, 10);
 		addActionListener(this);
 	}
 
 	public abstract void update();
 	public abstract void actionPerformed(ActionEvent e);
 
-    public void show() {
+    public final void show() {
         setVisible(true);
     }
 
-  	public void hide() {
+  	public final void hide() {
         setVisible(false);
     }
 
@@ -52,8 +53,7 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
     }
 
     public void setDimension(double width, double height) {
-        this.dim.setWidth(width);
-        this.dim.setHeight(height);
+        this.dim.setSize(width, height);
     }
 
     public Dimension getDimension() {
