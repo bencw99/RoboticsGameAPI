@@ -5,7 +5,8 @@ import physics.Dimension;
 import java.awt.*;
 
 public abstract class AbstractTimer extends TextArea implements SpritelessElement{
-	
+	private static final long serialVersionUID = 1L;
+
 	private Position pos;
 
     private Dimension dim;

@@ -8,8 +8,6 @@ import java.util.ConcurrentModificationException;
 
 import javax.swing.JPanel;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-
 import spriteless.SpritelessElement;
 import constants.Constants;
 import entity.Entity;

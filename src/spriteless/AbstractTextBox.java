@@ -5,15 +5,11 @@ import physics.Dimension;
 import java.awt.*;
 
 public abstract class AbstractTextBox extends TextArea implements SpritelessElement{
+	private static final long serialVersionUID = 1L;
 
-    private Position p;
+	private Position p;
 
     private Dimension dim;
-
-    private int numberOfRows;
-    private int numberOfColumns;
-
-    private String hiddenText;
 
     public abstract void update();
 

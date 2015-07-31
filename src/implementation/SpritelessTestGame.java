@@ -43,11 +43,9 @@ public class SpritelessTestGame extends Implementor {
 	
 	
 	private class MyMenu extends AbstractMenu {
-		MyMenu() {
-			super();
-		}
+		private static final long serialVersionUID = 1L;
 		
-		MyMenu(double xPos, double yPos) {
+		public MyMenu(double xPos, double yPos) {
 			super(xPos, yPos);
 		}
 		
@@ -55,6 +53,7 @@ public class SpritelessTestGame extends Implementor {
 	//MENU CLASS ENDS HERE
 	
 	private class MyButton extends AbstractButton {
+		private static final long serialVersionUID = 1L;
 
 		public void show() {
 			//should put show stuff here
@@ -76,13 +75,10 @@ public class SpritelessTestGame extends Implementor {
 	//BUTTON CLASS ENDS HERE
 	
 	private class MyTimer extends AbstractTimer {
+		private static final long serialVersionUID = 1L;
 
 		MyTimer() {
 			super();
-		}
-		
-		MyTimer(double xPos, double yPos) {
-			super(xPos, yPos);
 		}
 		
 		public void disable() {
@@ -93,6 +89,11 @@ public class SpritelessTestGame extends Implementor {
 	//TIMER CLASS ENDS HERE
 	
 	private class MyTextArea extends AbstractTextBox {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		MyTextArea(String s) {
 			super(s);

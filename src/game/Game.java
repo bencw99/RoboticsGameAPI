@@ -1,6 +1,4 @@
 package game;
-//Paly Robotics - Team 8
-//Game API
 
 import input.InputListener;
 
@@ -9,7 +7,6 @@ import javax.swing.JFrame;
 import spriteless.*;
 import constants.Constants;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -87,6 +84,7 @@ public class Game extends JFrame{
 	public boolean resetScreen(String screenName) {
 		if(screens.containsKey(screenName)) {
 			screens.get(screenName).reset();
+			return true;
 		}
 		return false;
 	}

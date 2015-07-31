@@ -1,12 +1,9 @@
 package implementation;
 
-import java.awt.event.ActionEvent;
 
 import constants.*;
 import entity.*;
 import game.*;
-import graphics.*;
-import gui.*;
 import input.*;
 import physics.*;
 public class Platformer extends Implementor{
