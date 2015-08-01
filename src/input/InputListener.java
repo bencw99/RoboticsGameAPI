@@ -9,10 +9,10 @@ import physics.*;
  */
 public class InputListener implements KeyListener, MouseListener, MouseMotionListener {
 	/** The array of booleans determining whether or not the given key is pressed **/
-	private static boolean keysPressed[] = new boolean[128];
+	private static boolean keysPressed[] = new boolean[100000];
 	
 	/** The array of booleans determining if the key was pressed last cycle **/
-	private static boolean newPressed[] = new boolean[128];
+	private static boolean newPressed[] = new boolean[100000];
 	
 	/** The boolean describing the mouse state **/
 	private static boolean mousePressed = false;

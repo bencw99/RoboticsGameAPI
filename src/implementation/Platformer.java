@@ -19,23 +19,23 @@ public class Platformer extends Implementor{
 		addEntity(new Jumper(game, new Position(100, 100), new Dimension()));
 		addEntity(new Platform(game, new Position(100, 200), new Dimension(100, 20), 0));
 		
-		for(int i = 0; i < 30; i ++) {
-			Platform p = null;
-			
-			boolean possible = false;
-			
-			while(!possible) {
-				p = new Platform(game, new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
-				possible = true;
-				for(Entity other : getEntities()) {
-					if(p.doesCollide(other)) {
-						possible = false;
-					}
-				}
-			}
-			
-			addEntity(p);
-		}
+//		for(int i = 0; i < 30; i ++) {
+//			Platform p = null;
+//			
+//			boolean possible = false;
+//			
+//			while(!possible) {
+//				p = new Platform(game, new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
+//				possible = true;
+//				for(Entity other : getEntities()) {
+//					if(p.doesCollide(other)) {
+//						possible = false;
+//					}
+//				}
+//			}
+//			
+//			addEntity(p);
+//		}
 		
 		//Ignore
 		run();
@@ -46,9 +46,9 @@ public class Platformer extends Implementor{
 		{
 			super(game, pos, angle, dim);
 			
-			spritesArray = new String[]{"smile", "images/preset/black.png"};
+			spritesArray = new String[]{"platform", "images/preset/black.png"};
 			loadSprites();
-			activeSprite = "smile";
+			activeSprite = "platform";
 		}
 
 		@Override
@@ -79,9 +79,9 @@ public class Platformer extends Implementor{
 		{
 			super(game, pos, 0, dim);
 			
-			spritesArray = new String[]{"rafi", "images/skull-transparent.png"};
+			spritesArray = new String[]{"jumper", "images/preset/red.png"};
 			loadSprites();
-			activeSprite = "rafi";
+			activeSprite = "jumper";
 		}
 
 		@Override
@@ -139,6 +139,8 @@ public class Platformer extends Implementor{
 					}
 				}
 			}
+			
+			translate(vel.scale(1 / (double)Constants.UPDATES_PER_SEC));
 		}
 
 		@Override
