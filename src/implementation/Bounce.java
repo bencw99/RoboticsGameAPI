@@ -5,6 +5,8 @@ import graphics.*;
 import physics.*;
 
 public class Bounce extends Implementor{
+	private static int hits = 0;
+
 	public void execute() {
 		init();
 		EvilSquare Edward;
@@ -122,6 +124,15 @@ public class Bounce extends Implementor{
 
 		private void EvilSquareCollide() {
 			kill();
+			hits++;
+			if(hits % 3 == 0) {
+				if(game.getScreenName(game.getCurrentScreen()) == "START") {
+					game.setCurrentScreen("PAUSED");
+				}
+				else {
+					game.setCurrentScreen("START");
+				}
+			}
 		}
 
 		private void kill() {

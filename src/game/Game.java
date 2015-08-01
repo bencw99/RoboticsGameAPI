@@ -105,9 +105,22 @@ public class Game extends JFrame{
 			remove(currentScreen);
 			currentScreen = screens.get(screenName);
 			add(currentScreen);
+			super.validate();
 			return true;
 		}
 		return false; 
+	}
+	
+	/**
+	 * Returns name of requested screen
+	 */
+	public String getScreenName(Screen screen) {
+		for(String name : screens.keySet()) {
+			if(screens.get(name).equals(screen)) {
+				return name;
+			}
+		}
+		return null;
 	}
 			
 	//Methods
