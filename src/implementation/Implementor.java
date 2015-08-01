@@ -15,7 +15,7 @@ public abstract class Implementor {
 	/**
 	 * The main function of this implementor
 	 */
-	public abstract void main();
+	public abstract void execute();
 	
 	/**
 	 * Adds an entity to world

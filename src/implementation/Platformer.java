@@ -10,7 +10,7 @@ public class Platformer extends Implementor{
 	/**
 	 * Called when game starts
 	 */
-	public void main() {
+	public void execute() {
 		//Ignore
 		init();
 		

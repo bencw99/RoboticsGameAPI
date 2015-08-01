@@ -5,7 +5,7 @@ import graphics.*;
 import physics.*;
 
 public class Bounce extends Implementor{
-	public void main() {
+	public void execute() {
 		init();
 		EvilSquare Edward;
 		Edward = new EvilSquare(game);

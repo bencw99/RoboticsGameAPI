@@ -8,30 +8,15 @@ import spriteless.AbstractTimer;
 import java.awt.event.ActionEvent;
 
 public class SpritelessTestGame extends Implementor {
-	
-	public void main() {
-		init();
-		
-		/** Button test - WORKS!
-		MyButton button = new MyButton();
-		addSpritelessElement(button);
-		*/
-		
-		/** Timer test - WORKS!
-		MyTimer timer = new MyTimer();
-		addSpritelessElement(timer);
-		*/
-		
-		/** Textbox test - WORKS!
-		MyTextArea text = new MyTextArea("INSERT TEXT HERE");
-		addSpritelessElement(text);
-		*/
 
-		MyMenu menu = new MyMenu(500, 500);
-		MyTextArea text = new MyTextArea("HELLO HELLO HELLO");
-		MyTimer timer = new MyTimer();
-		MyButton button = new MyButton();
-		
+    MyMenu menu = new MyMenu(500, 500);
+    MyTextArea text = new MyTextArea("HELLO HELLO HELLO");
+    MyTimer timer = new MyTimer();
+    MyButton button = new MyButton();
+
+    public void execute() {
+		init();
+
 		addSpritelessElement(menu);
 		
 		menu.addSpritelessElement(text);
