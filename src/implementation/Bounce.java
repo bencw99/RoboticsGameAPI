@@ -7,7 +7,8 @@ import physics.*;
 public class Bounce extends Implementor{
 	public void main() {
 		init();
-		EvilSquare Edward = new EvilSquare(game);
+		EvilSquare Edward;
+		Edward = new EvilSquare(game);
 		addEntity(Edward);
 		for(int i = 1; i <= 16; i++) {
 			addEntity(new PassiveShape(game));
