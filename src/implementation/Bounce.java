@@ -1,20 +1,27 @@
 package implementation;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+
 import entity.*;
 import game.Game;
 import graphics.*;
-import physics.*;
+import physics.Position;
+import physics.Vector;
+import spriteless.AbstractButton;
 
 public class Bounce extends Implementor{
-	private static int hits = 0;
-
+    MyButton addButton = new MyButton(new Position(300, 300), new Dimension(100, 200));
+	
 	public void execute() {
 		init();
 		EvilSquare Edward;
 		Edward = new EvilSquare(game);
 		addEntity(Edward);
-		for(int i = 1; i <= 64; i++) {
+		for(int i = 1; i <= 128; i++) {
 			addEntity(new PassiveShape(game));
 		}
+		addSpritelessElement(addButton);
 		run();
 	}
 
@@ -125,15 +132,6 @@ public class Bounce extends Implementor{
 
 		private void EvilSquareCollide() {
 			kill();
-			hits++;
-			if(hits % 3 == 0) {
-				if(game.getScreenName(game.getCurrentScreen()) == "START") {
-					game.setCurrentScreen("PAUSED");
-				}
-				else {
-					game.setCurrentScreen("START");
-				}
-			}
 		}
 
 		private void kill() {
@@ -218,7 +216,7 @@ public class Bounce extends Implementor{
 			timeAlive++;
 
 			if(timeAlive % GROW_TIME == 0) {
-				setDim(new Dimension(getDim().getWidth() * GROW_FACTOR, getDim().getHeight() * GROW_FACTOR));
+				setDim(new Dimension((int) (getDim().getWidth() * GROW_FACTOR) + timeAlive / 1000,(int) (getDim().getHeight() * GROW_FACTOR) + timeAlive / 1000));
 			}
 		}
 
@@ -226,5 +224,26 @@ public class Bounce extends Implementor{
 			setPos(new Position(START_LEFT_BOUND + Math.random() * (START_RIGHT_BOUND - START_LEFT_BOUND), 
 					START_UPPER_BOUND + Math.random() * (START_LOWER_BOUND - START_UPPER_BOUND)));
 		}
+	}
+	
+	private class MyButton extends AbstractButton {
+		private static final long serialVersionUID = 1L;
+
+		public MyButton(Position p, Dimension d) {
+			super(p, d);
+		}
+		
+		public void init() {
+			super.init();
+			this.setText("IT WORKS");
+		}
+		
+		public void update() {
+			
+		}
+
+		public void actionPerformed(ActionEvent e) {
+		}
+		
 	}
 }

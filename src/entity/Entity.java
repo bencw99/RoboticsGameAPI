@@ -1,6 +1,5 @@
 package entity;
 
-import physics.Dimension;
 import physics.Position;
 import physics.Vector;
 import game.Game;

@@ -13,12 +13,19 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 
     private Dimension dim;
 
-	private Position p;
+	private Position pos;
 
 	public AbstractButton() {
-		p = new Position(0, 0);
+		pos = new Position(0, 0);
         dim = new Dimension(10, 10);
         setPreferredSize(dim);
+		addActionListener(this);
+	}
+	
+	public AbstractButton(Position p, Dimension d) {
+		pos = p;
+		dim = d;
+		setPreferredSize(dim);
 		addActionListener(this);
 	}
 
@@ -63,25 +70,25 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
     }
 
 	public void setPosition(Position p) {
-		this.p.setX(p.getX());
-		this.p.setY(p.getY());
+		this.pos.setX(p.getX());
+		this.pos.setY(p.getY());
 	}
 
 	public void setPosition(double xPos, double yPos) {
-		this.p.setX(xPos);
-		this.p.setY(yPos);
+		this.pos.setX(xPos);
+		this.pos.setY(yPos);
 	}
 	
 	public Position getPosition() {
-		return p;
+		return pos;
 	}
 	
 	public double getXPosition() {
-		return this.p.getX();
+		return pos.getX();
 	}
 	
 	public double getYPosition() {
-		return this.p.getY();
+		return pos.getY();
 	}
 
 

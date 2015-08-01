@@ -8,7 +8,7 @@ import constants.Constants;
 
 /**
  * This class is an extension of SpriteManager that holds a set of Sprites that can be cycled between for the purpose of animation creations.
- * The animations can be individually steppted frame for frame or set to run automatically or loop. Animation will always have an active Sprite
+ * The animations can be individually stepped frame for frame or set to run automatically or loop. Animation will always have an active Sprite
  * that will be drawn when the inheritted draw method is called. The drawable interface means this class can be held in a SpriteManager.
  * 
  * @author Jonathan Zwiebel

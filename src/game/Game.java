@@ -14,7 +14,7 @@ import entity.*;
 import gui.Screen;
 
 public class Game extends JFrame{
-	
+
 	/**
 	 * 
 	 */
@@ -25,7 +25,7 @@ public class Game extends JFrame{
 	 */
 	HashMap<String, Screen> screens = new HashMap<String, Screen>();
 	private Screen currentScreen;
-	
+
 	/**
 	 * Input Listener
 	 */
@@ -52,7 +52,7 @@ public class Game extends JFrame{
 		setVisible(true);
 		setSize(1000, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		addKeyListener(inputListener);
 		addMouseListener(inputListener);
 		add(currentScreen);
@@ -65,9 +65,9 @@ public class Game extends JFrame{
 		screens.put("START", new Screen());
 		screens.put("PAUSED", new Screen());
 		screens.put("FINISHED", new Screen());
-		
+
 		screens.get("START").init();
-		
+
 		currentScreen = screens.get("START");
 	}
 	/**
@@ -76,7 +76,7 @@ public class Game extends JFrame{
 	public void addScreen(String screenName, Screen screen) {
 		screens.put(screenName, screen);
 	}
-	
+
 	/**
 	 * Wipes the screen with screenName of all Elements/Entities
 	 * @return false if the screenName is invalid
@@ -88,7 +88,7 @@ public class Game extends JFrame{
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Get available screens
 	 */
@@ -129,7 +129,7 @@ public class Game extends JFrame{
 	public Screen getScreenWithName(String name) {
 		return screens.get(name);
 	}
-			
+
 	//Methods
 
 	/**
@@ -137,11 +137,16 @@ public class Game extends JFrame{
 	 */
 	public void run() {
 		while(true) {
+			long start = System.currentTimeMillis();
 			update();
-			try {
-				Thread.sleep(1000 / (int) Constants.UPDATES_PER_SEC);
-			} catch (InterruptedException e) { 
-				e.printStackTrace();
+			long diff = System.currentTimeMillis() - start;
+			long timeToSleep = (1000 / (int) Constants.UPDATES_PER_SEC) - diff;
+			if(timeToSleep > 0) {
+				try {
+					Thread.sleep(timeToSleep);
+				} catch (InterruptedException e) { 
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -153,9 +158,9 @@ public class Game extends JFrame{
 	public void disbale() {
 		currentScreen.disable();
 	}
-	
+
 	//Getters / Setters
-	
+
 	/**
 	 * @return the listener
 	 */
@@ -208,7 +213,7 @@ public class Game extends JFrame{
 	public void remove(Entity ent) {
 		currentScreen.remove(ent);
 	}
-	
+
 	/**
 	 * Returns entity list
 	 * @return
@@ -216,7 +221,7 @@ public class Game extends JFrame{
 	public ArrayList<Entity> getEntities() {
 		return currentScreen.getEntities();
 	}
-	
+
 	public Screen getCurrentScreen() {
 		return currentScreen;
 	}

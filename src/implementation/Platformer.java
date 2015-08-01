@@ -1,6 +1,8 @@
 package implementation;
 
 
+import java.awt.Dimension;
+
 import constants.*;
 import entity.*;
 import game.*;
