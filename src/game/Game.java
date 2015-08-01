@@ -155,7 +155,7 @@ public class Game extends JFrame{
 		currentScreen.update();
 	}
 
-	public void disbale() {
+	public void disable() {
 		currentScreen.disable();
 	}
 
