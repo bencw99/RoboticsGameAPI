@@ -12,7 +12,7 @@ public class Bounce extends Implementor{
 		EvilSquare Edward;
 		Edward = new EvilSquare(game);
 		addEntity(Edward);
-		for(int i = 1; i <= 16; i++) {
+		for(int i = 1; i <= 64; i++) {
 			addEntity(new PassiveShape(game));
 		}
 		run();
@@ -110,6 +110,7 @@ public class Bounce extends Implementor{
 				velocity.setY(velocity.getY() + (Math.random() / RANDOM_FACTOR - (1 / (2 * RANDOM_FACTOR))) * (1 + timeAlive * 0.01 * ACCEL_FACTOR));
 				timeAlive++;
 			}
+
 		}
 
 		private void resetPosition() {
@@ -141,6 +142,7 @@ public class Bounce extends Implementor{
 			activeSprite = "explosion";
 			setAutoMode(true);
 			setTicksPerFrame(2);
+			stepFrame();
 			timeAlive = 0;
 		}
 

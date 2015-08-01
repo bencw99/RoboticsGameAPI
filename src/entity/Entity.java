@@ -365,21 +365,20 @@ public abstract class Entity {
 		this.spriteManager = spriteManager;
 	}
 	
-	public void stepFrame() {
-		spriteManager.stepFrame();
-	}
-	
 	public void setCycleMode(boolean cycleMode) {
 		spriteManager.setCycleMode(cycleMode);
 	}
 
-	
 	public void setAutoMode(boolean autoMode) {
 		spriteManager.setAutoMode(autoMode);
 	}
 	
 	public void setTicksPerFrame(int ticks) {
 		spriteManager.setTicksPerFrame(ticks);
+	}
+	
+	public void stepFrame() {
+		spriteManager.stepFrame();
 	}
 	
 	/**
