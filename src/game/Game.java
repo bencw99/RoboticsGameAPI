@@ -176,4 +176,5 @@ public class Game extends JFrame{
 	public Screen getCurrentScreen() {
 		return currentScreen;
 	}
+
 }
