@@ -447,6 +447,9 @@ public abstract class Entity {
 				collisions.add(e);
 			}
 		}
-		return collisions;
+		if(collisions.size() > 0) {
+			return collisions;
+		}
+		return null;
 	}
 }
