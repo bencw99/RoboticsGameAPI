@@ -437,4 +437,18 @@ public abstract class Entity {
 		spriteManager = new SpriteManager(this, drawableList);
 		activeSprite = (String) concatArray[0];
 	}
+	/**
+	 * Method that gets all the entities that collides with it and is of type Class
+	 * @param c the Class type
+	 * @return all the entities that collide with this entity
+	 */
+	public ArrayList<Entity> collidesWithType(Class c){
+		ArrayList<Entity> collisions = new ArrayList<Entity>();
+		for(Entity e : game.getCurrentScreen().getEntities()){
+			if(c.isInstance(e)  && e.doesCollide(this)){
+				collisions.add(e);
+			}
+		}
+		return collisions;
+	}
 }
