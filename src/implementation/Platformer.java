@@ -19,23 +19,23 @@ public class Platformer extends Implementor{
 		addEntity(new Jumper(game, new Position(100, 100), new Dimension()));
 		addEntity(new Platform(game, new Position(100, 200), new Dimension(100, 20), 0));
 		
-//		for(int i = 0; i < 30; i ++) {
-//			Platform p = null;
-//			
-//			boolean possible = false;
-//			
-//			while(!possible) {
-//				p = new Platform(game, new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
-//				possible = true;
-//				for(Entity other : getEntities()) {
-//					if(p.doesCollide(other)) {
-//						possible = false;
-//					}
-//				}
-//			}
-//			
-//			addEntity(p);
-//		}
+		for(int i = 0; i < 20; i ++) {
+			Platform p = null;
+			
+			boolean possible = false;
+			
+			while(!possible) {
+				p = new Platform(game, new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
+				possible = true;
+				for(Entity other : getEntities()) {
+					if(p.doesCollide(other)) {
+						possible = false;
+					}
+				}
+			}
+			
+			addEntity(p);
+		}
 		
 		//Ignore
 		run();
@@ -73,7 +73,7 @@ public class Platformer extends Implementor{
 	private class Jumper extends Entity {
 		private Vector vel;
 		
-		private final Vector gravity = new Vector(0, 80);
+		private final Vector gravity = new Vector(0, 400);
 		
 		public Jumper(Game game, Position pos, Dimension dim)
 		{
@@ -93,12 +93,16 @@ public class Platformer extends Implementor{
 		@Override
 		public void update()
 		{
+			translate(vel.scale(1/(double) Constants.UPDATES_PER_SEC));
 			
-			vel.translate(gravity.scale(1 / (double)Constants.UPDATES_PER_SEC));
+			System.out.println(vel.getX() + " " + vel.getY());
+			
+			vel.translate(gravity.scale(1/(double) Constants.UPDATES_PER_SEC));
 			
 			if(InputListener.isKeyNewPressed('w')) {
 				boolean canJump = false;
-				for(Entity other : game.getEntities()) {
+				
+				for(Entity other : getEntities()) {
 					if(other instanceof Platform && doesCollide(other)) {
 						canJump = true;
 					}
@@ -114,7 +118,8 @@ public class Platformer extends Implementor{
 			if(InputListener.isKeyPressed('d')) {
 				translateX(3);
 			}
-			for(Entity other : game.getEntities()) {
+			
+			for(Entity other : getEntities()) {
 				if(other instanceof Platform && doesCollide(other)) {
 					Vector dir = collides(other);
 					
@@ -139,8 +144,6 @@ public class Platformer extends Implementor{
 					}
 				}
 			}
-			
-			translate(vel.scale(1 / (double)Constants.UPDATES_PER_SEC));
 		}
 
 		@Override
