@@ -122,6 +122,13 @@ public class Game extends JFrame{
 		}
 		return null;
 	}
+	
+	/**
+	 * Returns reference to screen with specified name
+	 */
+	public Screen getScreenWithName(String name) {
+		return screens.get(name);
+	}
 			
 	//Methods
 
@@ -164,9 +171,33 @@ public class Game extends JFrame{
 		currentScreen.add(ent);
 	}
 	
+	/**
+	 * Adds spriteless element to current screen
+	 * @param se SpritelessElement to add
+	 */
 	public void add(SpritelessElement se) {
 		se.init();
 		currentScreen.add(se);
+	}
+	
+	/**
+	 * Adds entity to specified screen
+	 * @param ent entity to add
+	 * @param screen screen to add to
+	 */
+	public void add(Entity ent, Screen screen) {
+		ent.init();
+		screen.add(ent);
+	}
+	
+	/**
+	 * Adds spriteless element to specified screen
+	 * @param se spriteless element to add
+	 * @param screen screen to add to
+	 */
+	public void add(SpritelessElement se, Screen screen) {
+		se.init();
+		screen.add(se);
 	}
 
 	/**
