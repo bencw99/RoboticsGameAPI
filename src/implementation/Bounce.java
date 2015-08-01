@@ -4,26 +4,18 @@ import game.Game;
 import graphics.*;
 import physics.*;
 
-public class SkullBounce extends Implementor{
-	private static int hits = 0;
-
-
+public class Bounce extends Implementor{
 	public void main() {
 		init();
-		game.setCurrentScreen("PAUSED");
-		addEntity(new Skull(game));
+		EvilSquare Edward = new EvilSquare(game);
+		addEntity(Edward);
 		for(int i = 1; i <= 16; i++) {
-			addEntity(new CrazyEntity(game));
-		}
-		game.setCurrentScreen("START");
-		addEntity(new Skull(game));
-		for(int i = 1; i <= 16; i++) {
-			addEntity(new CrazyEntity(game));
+			addEntity(new PassiveShape(game));
 		}
 		run();
 	}
 
-	private class CrazyEntity extends Entity {	
+	private class PassiveShape extends Entity {	
 		final static double ACCEL_FACTOR = 0.1;
 		final static double BOUNCE_FACTOR = 1;
 		final static double RANDOM_FACTOR = 100;
@@ -55,7 +47,7 @@ public class SkullBounce extends Implementor{
 		double rotateSpeed;
 
 
-		public CrazyEntity(Game game) {
+		public PassiveShape(Game game) {
 			super(game);
 		}
 
@@ -67,13 +59,13 @@ public class SkullBounce extends Implementor{
 					"e11", "images/explosion/tmp-11.gif", "e12", "images/explosion/tmp-12.gif", "e13", "images/explosion/tmp-13.gif", "e14", "images/explosion/tmp-14.gif",
 					"e15", "images/explosion/tmp-15.gif", "e16", "images/explosion/tmp-16.gif", "e17", "images/explosion/tmp-17.gif", "e18", "images/explosion/tmp-18.gif",});
 			if(Math.random() < 0.5) {
-				spritesArray = new Object[]{"red", "images/preset/red.png", "explosion", explosion, "death", "images/skull-transparent.png", 100};
+				spritesArray = new Object[]{"red", "images/preset/red.png", "explosion", explosion};
 				loadSprites();
 				setDim(new Dimension(32, 32));
 				activeSprite = "red";
 			}
 			else {
-				spritesArray = new Object[]{"green", "images/preset/green.jpg", "explosion", explosion, "death", "images/skull-transparent.png", 100};
+				spritesArray = new Object[]{"green", "images/preset/green.jpg", 30, "explosion", explosion};
 				loadSprites();
 				setDim(new Dimension(16, 64));
 				activeSprite = "green";
@@ -94,7 +86,7 @@ public class SkullBounce extends Implementor{
 				translate(velocity);
 				setAngle(getAngle() + rotateSpeed);
 				if(doesCollide(game.getEntities().get(0))) {
-					skullCollide();
+					EvilSquareCollide();
 				};
 
 				if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
@@ -127,17 +119,8 @@ public class SkullBounce extends Implementor{
 			velocity.setY(0);
 		}
 
-		private void skullCollide() {
+		private void EvilSquareCollide() {
 			kill();
-			hits++;
-			if(hits % 3 == 0) {
-				if(game.getCurrentScreen().getName() == "START") {
-					game.setCurrentScreen("PAUSED");
-				}
-				else {
-					game.setCurrentScreen("START");
-				}
-			}
 		}
 
 		private void kill() {
@@ -155,7 +138,7 @@ public class SkullBounce extends Implementor{
 		}
 	}
 
-	private class Skull extends Entity {	
+	private class EvilSquare extends Entity {	
 		final static double ACCEL_FACTOR = 2;
 		final static double BOUNCE_FACTOR = 1;
 		final static double RANDOM_FACTOR = 1000;
@@ -182,16 +165,16 @@ public class SkullBounce extends Implementor{
 		int timeAlive = 0;
 		double rotationalVelocity = 0;
 
-		public Skull(Game game) {
+		public EvilSquare(Game game) {
 			super(game);
 		}
 
 		@Override
 		public void init() {
 			setDim(new Dimension(16, 16));
-			spritesArray = new Object[]{"skull", "images/preset/black.png"};
+			spritesArray = new Object[]{"Black Square", "images/preset/black.png"};
 			loadSprites();
-			activeSprite = "skull";
+			activeSprite = "Black Square";
 			resetPosition();
 		}
 
