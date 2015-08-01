@@ -18,6 +18,7 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 	public AbstractButton() {
 		p = new Position(0, 0);
         dim = new Dimension(10, 10);
+        setPreferredSize(dim);
 		addActionListener(this);
 	}
 
@@ -54,6 +55,7 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 
     public void setDimension(double width, double height) {
         this.dim.setSize(width, height);
+        setPreferredSize(dim);
     }
 
     public Dimension getDimension() {

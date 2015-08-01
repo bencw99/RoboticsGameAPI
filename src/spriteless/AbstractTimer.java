@@ -26,6 +26,8 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
 	public AbstractTimer(double xPos, double yPos, boolean displayText) {
 		super();
         pos = new Position(xPos, yPos);
+        dim = new Dimension(100, 50);
+        setPreferredSize(dim);
 		setVisible(displayText);
 		setEditable(false);
 		setFocusable(false);
@@ -67,6 +69,7 @@ public abstract class AbstractTimer extends TextArea implements SpritelessElemen
 
     public void setDimension(double width, double height) {
         this.dim.setSize(width, height);
+        setPreferredSize(dim);
     }
 
     public Dimension getDimension() {

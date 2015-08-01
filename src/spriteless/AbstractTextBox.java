@@ -20,14 +20,15 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
         this("", 50, 50);
     }
 
-    public AbstractTextBox(int numberOfRows, int numberOfColumns) {
-        this("", numberOfRows, numberOfColumns);
+    public AbstractTextBox(int width, int height) {
+        this("", width, height);
     }
 
-    public AbstractTextBox(String text, int numberOfRows, int numberOfColumns) {
-        super(text, numberOfRows, numberOfColumns, SCROLLBARS_NONE);
+    public AbstractTextBox(String text, int width, int height) {
+        super(text, height, width, SCROLLBARS_NONE);
         p = new Position(0, 0);
-        setDimension(numberOfColumns, numberOfRows);
+        dim = new Dimension(width, height);
+        setPreferredSize(dim);
         setEditable(false);
         setFocusable(false);
     }
@@ -46,6 +47,7 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
 
     public void setDimension(double width, double height) {
         this.dim.setSize(width, height);
+        setPreferredSize(dim);
     }
 
     public Dimension getDimension() {
