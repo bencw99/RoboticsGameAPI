@@ -41,6 +41,8 @@ public class Platformer extends Implementor{
 	}
 	
 	private class PlatformCount extends AbstractTextBox {
+		private static final long serialVersionUID = 1L;
+
 		public PlatformCount(String string) {
 			super(string);
 		}

@@ -82,7 +82,6 @@ public abstract class Entity {
 
 	/**
 	 * Draws this entity on the given graphics object
-	 * 
 	 * @param g the graphics object to be drawn on
 	 */
 	public void draw(Graphics g) {
@@ -90,36 +89,7 @@ public abstract class Entity {
 	}
 
 	/**
-	 * @return the position
-	 */
-	public Position getPos() {
-		return pos;
-	}
-
-	/**
-	 * @return the x position
-	 */
-	public double getX() {
-		return pos.getX();
-	}
-
-	/**
-	 * @return the y position
-	 */
-	public double getY() {
-		return pos.getY();
-	}
-
-	/**
-	 * @param pos the position to set
-	 */
-	public void setPos(Position pos) {
-		this.pos = pos;
-	}
-
-	/**
 	 * Translates this position by the given x and y differentials
-	 * 
 	 * @param dx the x differential
 	 * @param dy the y differential
 	 */
@@ -129,7 +99,6 @@ public abstract class Entity {
 
 	/**
 	 * Translates this position by the given vector differentials
-	 * 
 	 * @param vec the translation vector
 	 */
 	public void translate(Vector vec) {
@@ -138,7 +107,6 @@ public abstract class Entity {
 
 	/**
 	 * Translates the position by the given x differential
-	 * 
 	 * @param dx the x differential
 	 */
 	public void translateX(double dx) {
@@ -147,7 +115,6 @@ public abstract class Entity {
 
 	/**
 	 * Translates the position by the given y differential
-	 * 
 	 * @param dy the y differential
 	 */
 	public void translateY(double dy) {
@@ -156,7 +123,6 @@ public abstract class Entity {
 
 	/**
 	 * Returns the upper left position of this entity
-	 * 
 	 * @return the upper left position
 	 */
 	public Position getUpperLeftPos() {
@@ -165,7 +131,6 @@ public abstract class Entity {
 
 	/**
 	 * Returns the upper right position of this entity
-	 * 
 	 * @return the upper right position
 	 */
 	public Position getUpperRightPos() {
@@ -174,7 +139,6 @@ public abstract class Entity {
 
 	/**
 	 * Returns the lower left position of this entity
-	 * 
 	 * @return the lower left position
 	 */
 	public Position getLowerLeftPos() {
@@ -183,7 +147,6 @@ public abstract class Entity {
 
 	/**
 	 * Returns the lower right position of this entity
-	 * 
 	 * @return the lower right position
 	 */
 	public Position getLowerRightPos() {
@@ -192,7 +155,6 @@ public abstract class Entity {
 
 	/**
 	 * Returns the bounding polygon of this entity based off of its angle and dimension
-	 * 
 	 * @return the bounding polygon of this entity
 	 */
 	public Polygon getBounds() {
@@ -206,7 +168,6 @@ public abstract class Entity {
 
 	/**
 	 * Rotates the given polygon by the given angle about the given pivot
-	 * 
 	 * @param poly
 	 * @param pivot
 	 * @param angle
@@ -232,7 +193,6 @@ public abstract class Entity {
 
 	/**
 	 * Collision detection function. Returns the vector in the direction of the force applied by the other colliding entity on this one. If the entities don't collide, returns null
-	 *
 	 * @param other	the entity colliding with
 	 * @return	the collision result (see above for details)
 	 */
@@ -295,7 +255,6 @@ public abstract class Entity {
 
 	/**
 	 * Returns true if the two entities collide
-	 * 
 	 * @param other the entity colliding with
 	 * @return the collision result
 	 */
@@ -304,80 +263,11 @@ public abstract class Entity {
 	}
 
 	/**
-	 * @return the angle
-	 */
-	public double getAngle() {
-		return angle;
-	}
-
-	/**
-	 * @param angle the angle to set
-	 */
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-
-	/**
 	 * Translates this angle by the given angle difference
-	 * 
 	 * @param dAngle the angle to be translated by
 	 */
 	public void translateAngle(double dAngle) {
 		this.angle += dAngle;
-	}
-
-	/**
-	 * @return the dim
-	 */
-	public Dimension getDim() {
-		return dim;
-	}
-
-	/**
-	 * @param dim the dimension to set
-	 */
-	public void setDim(Dimension dim) {
-		this.dim = dim;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-
-	// ***************************************
-	// GRAPHICS
-	// ***************************************
-
-	// Call Downs
-	// GRAPHICS:
-
-	public SpriteManager getSpriteManager() {
-		return spriteManager;
-	}
-
-	public void setSpriteManager(SpriteManager spriteManager) {
-		this.spriteManager = spriteManager;
-	}
-
-	public void setCycleMode(boolean cycleMode) {
-		spriteManager.setCycleMode(cycleMode);
-	}
-
-	public void setAutoMode(boolean autoMode) {
-		spriteManager.setAutoMode(autoMode);
-	}
-
-	public void setTicksPerFrame(int ticks) {
-		spriteManager.setTicksPerFrame(ticks);
-	}
-
-	public void stepFrame() {
-		spriteManager.stepFrame();
 	}
 
 	/**
@@ -442,7 +332,7 @@ public abstract class Entity {
 	 */
 	public ArrayList<Entity> collidesWithType(String classname){
 		try {
-			Class c;
+			Class<?> c;
 			c = Class.forName(classname);
 			ArrayList<Entity> collisions = new ArrayList<Entity>();
 			for(Entity e : game.getCurrentScreen().getEntities()){
@@ -459,5 +349,70 @@ public abstract class Entity {
 		}
 
 		return null;
+	}
+	
+
+	public void setDim(Dimension dim) {
+		this.dim = dim;
+	}
+	
+	public Dimension getDim() {
+		return dim;
+	}
+	
+	public double getAngle() {
+		return angle;
+	}
+
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public SpriteManager getSpriteManager() {
+		return spriteManager;
+	}
+
+	public void setSpriteManager(SpriteManager spriteManager) {
+		this.spriteManager = spriteManager;
+	}
+
+	public void setCycleMode(boolean cycleMode) {
+		spriteManager.setCycleMode(cycleMode);
+	}
+
+	public void setAutoMode(boolean autoMode) {
+		spriteManager.setAutoMode(autoMode);
+	}
+
+	public void setTicksPerFrame(int ticks) {
+		spriteManager.setTicksPerFrame(ticks);
+	}
+
+	public void stepFrame() {
+		spriteManager.stepFrame();
+	}
+	
+	public Position getPos() {
+		return pos;
+	}
+
+	public double getX() {
+		return pos.getX();
+	}
+
+	public double getY() {
+		return pos.getY();
+	}
+
+	public void setPos(Position pos) {
+		this.pos = pos;
 	}
 }
