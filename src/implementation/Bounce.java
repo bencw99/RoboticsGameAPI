@@ -16,18 +16,18 @@ public class Bounce extends Implementor {
 	public void execute() {
 		init();
 		
-//		EvilSquare Edward;
-//		Edward = new EvilSquare("Edward", game);
-//		addEntity(Edward);
-//		
-//		EvilSquare Eric;
-//		Eric = new EvilSquare("Eric", game);
-//		addEntity(Eric);
-//		
-//		for(int i = 1; i <= 128; i++) {
-//			addEntity(new PassiveShape(game));
-//		}
+		EvilSquare Edward;
+		Edward = new EvilSquare("Edward", game);
+		addEntity(Edward);
+
+		EvilSquare Eric;
+		Eric = new EvilSquare("Eric", game);
+		game.add(Eric, game.getScreenWithName("PAUSED"));
 		
+		for(int i = 1; i <= 128; i++) {
+			addEntity(new PassiveShape(game));
+		}
+
 		addSpritelessElement(button);
 		run();
 	}
@@ -44,7 +44,10 @@ public class Bounce extends Implementor {
 		
 		public void init() {
 			super.init();
+
 			setText("");
+
+			System.out.println(super.getSize());
 		}
 		
 		public void update() {
@@ -54,6 +57,7 @@ public class Bounce extends Implementor {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+
 			if(counter % 2 == 0) {
 				setText("ohey");
 			}	

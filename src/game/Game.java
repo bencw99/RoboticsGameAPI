@@ -67,6 +67,8 @@ public class Game extends JFrame{
 		screens.put("FINISHED", new Screen());
 
 		screens.get("START").init();
+		screens.get("PAUSED").init();
+		screens.get("FINISHED").init();
 
 		currentScreen = screens.get("START");
 	}

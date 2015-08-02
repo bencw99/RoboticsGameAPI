@@ -2,6 +2,8 @@ package constants;
 
 import java.awt.Dimension;
 
+import physics.Vector;
+
 /** 
  * A class holding constants
  */
@@ -30,4 +32,10 @@ public class Constants {
 	
 	/** Default ticks till animation steps in auto mode **/
 	public final static int DEFAULT_ANIMATION_TICKS_PER_FRAME = 10;
+	
+	// ***************************************
+	// PHYSICS
+	// ***************************************
+	public static final Vector GRAVITY = new Vector(0, 600);
+
 }
