@@ -29,8 +29,8 @@ public class Screen extends JPanel {
 		for (Entity ent : entities) {
 			ent.update();
 		}
-		for (SpritelessElement se : spritelessElements) {
-			se.update();
+		for (SpritelessElement ent : spritelessElements) {
+			ent.update();
 		}
 		super.repaint();
 	}
@@ -73,9 +73,9 @@ public class Screen extends JPanel {
 	/**
 	 * Add a spriteless element to the screen
 	 */
-	public void add(SpritelessElement se) {
-		spritelessElements.add(se);
-		super.add((Component) se);
+	public void add(SpritelessElement ent) {
+		spritelessElements.add(ent);
+		super.add((Component) ent);
 	}
 
 	/**

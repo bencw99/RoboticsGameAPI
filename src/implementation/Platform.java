@@ -31,6 +31,7 @@ public class Platform extends Entity {
 		
 		spritesArray = new Object[]{"platform", "images/preset/black.png", "stepped", "images/preset/green.jpg", "explosion", explosion};
 		loadSprites();
+		this.plat = plat;
 	}
 
 	@Override

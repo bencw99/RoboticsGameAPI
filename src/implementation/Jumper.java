@@ -72,23 +72,25 @@ public class Jumper extends Entity {
 			for(Entity e : collisions) {
 				Vector force = collides(e);
 				
-				if(force.getY() > 0.5) {
-					vel.setY(Math.max(vel.getY(), 0));
-				}
-				if(force.getY() < -0.5) {
-					vel.setY(Math.min(vel.getY(), 0));
-				}
-				
-				if(force.getX() > 0.5) {
-					vel.setX(Math.max(vel.getX(), 0));
-					if(InputListener.isKeyPressed('a')) {
-						translateX(3);
+				if(force != null && ((Platform) e).isAlive()) {
+					if(force.getY() > 0.5) {
+						vel.setY(Math.max(vel.getY(), 0));
 					}
-				}
-				if(force.getX() < -0.5) {
-					vel.setX(Math.min(vel.getX(), 0));
-					if(InputListener.isKeyPressed('d')) {
-						translateX(-3);
+					if(force.getY() < -0.5) {
+						vel.setY(Math.min(vel.getY(), 0));
+					}
+					
+					if(force.getX() > 0.5) {
+						vel.setX(Math.max(vel.getX(), 0));
+						if(InputListener.isKeyPressed('a')) {
+							translateX(3);
+						}
+					}
+					if(force.getX() < -0.5) {
+						vel.setX(Math.min(vel.getX(), 0));
+						if(InputListener.isKeyPressed('d')) {
+							translateX(-3);
+						}
 					}
 				}
 			}
