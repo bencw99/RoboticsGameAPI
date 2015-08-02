@@ -37,6 +37,10 @@ public class EvilSquare extends Entity {
 	public EvilSquare(Game game) {
 		super(game);
 	}
+	
+	public EvilSquare(String name, Game game) {
+		super(name, game);
+	}
 
 	@Override
 	public void init() {

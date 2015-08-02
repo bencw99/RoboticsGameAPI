@@ -80,7 +80,7 @@ public class PassiveShape extends Entity {
 			translate(velocity);
 			setAngle(getAngle() + rotateSpeed);
 			
-			if(doesCollideWithType("implementation.EvilSquare")) {
+			if(doesCollideWithName("Edward")) {
 				evilSquareCollide();
 			}
 			

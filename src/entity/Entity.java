@@ -51,7 +51,7 @@ public abstract class Entity {
 		this("anonymous", game, new Position(), 0, new Dimension());
 	}
 
-	public Entity(Game game, String name) {
+	public Entity(String name, Game game) {
 		this(name, game, new Position(), 0, new Dimension());
 	}
 
