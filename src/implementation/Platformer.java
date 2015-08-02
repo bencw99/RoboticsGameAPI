@@ -24,7 +24,7 @@ public class Platformer extends Implementor{
 		//Ignore
 		init();
 		
-		addEntity(new Jumper(game, new Position(100, 100), new Dimension()));
+		addEntity(new Jumper(game, new Position(100, 100), Constants.DEFAULT_DIMENSION));
 		addSpritelessElement(new PlatformCount("Hello"));
 		
 		for(int i = 100; i < Constants.SCREEN_WIDTH; i += Constants.SCREEN_WIDTH/5) {

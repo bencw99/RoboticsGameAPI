@@ -1,5 +1,7 @@
 package constants;
 
+import java.awt.Dimension;
+
 /** 
  * A class holding constants
  */
@@ -8,7 +10,7 @@ public class Constants {
 	public final static int UPDATES_PER_SEC = 120;
 	
 	/** The default dimension size **/
-	public final static int DEFAULT_DIMENSION = 32;
+	public final static Dimension DEFAULT_DIMENSION = new Dimension(32, 32);
 	
 	// ***************************************
 	// SCREENS
