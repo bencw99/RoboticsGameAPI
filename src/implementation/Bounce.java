@@ -37,7 +37,7 @@ public class Bounce extends Implementor{
 		}
 		
 		public void update() {
-			
+		
 		}
 
 		public void actionPerformed(ActionEvent e) {
