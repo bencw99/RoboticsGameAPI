@@ -6,7 +6,13 @@ import entity.*;
 import game.*;
 import input.*;
 import physics.*;
+import spriteless.AbstractTimer;
 public class Platformer extends Implementor{
+	public static final Dimension DEFAULT_PLATFORM_DIMENSION = new Dimension(100, 20);
+	public static final double DEFAULT_PLATFORM_ANGLE = 0;
+	
+	public static final Vector GRAVITY = new Vector(0, 600);
+	
 	/**
 	 * Called when game starts
 	 */
@@ -14,47 +20,36 @@ public class Platformer extends Implementor{
 		//Ignore
 		init();
 		
-		
-		
 		addEntity(new Jumper(game, new Position(100, 100), new Dimension()));
-		addEntity(new Platform(game, new Position(100, 200), new Dimension(100, 20), 0));
 		
-		for(int i = 0; i < 20; i ++) {
-			Platform p = null;
-			
-			boolean possible = false;
-			
-			while(!possible) {
-				p = new Platform(game, new Position(Math.random()*1000, Math.random()*800), new Dimension(100, 20), 0);
-				possible = true;
-				for(Entity other : getEntities()) {
-					if(p.doesCollide(other)) {
-						possible = false;
-					}
-				}
+		for(int i = 100; i < Constants.SCREEN_WIDTH; i += Constants.SCREEN_WIDTH/5) {
+			for(int j = 200; j < Constants.SCREEN_HEIGHT; j += Constants.SCREEN_HEIGHT/8) {
+				Position platformPosition = new Position(i, j);
+				Platform platform = new Platform(game, platformPosition);
+				
+				addEntity(platform);
 			}
-			
-			addEntity(p);
 		}
+		
+		System.out.println("Entity addition completed");
 		
 		//Ignore
 		run();
 	}
 	
 	private class Platform extends Entity {
-		public Platform(Game game, Position pos, Dimension dim, double angle)
+		public Platform(Game game, Position pos)
 		{
-			super(game, pos, angle, dim);
+			super(game, pos, DEFAULT_PLATFORM_ANGLE, DEFAULT_PLATFORM_DIMENSION);
 			
 			spritesArray = new String[]{"platform", "images/preset/black.png"};
 			loadSprites();
-			activeSprite = "platform";
 		}
 
 		@Override
 		public void init()
 		{
-
+			activeSprite = "platform";
 		}
 
 		@Override
@@ -73,31 +68,34 @@ public class Platformer extends Implementor{
 	private class Jumper extends Entity {
 		private Vector vel;
 		
-		private final Vector gravity = new Vector(0, 400);
-		
 		public Jumper(Game game, Position pos, Dimension dim)
 		{
 			super(game, pos, 0, dim);
 			
 			spritesArray = new String[]{"jumper", "images/preset/red.png"};
 			loadSprites();
-			activeSprite = "jumper";
 		}
-
+		
+		public void applyGravity() {
+			vel.translate(GRAVITY.scale(1/(double) Constants.UPDATES_PER_SEC));
+		}
+		
+		public void move() {
+			translate(vel.scale(1/(double) Constants.UPDATES_PER_SEC));
+		}
+		
 		@Override
 		public void init()
 		{
 			vel = new Vector(0, 0);
+			activeSprite = "jumper";
 		}
 
 		@Override
 		public void update()
 		{
-			translate(vel.scale(1/(double) Constants.UPDATES_PER_SEC));
-			
-			System.out.println(vel.getX() + " " + vel.getY());
-			
-			vel.translate(gravity.scale(1/(double) Constants.UPDATES_PER_SEC));
+			move();
+			applyGravity();
 			
 			if(InputListener.isKeyNewPressed('w')) {
 				boolean canJump = false;
@@ -108,8 +106,9 @@ public class Platformer extends Implementor{
 					}
 				}
 				
-				if(canJump)
+				if(canJump) {
 					vel.setY(-400);
+				}
 			}
 			
 			if(InputListener.isKeyPressed('a')) {
@@ -121,22 +120,22 @@ public class Platformer extends Implementor{
 			
 			for(Entity other : getEntities()) {
 				if(other instanceof Platform && doesCollide(other)) {
-					Vector dir = collides(other);
+					Vector force = collides(other);
 					
-					if(dir.getY() > 0.5) {
+					if(force.getY() > 0.5) {
 						vel.setY(Math.max(vel.getY(), 0));
 					}
-					if(dir.getY() < -0.5) {
+					if(force.getY() < -0.5) {
 						vel.setY(Math.min(vel.getY(), 0));
 					}
 					
-					if(dir.getX() > 0.5) {
+					if(force.getX() > 0.5) {
 						vel.setX(Math.max(vel.getX(), 0));
 						if(InputListener.isKeyPressed('a')) {
 							translateX(3);
 						}
 					}
-					if(dir.getX() < -0.5) {
+					if(force.getX() < -0.5) {
 						vel.setX(Math.min(vel.getX(), 0));
 						if(InputListener.isKeyPressed('d')) {
 							translateX(-3);
@@ -147,9 +146,8 @@ public class Platformer extends Implementor{
 		}
 
 		@Override
-		public void disable()
-		{
-			System.out.println("ExampleEntity disabled");
+		public void disable() {
+			
 		}
 	}
 }
