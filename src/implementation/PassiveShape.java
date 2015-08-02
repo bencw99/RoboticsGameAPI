@@ -79,14 +79,11 @@ public class PassiveShape extends Entity {
 		if(!dead) {
 			translate(velocity);
 			setAngle(getAngle() + rotateSpeed);
-			try {
-				if(collidesWithType(Class.forName("implementation.EvilSquare")) != null) {
-					EvilSquareCollide();
-				}
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			};
-
+			
+			if(doesCollideWithName("Edward")) {
+				evilSquareCollide();
+			}
+			
 			if(getPos().getX() > BOUNCE_RIGHT_BOUND || getPos().getX() < BOUNCE_LEFT_BOUND) {
 				velocity.setX(velocity.getX() * -BOUNCE_FACTOR);
 				velocity.setY(velocity.getY() * BOUNCE_FACTOR);
@@ -118,7 +115,7 @@ public class PassiveShape extends Entity {
 		velocity.setY(0);
 	}
 
-	private void EvilSquareCollide() {
+	private void evilSquareCollide() {
 		kill();
 	}
 
