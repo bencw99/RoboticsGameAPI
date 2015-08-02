@@ -70,6 +70,7 @@ public class Game extends JFrame{
 
 		currentScreen = screens.get("START");
 	}
+	
 	/**
 	 * Adds screens to the game
 	 */
@@ -121,6 +122,15 @@ public class Game extends JFrame{
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Gets the current screen of the game
+	 * 
+	 * @return the current screen of the game
+	 */
+	public Screen getCurrentScreen() {
+		return currentScreen;
 	}
 	
 	/**
@@ -220,10 +230,6 @@ public class Game extends JFrame{
 	 */
 	public ArrayList<Entity> getEntities() {
 		return currentScreen.getEntities();
-	}
-
-	public Screen getCurrentScreen() {
-		return currentScreen;
 	}
 
 }
