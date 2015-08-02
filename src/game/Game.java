@@ -24,6 +24,9 @@ public class Game extends JFrame{
 	 * screen is currently being used
 	 */
 	HashMap<String, Screen> screens = new HashMap<String, Screen>();
+	/**
+	 * A reference to the current screen
+	 */
 	private Screen currentScreen;
 
 	/**
@@ -52,7 +55,6 @@ public class Game extends JFrame{
 		setVisible(true);
 		setSize(1000, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		addKeyListener(inputListener);
 		addMouseListener(inputListener);
 		add(currentScreen);
@@ -150,11 +152,15 @@ public class Game extends JFrame{
 			}
 		}
 	}
-
+	/**
+	 * update the current screen
+	 */
 	public void update() {
 		currentScreen.update();
 	}
-
+	/**
+	 * disable the current screen
+	 */
 	public void disable() {
 		currentScreen.disable();
 	}
@@ -162,7 +168,7 @@ public class Game extends JFrame{
 	//Getters / Setters
 
 	/**
-	 * @return the listener
+	 * @return the listener (key listener)
 	 */
 	public InputListener getListener() {
 		return inputListener;
@@ -206,8 +212,7 @@ public class Game extends JFrame{
 	}
 
 	/**
-	 * Remove an entity from the current Screen
-	 * 
+	 * Remove an entity from the current screen
 	 * @param ent	the entity to remove
 	 */
 	public void remove(Entity ent) {
@@ -215,13 +220,20 @@ public class Game extends JFrame{
 	}
 
 	/**
-	 * Returns entity list
-	 * @return
+	 * Returns all the entities currently on the current screen
+	 * @see getCurrentScreen()
+	 * @return entities
 	 */
 	public ArrayList<Entity> getEntities() {
 		return currentScreen.getEntities();
 	}
-
+	
+	/**
+	 * Returns a reference to the current screen shown. The screen keeps 
+	 * a reference to all the existing objects on screen. 
+	 * @see Screen
+	 * @return the current screen shown
+	 */
 	public Screen getCurrentScreen() {
 		return currentScreen;
 	}
