@@ -31,6 +31,9 @@ public abstract class Entity {
 	/** An ArrayList of the Drawabale to this object **/
 	private ArrayList<Drawable> drawableList;
 
+	/** Name **/
+	private String name;
+
 	/** The name of the current Sprite or Animation this Entity is displaying outside of animation mode **/
 	protected String activeSprite;
 
@@ -45,10 +48,11 @@ public abstract class Entity {
 	 * Parameterized constructor, initializes entity world to given parameters
 	 */
 	public Entity(Game game) {
-		this.setGame(game);
-		this.setPos(new Position());
-		this.setDim(new Dimension());
-		this.setAngle(0);
+		this("anonymous", game, new Position(), 0, new Dimension());
+	}
+
+	public Entity(Game game, String name) {
+		this(name, game, new Position(), 0, new Dimension());
 	}
 
 	/**
@@ -59,6 +63,11 @@ public abstract class Entity {
 	 * @param dim the dimension of this entity
 	 */
 	public Entity(Game game, Position pos, double angle, Dimension dim) {
+		this("anonymous", game, pos, angle, dim);
+	}
+
+	public Entity(String name, Game game, Position pos, double angle, Dimension dim) {
+		this.name = name;
 		this.game = game;
 		this.pos = pos;
 		this.angle = angle;
@@ -325,18 +334,19 @@ public abstract class Entity {
 		spriteManager = new SpriteManager(this, drawableList);
 		activeSprite = (String) concatArray[0];
 	}
+	
 	/**
 	 * Method that gets all the entities that collides with it and is of type Class
 	 * @param c the Class type
 	 * @return all the entities that collide with this entity
 	 */
-	public ArrayList<Entity> collidesWithType(String classname){
+	public ArrayList<Entity> collisionsWithType(String classname){
 		try {
 			Class<?> c;
 			c = Class.forName(classname);
 			ArrayList<Entity> collisions = new ArrayList<Entity>();
 			for(Entity e : game.getCurrentScreen().getEntities()){
-				if(c.isInstance(e)  && e.doesCollide(this)){
+				if(c.isInstance(e) && e.doesCollide(this)){
 					collisions.add(e);
 				}
 			}
@@ -347,19 +357,58 @@ public abstract class Entity {
 			e1.printStackTrace();
 			System.out.println("Invallid classname " + classname + " for collidesWithType");
 		}
+		return new ArrayList<Entity>();
 
-		return null;
+	}
+
+	/**
+	 * Checks if this Entity collides with any Entities of a specific type
+	 * @param classname the type to check
+	 * @return does collide
+	 */
+	public boolean doesCollideWithType(String classname) {
+		if(collisionsWithType(classname).size() == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Hets all the entities that collides with this of a specific name
+	 * @param name the name
+	 * @return all the entities that collide with this entity of that name
+	 */
+	public ArrayList<Entity> collisionsWithName(String name) {
+		ArrayList<Entity> collisions = new ArrayList<Entity>();
+		for(Entity e : game.getCurrentScreen().getEntities()){
+			if(e.getName() == name && e.doesCollide(this)){
+				collisions.add(e);
+			}
+		}
+		return collisions;
 	}
 	
+	/**
+	 * Checks if this Entity collides with any Entities of a specific name
+	 * @param name the name to check
+	 * @return does collide
+	 */
+	public boolean doesCollideWithName(String name) {
+		if(collisionsWithName(name).size() == 0) {
+			return false;
+		}
+		return true;
+	}
+
 
 	public void setDim(Dimension dim) {
 		this.dim = dim;
 	}
-	
+
 	public Dimension getDim() {
 		return dim;
 	}
-	
+
 	public double getAngle() {
 		return angle;
 	}
@@ -399,7 +448,7 @@ public abstract class Entity {
 	public void stepFrame() {
 		spriteManager.stepFrame();
 	}
-	
+
 	public Position getPos() {
 		return pos;
 	}
@@ -414,5 +463,13 @@ public abstract class Entity {
 
 	public void setPos(Position pos) {
 		this.pos = pos;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
