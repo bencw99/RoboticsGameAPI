@@ -19,7 +19,7 @@ public class Bounce extends Implementor {
 		
 		EvilSquare Eric;
 		Eric = new EvilSquare("Eric", game);
-		addEntity(Eric);
+		game.add(Eric, game.getScreenWithName("PAUSED"));
 		
 		for(int i = 1; i <= 128; i++) {
 			addEntity(new PassiveShape(game));
@@ -39,6 +39,7 @@ public class Bounce extends Implementor {
 		public void init() {
 			super.init();
 			setText("IT WORKS");
+			System.out.println(super.getSize());
 		}
 		
 		public void update() {
@@ -46,6 +47,7 @@ public class Bounce extends Implementor {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			game.setCurrentScreen("PAUSED");
 		}
 		
 	}
