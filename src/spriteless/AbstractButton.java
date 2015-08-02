@@ -11,14 +11,31 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * The dimension of the AbstractButton
+	 */
     private Dimension dim;
 
+    /**
+     * The position of the AbstractButton
+     */
 	private Position pos;
 
+	/**
+	 * Default constructor for AbstractButton
+	 * Default position is (0, 0)
+	 * Default dimension is (10, 10)
+	 */
 	public AbstractButton() {
 		this(new Position(0, 0), new Dimension(10, 10));
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param p the position of the AbstractButton
+	 * @param d the dimension of the AbstractButton
+	 */
 	public AbstractButton(Position p, Dimension d) {
 		pos = p;
 		dim = d;
