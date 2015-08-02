@@ -8,7 +8,7 @@ import physics.Position;
 import spriteless.AbstractButton;
 
 public class Bounce extends Implementor{
-    MyButton addButton = new MyButton(new Position(300, 300), new Dimension(100, 200));
+    MyButton button = new MyButton(new Position(300, 300), new Dimension(100, 200));
 	
 	public void execute() {
 		init();
@@ -18,26 +18,25 @@ public class Bounce extends Implementor{
 		for(int i = 1; i <= 128; i++) {
 			addEntity(new PassiveShape(game));
 		}
-		addSpritelessElement(addButton);
+		addSpritelessElement(button);
 		run();
 	}
 
 
-	
-	private class MyButton extends AbstractButton {
+	public class MyButton extends AbstractButton {
 		private static final long serialVersionUID = 1L;
-
+		
 		public MyButton(Position p, Dimension d) {
 			super(p, d);
 		}
 		
 		public void init() {
 			super.init();
-			this.setText("IT WORKS");
+			setText("IT WORKS");
 		}
 		
 		public void update() {
-		
+			super.update(game.getGraphics());
 		}
 
 		public void actionPerformed(ActionEvent e) {
