@@ -85,13 +85,14 @@ public class Platformer extends Implementor{
 		public void update()
 		{
 			if(alive) {
+				translateAngle(0.003);
 				for(Entity other : getEntities()) {
 					if(other instanceof Jumper && doesCollide(other)) {
 						contacts ++;
 						activeSprite = "stepped";
 					}
 				}
-				if(contacts >= 100) {
+				if(contacts >= 300) {
 					System.out.println("Platform destroyed");
 					alive = false;
 					activeSprite = "explosion";
