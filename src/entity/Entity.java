@@ -295,7 +295,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Returns true of the two entities collide
+	 * Returns true if the two entities collide
 	 * 
 	 * @param other the entity colliding with
 	 * @return the collision result

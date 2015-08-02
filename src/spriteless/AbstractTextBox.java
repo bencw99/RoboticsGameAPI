@@ -32,7 +32,7 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
         setEditable(false);
         setFocusable(false);
     }
-
+    
 	public void init() {
         setEnabled(true);
 	}
@@ -82,5 +82,4 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
 	public void hide() {
         setVisible(false);
 	}
-
 }
