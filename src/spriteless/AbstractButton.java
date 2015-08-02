@@ -31,7 +31,7 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 	}
 	
 	/**
-	 * 
+	 * Constructor for AbstractButton
 	 * 
 	 * @param p the position of the AbstractButton
 	 * @param d the dimension of the AbstractButton
@@ -44,13 +44,27 @@ public abstract class AbstractButton extends JButton implements SpritelessElemen
 		addActionListener(this);
 	}
 
+	/**
+	 * Updates the AbstractButton
+	 * This method is called multiple times a second
+	 */
 	public abstract void update();
+	
+	/**
+	 * This method is called whenever the button is pressed
+	 */
 	public abstract void actionPerformed(ActionEvent e);
 
+	/**
+	 * Makes the AbstractButton visible
+	 */
     public final void show() {
         setVisible(true);
     }
 
+    /**
+     * Makes the AbstractButton invisible
+     */
   	public final void hide() {
         setVisible(false);
     }
