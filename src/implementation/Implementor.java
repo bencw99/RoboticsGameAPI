@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entity.*;
 import game.*;
+import gui.Screen;
 import spriteless.SpritelessElement;
 
 public abstract class Implementor {
@@ -47,6 +48,24 @@ public abstract class Implementor {
 		}
 		return false;
 	}
+	
+	public boolean addEntity(Entity entity, Screen screen){
+		if(game != null){
+			game.add(entity, screen);
+			return true;
+		}
+		return false;
+	}
+
+	
+	public boolean addSpritelessElement(SpritelessElement spriteLess, Screen screen){
+		if(game != null){
+			game.add(spriteLess, screen);
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * 
 	 * @param index

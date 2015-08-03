@@ -7,8 +7,11 @@ import physics.Position;
 import spriteless.AbstractButton;
 
 public class Bounce extends Implementor {
-    MyButton button = new MyButton(new Position(300, 300), new Dimension(300, 50));
-	public void execute() {
+    EntityMaker button = new EntityMaker(new Position(300, 300), new Dimension(300, 50));
+    ScreenSwitcher switchButton1 = new ScreenSwitcher(new Position(900, 900), new Dimension(100, 50));
+    ScreenSwitcher switchButton2 = new ScreenSwitcher(new Position(900, 900), new Dimension(100, 50));
+
+    public void execute() {
 		init();
 		
 		EvilSquare Edward;
@@ -17,28 +20,32 @@ public class Bounce extends Implementor {
 
 		EvilSquare Eric;
 		Eric = new EvilSquare("Eric", game);
-		game.add(Eric, game.getScreenWithName("PAUSED"));
+		addEntity(Eric, game.getScreenWithName("PAUSED"));
+
 		
 		for(int i = 1; i <= 128; i++) {
+			addEntity(new PassiveShape(game));
 			addEntity(new PassiveShape(game));
 		}
 
 		addSpritelessElement(button);
+		addSpritelessElement(switchButton1);
+		addSpritelessElement(switchButton2, game.getScreenWithName("PAUSED"));
 		run();
 	}
 	
-	public class MyButton extends AbstractButton {
+	public class EntityMaker extends AbstractButton {
 		private static final long serialVersionUID = 1L;
 		
 		int clicks = 0;
 		
-		public MyButton(Position p, Dimension d) {
+		public EntityMaker(Position p, Dimension d) {
 			super(p, d);
 		}
 		
 		public void init() {
 			super.init();
-			setButtonText("Demo Button");
+			setButtonText("Click Me");
 		}
 		
 		public void update() {
@@ -47,12 +54,40 @@ public class Bounce extends Implementor {
 
 		public void actionPerformed(ActionEvent e) {
 			clicks++;
-			if(clicks == 4) {
+			if(clicks % 4 == 0) {
 				addEntity(new PassiveShape(game));
-				setButtonText("wtf");
-			}	
+				setButtonText("Adding Passive Shape");
+			}
+			else {
+				setButtonText("Click Me");
+			}
 			
 		}
+	}
+	
+	public class ScreenSwitcher extends AbstractButton {
+		private static final long serialVersionUID = 1L;		
+		public ScreenSwitcher(Position p, Dimension d) {
+			super(p, d);
+		}
 		
+		public void init() {
+			super.init();
+			setButtonText("Switch Screens");
+		}
+		
+		public void update() {
+			super.updateUI();
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if(game.getCurrentScreenName() == "PAUSED") {
+				game.setCurrentScreen("START");
+			}
+			else {
+				game.setCurrentScreen("PAUSED");
+			}
+			
+		}
 	}
 }

@@ -8,6 +8,11 @@ import constants.Direction;
 import constants.Constants;
 
 public class Wall extends Entity {
+	
+	public Wall(Game g) {
+		super(g);
+	}
+	
 	/**
 	 * Constructor with arguments
 	 * @param p

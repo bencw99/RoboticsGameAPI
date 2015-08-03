@@ -14,6 +14,9 @@ public class Constants {
 	/** The default dimension size **/
 	public final static Dimension DEFAULT_DIMENSION = new Dimension(32, 32);
 	
+	public final static int DEFAULT_CELL_WIDTH = 32;
+	public final static int DEFAULT_CELL_HEIGHT = 32;
+	
 	// ***************************************
 	// SCREENS
 	// ***************************************
@@ -42,5 +45,5 @@ public class Constants {
 	/**
 	 * The default wall width
 	 */
-	public final static double DEFAULT_WALL_WIDTH = 5.0;
+	public final static int DEFAULT_WALL_WIDTH = 5;
 }

@@ -125,6 +125,12 @@ public class Game extends JFrame{
 		return null;
 	}
 	
+	/**
+	 * Returns name of the current screen
+	 */
+	public String getCurrentScreenName() {
+		return getScreenName(currentScreen);
+	}
 	
 	/**
 	 * Returns reference to screen with specified name
