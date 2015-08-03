@@ -11,9 +11,10 @@ public class Mazerunner extends CelledImplementor {
 	 * Initialize everything here
 	 */
 	public void execute() {
+		init();
 		Runner Runner = new Runner(new Position(Constants.DEFAULT_CELL_WIDTH / 2, Constants.DEFAULT_CELL_HEIGHT / 2), 0, 
-				new Dimension(Constants.DEFAULT_CELL_WIDTH, Constants.DEFAULT_CELL_HEIGHT), game);
-		game.add(Runner);
+				new Dimension(Constants.DEFAULT_CELL_WIDTH / 2, Constants.DEFAULT_CELL_HEIGHT / 2), game);
+		addEntity(Runner);
 		for(Cell[] CELLS : cells){
 			for(Cell c : CELLS){
 				int random = (int)(Math.random() * 4);
@@ -33,5 +34,6 @@ public class Mazerunner extends CelledImplementor {
 				}
 			}
 		}
+		run();
 	}
 }

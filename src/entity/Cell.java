@@ -67,26 +67,32 @@ public class Cell {
 		this.dimension = d;
 		this.game = game;
 		Position topLeft = new Position(p.getX()-d.getWidth()/2, p.getY() - d.getHeight()/2);
+		
 		northWall = new Wall(game);
-		northWall.setAngle(0);
+		northWall.setAngle(0 * 3.14159 / 180);
 		northWall.setPos(new Position(p.getX(), topLeft.getY()));
 		northWall.setDim(new Dimension((int) d.getWidth(), Constants.DEFAULT_WALL_WIDTH));
+		
 		southWall = new Wall(game);
-		southWall.setAngle(0);
-		southWall.setPos(new Position(p.getX(), p.getY()+d.getHeight()/2));
+		southWall.setAngle(0 * 3.14159 / 180);
+		southWall.setPos(new Position(p.getX(), p.getY() + d.getHeight()/2));
 		southWall.setDim(new Dimension((int) d.getWidth(), Constants.DEFAULT_WALL_WIDTH));
+		
 		westWall = new Wall(game);
 		westWall.setPos(new Position(topLeft.getX(), p.getY()));
-		westWall.setAngle(90);
+		westWall.setAngle(180 * 3.14159 / 180);
 		westWall.setDim(new Dimension(Constants.DEFAULT_WALL_WIDTH, (int) d.getHeight()));
+		
 		eastWall = new Wall(game);
-		eastWall.setAngle(90);
+		eastWall.setAngle(180 * 3.14159 / 180);
 		eastWall.setPos(new Position(p.getX() + d.getWidth()/2, p.getY()));
 		eastWall.setDim(new Dimension(Constants.DEFAULT_WALL_WIDTH, (int) d.getHeight()));
+		
 		fillWall = new Wall(game);
-		fillWall.setAngle(0);
+		fillWall.setAngle(0 * 3.14159 / 180);
 		fillWall.setPos(p);
 		fillWall.setDim(d);
+		
 		northWallVisible = false;
 		southWallVisible = false;
 		eastWallVisible = false;

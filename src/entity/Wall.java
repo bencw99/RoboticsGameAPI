@@ -23,19 +23,19 @@ public class Wall extends Entity {
 		super(g, p, 0, Constants.DEFAULT_DIMENSION);
 		switch(direction){
 		case NORTH:
-			setAngle(270);
+			setAngle(270 * 3.14159 / 180);
 			break;
 		case SOUTH:
-			setAngle(90);
+			setAngle(90 * 3.14159 / 180);
 			break;
 		case EAST:
-			setAngle(0);
+			setAngle(0 * 3.14159 / 180);
 			break;
 		case WEST:
-			setAngle(180);
+			setAngle(180 * 3.14159 / 180);
 			break;
 		default:
-			setAngle(0);
+			setAngle(0 * 3.14159 / 180);
 			break;
 		}
 	}

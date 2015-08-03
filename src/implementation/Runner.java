@@ -9,48 +9,51 @@ import input.InputListener;
 import physics.Position;
 
 public class Runner extends Entity{
+	public Position start = new Position(Constants.DEFAULT_CELL_WIDTH / 2, Constants.DEFAULT_CELL_HEIGHT / 2);
+	
 	Runner(Position pos, double angle, Dimension dim, Game game){
 		super(game, pos, angle, dim);
 	}
+	
 	public void init() {
-		spritesArray = new Object[]{"happy", "images/skull-transparent.png", 50, "death", "images/happy.jpg"};
+		spritesArray = new Object[]{"black", "images/preset/red.png"};
 		loadSprites();
-		activeSprite = "happy";
+		activeSprite = "black";
 		
 	}
 
 	@Override
 	public void update() {
-		if(InputListener.isKeyNewPressed('w')){
+		if(InputListener.isKeyPressed('w')){
 			if(getY() > 0){
-				this.setPos(new Position(getX(), getY() - Constants.DEFAULT_CELL_HEIGHT));
-				if(doesCollideWithType("Entity.wall")){
-					this.setPos(new Position(getX(), getY() + Constants.DEFAULT_CELL_HEIGHT));
+				this.setPos(new Position(getX(), getY() - 1));
+				if(doesCollideWithType("entity.Wall")){
+					this.setPos(start);
 				}
 			}	
 				
 		}
-		if(InputListener.isKeyNewPressed('s')){
+		if(InputListener.isKeyPressed('s')){
 			if(getY() < getGame().getHeight() - Constants.DEFAULT_CELL_HEIGHT){
-				this.setPos(new Position(getX(), getY() + Constants.DEFAULT_CELL_HEIGHT));
-				if(doesCollideWithType("Entity.wall")){
-					this.setPos(new Position(getX(), getY() - Constants.DEFAULT_CELL_HEIGHT));
+				this.setPos(new Position(getX(), getY() + 1));
+				if(doesCollideWithType("entity.Wall")){
+					this.setPos(start);
 				}
 			}
 		}
-		if(InputListener.isKeyNewPressed('a')){
+		if(InputListener.isKeyPressed('a')){
 			if(getX() > 0){
-				this.setPos(new Position(getX() - Constants.DEFAULT_CELL_WIDTH, getY()));
-				if(doesCollideWithType("Entity.wall")){
-					this.setPos(new Position(getX() + Constants.DEFAULT_CELL_WIDTH, getY()));
+				this.setPos(new Position(getX() - 1, getY()));
+				if(doesCollideWithType("entity.Wall")){
+					this.setPos(start);
 				}
 			}
 		}
-		if(InputListener.isKeyNewPressed('d')){
+		if(InputListener.isKeyPressed('d')){
 			if(getX() < getGame().getWidth() - Constants.DEFAULT_CELL_WIDTH){
-				this.setPos(new Position(getX() + Constants.DEFAULT_CELL_WIDTH, getY()));
-				if(doesCollideWithType("Entity.wall")){
-					this.setPos(new Position(getX() - Constants.DEFAULT_CELL_WIDTH, getY()));
+				this.setPos(new Position(getX() + 1, getY()));
+				if(doesCollideWithType("entity.Wall")){
+					this.setPos(start);
 				}
 			}
 		}

@@ -2,7 +2,7 @@ package implementation;
 public class Run {
 
 	public static void main(String[] args) {
-		Implementor bounce = new Platformer();
+		Implementor bounce = new Mazerunner();
 		bounce.execute();
 	}
 }
