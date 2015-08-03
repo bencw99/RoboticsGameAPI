@@ -1,2 +1,2 @@
 # RoboticsGameAPI
-A repository for the Paly Robotics Summer Camp Game Library. With this framework, robotics students will learn about programming concepts related to robotics by designing their own games.
+Website storing the Javadocs documentation for the Robotics Game API. Hosted on Github to make it easier for the students to access the Javadocs documentation in a readable format. Generated and set up here by Nihar.
