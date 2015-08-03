@@ -6,6 +6,8 @@ import entity.*;
 import physics.*;
 
 public class Mazerunner extends CelledImplementor {
+	public final static double WALL_CHANCE = 0.9;
+	
 	/**
 	 * The first method called in the program (After Run.java)
 	 * Initialize everything here
@@ -17,20 +19,23 @@ public class Mazerunner extends CelledImplementor {
 		addEntity(Runner);
 		for(Cell[] CELLS : cells){
 			for(Cell c : CELLS){
+				double addRand = Math.random();
 				int random = (int)(Math.random() * 4);
-				switch(random){
-				case 0:
-					c.setNorthernWallVisibility(true);
-					break;
-				case 1:
-					c.setSouthernWallVisibility(true);
-					break;
-				case 2:
-					c.setWesternWallVisibility(true);
-					break;
-				case 3:
-					c.setEasternWallVisibility(true);
-					break;
+				if(addRand < WALL_CHANCE) {
+					switch(random){
+					case 0:
+						c.setNorthernWallVisibility(true);
+						break;
+					case 1:
+						c.setSouthernWallVisibility(true);
+						break;
+					case 2:
+						c.setWesternWallVisibility(true);
+						break;
+					case 3:
+						c.setEasternWallVisibility(true);
+						break;
+					}
 				}
 			}
 		}

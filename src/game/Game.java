@@ -164,6 +164,7 @@ public class Game extends JFrame{
 	 */
 	public void update() {
 		currentScreen.update();
+		this.requestFocus();
 	}
 	/**
 	 * disable the current screen
