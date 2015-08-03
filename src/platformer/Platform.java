@@ -1,4 +1,4 @@
-package api.implementation;
+package platformer;
 
 import java.awt.Dimension;
 
@@ -46,7 +46,7 @@ public class Platform extends Entity {
 	public void update()
 	{
 		if(alive) {
-			if(doesCollideWithType("implementation.Jumper")) {
+			if(doesCollideWithType("platformer.Jumper")) {
 				contacts++;
 				activeSprite = "stepped";
 			}

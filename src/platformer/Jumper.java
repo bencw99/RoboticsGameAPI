@@ -1,12 +1,12 @@
-package api.implementation;
+package platformer;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
 
+import platformer.Platform;
 import api.constants.Constants;
 import api.entity.Entity;
 import api.game.Game;
-import api.implementation.Platform;
 import api.input.InputListener;
 import api.physics.Position;
 import api.physics.Vector;
@@ -45,7 +45,7 @@ public class Jumper extends Entity {
 		if(InputListener.isKeyNewPressed('w')) {
 			boolean canJump = false;
 			
-			ArrayList<Entity> collisions = collisionsWithType("implementation.Platform");
+			ArrayList<Entity> collisions = collisionsWithType("platformer.Platform");
 			if(collisions.size() > 0) {
 				for(Entity e : collisions) {
 					if(((Platform) e).isAlive()) {
@@ -66,7 +66,7 @@ public class Jumper extends Entity {
 			translateX(3);
 		}
 		
-		ArrayList<Entity> collisions = collisionsWithType("implementation.Platform");
+		ArrayList<Entity> collisions = collisionsWithType("platformer.Platform");
 		if(collisions.size() > 0) {
 			for(Entity e : collisions) {
 				Vector force = collides(e);

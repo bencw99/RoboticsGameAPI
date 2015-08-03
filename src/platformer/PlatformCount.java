@@ -1,4 +1,4 @@
-package api.implementation;
+package platformer;
 
 import api.spriteless.AbstractTextBox;
 

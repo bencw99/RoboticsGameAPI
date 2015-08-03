@@ -1,8 +1,9 @@
-package api.implementation;
+package platformer;
 
 
 
 import api.constants.*;
+import api.implementation.Implementor;
 import api.physics.*;
 public class Platformer extends Implementor{
 	private int platformsDestroyed = 0;
