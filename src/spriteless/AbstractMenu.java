@@ -147,6 +147,9 @@ public class AbstractMenu extends Container implements SpritelessElement {
         return this.dim;
     }
 
+    /**
+     * Makes the AbstractMenu visible
+     */
     public void show() {
         for(int x = 0; x < this.getComponentCount(); x++) {
         	SpritelessElement element = (SpritelessElement)(getComponent(x));
@@ -154,6 +157,9 @@ public class AbstractMenu extends Container implements SpritelessElement {
         }
     }
 
+    /**
+     * Makes the AbstractMenu invisible
+     */
     public void hide() {
         for(int x = 0; x < this.getComponentCount(); x++) {
         	SpritelessElement element = (SpritelessElement)(getComponent(x));
@@ -161,18 +167,39 @@ public class AbstractMenu extends Container implements SpritelessElement {
         }
     }
     
+    /**
+     * Gets the x position of this AbstractMenu
+     * 
+     * @return the x coordinate of this AbstractMenu
+     */
     public double getXPosition() {
         return this.p.getX();
     }
 
+    /**
+     * Gets the y position of this AbstractMenu
+     * 
+     * @return the y coordinate of this AbstractMenu
+     */
     public double getYPosition() {
         return this.p.getY();
     }
 
+    /**
+     * Gets the position of this AbstractMenu
+     * 
+     * @return the position of this AbstractMenu
+     */
     public Position getPosition() {
         return p;
     }
 
+    /**
+     * Sets the position of this AbstractMenu to the given coordinates
+     * 
+     * @param xPos the x coordinate of the position to set
+     * @param yPos the y coordinate of the position to set
+     */
     public void setPosition(double xPos, double yPos) {
         double xDifference = xPos - this.p.getX();
         this.p.setX(xPos);
@@ -186,6 +213,11 @@ public class AbstractMenu extends Container implements SpritelessElement {
         }
     }
 
+    /**
+     * Sets the position of this AbstractMenu to the given position
+     * 
+     * @param pos the position to set
+     */
     public void setPosition(Position pos) {
         double xDifference = pos.getX() - this.p.getX();
         double yDifference = pos.getY() - this.p.getY();
