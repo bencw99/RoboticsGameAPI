@@ -14,10 +14,7 @@ import entity.*;
 import gui.Screen;
 
 public class Game extends JFrame{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Stores all the different game screens and which

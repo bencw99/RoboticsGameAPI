@@ -38,18 +38,18 @@ public class Bounce extends Implementor {
 		
 		public void init() {
 			super.init();
-			setText("Demo Button");
+			setButtonText("Demo Button");
 		}
 		
 		public void update() {
-			
+			super.updateUI();
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			clicks++;
-			if(clicks % 3 == 1) {
+			if(clicks == 4) {
 				addEntity(new PassiveShape(game));
-				setText("wtf");
+				setButtonText("wtf");
 			}	
 			
 		}
