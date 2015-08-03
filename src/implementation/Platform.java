@@ -46,14 +46,12 @@ public class Platform extends Entity {
 	public void update()
 	{
 		if(alive) {
-			translateAngle(0.003);
 			if(doesCollideWithType("implementation.Jumper")) {
 				contacts++;
 				activeSprite = "stepped";
 			}
 
 			if(contacts >= 300) {
-				System.out.println("Platform destroyed");
 				alive = false;
 				activeSprite = "explosion";
 				setAutoMode(true);
