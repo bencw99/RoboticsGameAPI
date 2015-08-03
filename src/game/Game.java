@@ -128,14 +128,6 @@ public class Game extends JFrame{
 		return null;
 	}
 	
-	/**
-	 * Gets the current screen of the game
-	 * 
-	 * @return the current screen of the game
-	 */
-	public Screen getCurrentScreen() {
-		return currentScreen;
-	}
 	
 	/**
 	 * Returns reference to screen with specified name
@@ -239,8 +231,6 @@ public class Game extends JFrame{
 	public ArrayList<Entity> getEntities() {
 		return currentScreen.getEntities();
 	}
-<<<<<<< HEAD
-	
 	/**
 	 * Returns a reference to the current screen shown. The screen keeps 
 	 * a reference to all the existing objects on screen. 
@@ -250,7 +240,5 @@ public class Game extends JFrame{
 	public Screen getCurrentScreen() {
 		return currentScreen;
 	}
-=======
->>>>>>> 7d5f6c817abf8cbb9532587dd65f17209c632d2b
 
 }
