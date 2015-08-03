@@ -124,7 +124,6 @@ public abstract class AbstractTextBox extends TextArea implements SpritelessElem
         this.p = p;
 	}
 
-
     /**
      * Sets the position of the AbstractTextBox to the given coordinates.
      *

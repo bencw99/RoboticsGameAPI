@@ -148,7 +148,7 @@ public class AbstractMenu extends Container implements SpritelessElement {
     }
 
     /**
-     * Makes the AbstractMenu visible
+     * Makes this AbstractMenu visible
      */
     public void show() {
         for(int x = 0; x < this.getComponentCount(); x++) {
@@ -158,7 +158,7 @@ public class AbstractMenu extends Container implements SpritelessElement {
     }
 
     /**
-     * Makes the AbstractMenu invisible
+     * Makes this AbstractMenu invisible
      */
     public void hide() {
         for(int x = 0; x < this.getComponentCount(); x++) {
@@ -166,20 +166,20 @@ public class AbstractMenu extends Container implements SpritelessElement {
             element.hide();
         }
     }
-    
+
     /**
-     * Gets the x position of this AbstractMenu
-     * 
-     * @return the x coordinate of this AbstractMenu
+     * Gets the x coordinate of this AbstractMenu
+     *
+     * @return the x position of this AbstractMenu
      */
     public double getXPosition() {
         return this.p.getX();
     }
 
     /**
-     * Gets the y position of this AbstractMenu
-     * 
-     * @return the y coordinate of this AbstractMenu
+     * Gets the y coordinate of this AbstractMenu
+     *
+     * @return the y position of this AbstractMenu
      */
     public double getYPosition() {
         return this.p.getY();
@@ -187,7 +187,7 @@ public class AbstractMenu extends Container implements SpritelessElement {
 
     /**
      * Gets the position of this AbstractMenu
-     * 
+     *
      * @return the position of this AbstractMenu
      */
     public Position getPosition() {
@@ -196,9 +196,9 @@ public class AbstractMenu extends Container implements SpritelessElement {
 
     /**
      * Sets the position of this AbstractMenu to the given coordinates
-     * 
-     * @param xPos the x coordinate of the position to set
-     * @param yPos the y coordinate of the position to set
+     *
+     * @param xPos the x coordinate of the new Position
+     * @param yPos the y coordinate of the new Position
      */
     public void setPosition(double xPos, double yPos) {
         double xDifference = xPos - this.p.getX();
@@ -215,8 +215,8 @@ public class AbstractMenu extends Container implements SpritelessElement {
 
     /**
      * Sets the position of this AbstractMenu to the given position
-     * 
-     * @param pos the position to set
+     *
+     * @param pos the position to be set
      */
     public void setPosition(Position pos) {
         double xDifference = pos.getX() - this.p.getX();
