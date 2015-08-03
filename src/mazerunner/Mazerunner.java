@@ -1,8 +1,9 @@
-package api.implementation;
+package mazerunner;
 import java.awt.Dimension;
 
 import api.constants.*;
 import api.entity.*;
+import api.implementation.CelledImplementor;
 import api.physics.*;
 
 public class Mazerunner extends CelledImplementor {
