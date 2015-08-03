@@ -47,7 +47,7 @@ public class Platformer extends Implementor{
 	private class Platform extends Entity {
 		public Platform(Position pos, Dimension dim)
 		{
-			super( pos, 0, dim);
+			super( pos, 0, dim, null);
 			
 			spritesArray = new String[]{"smile", "images/happy.jpg"};
 			loadSprites();
@@ -80,7 +80,7 @@ public class Platformer extends Implementor{
 		
 		public Jumper(Position pos, Dimension dim)
 		{
-			super( pos, 0, dim);
+			super( pos, 0, dim, null);
 			
 			spritesArray = new String[]{"rafi", "images/rafi.png"};
 			loadSprites();

@@ -3,6 +3,7 @@ package entity;
 import physics.Dimension;
 import physics.Position;
 import physics.Vector;
+import game.Game;
 import graphics.Sprite;
 import graphics.SpriteManager;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Entity {
+	public Game game;
 	/** The position of this Entity instance (Center)*/
 	private Position pos;
 	
@@ -56,10 +58,11 @@ public abstract class Entity {
 	 * @param pos the position of this entity
 	 * @param dim the dimension of this entity
 	 */
-	public Entity(Position pos, double angle, Dimension dim) {
+	public Entity(Position pos, double angle, Dimension dim, Game game) {
 		this.pos = pos;
 		this.angle = angle;
 		this.dim = dim;
+		this.game = game;
 	}
 	
 	/**
@@ -330,5 +333,16 @@ public abstract class Entity {
 		
 		spriteManager = new SpriteManager(this, spritesList);
 		activeSprite = (String) concatArray[0];
+	}
+	public Game getGame(){
+		return game;
+	}
+	public boolean collidesWithEntity(){
+		for(Entity e : game.getEntities()){
+			if(this.collide(e)){
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -94,7 +94,7 @@ public class Wall extends Entity {
 	 * @param d
 	 */
 	public Wall(Position p, double angle, Dimension d){
-		super(p, angle, d);
+		super(p, angle, d, null);
 	}
 	/**
 	 * Initializes this wall

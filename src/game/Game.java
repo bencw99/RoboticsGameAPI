@@ -70,7 +70,7 @@ public class Game extends JPanel{
 		inputListener = new InputListener();
 		frame = new JFrame();
 		frame.setTitle("Paly Robotics Team 8 - Programming - Game API");
-		frame.setSize(1000, 1000);
+		frame.setSize(600, 600);
 		frame.add(this);
 		frame.setVisible(true);
 		frame.setLayout(null);
