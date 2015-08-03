@@ -38,4 +38,9 @@ public class Constants {
 	// ***************************************
 	public static final Vector GRAVITY = new Vector(0, 600);
 
+	
+	/**
+	 * The default wall width
+	 */
+	public final static double DEFAULT_WALL_WIDTH = 5.0;
 }
