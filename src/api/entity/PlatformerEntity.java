@@ -1,13 +1,13 @@
-package entity;
+package api.entity;
 
-import game.Game;
-import input.InputListener;
+import api.game.Game;
+import api.input.InputListener;
 
 import java.awt.Dimension;
 
-import constants.Constants;
-import physics.Position;
-import physics.Vector;
+import api.constants.Constants;
+import api.physics.Position;
+import api.physics.Vector;
 
 public class PlatformerEntity extends Entity {
 	private Vector vel;

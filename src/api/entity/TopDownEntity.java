@@ -1,10 +1,10 @@
-package entity;
+package api.entity;
 
-import game.Game;
-import input.InputListener;
+import api.game.Game;
+import api.input.InputListener;
 
 import java.awt.Dimension;
-import physics.Position;
+import api.physics.Position;
 
 public class TopDownEntity extends Entity {
 
